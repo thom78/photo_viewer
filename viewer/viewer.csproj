@@ -45,6 +45,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Album.cs" />
+    <Compile Include="ListaAlbums.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ListaAlbums.Designer.cs">
+      <DependentUpon>ListaAlbums.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Picture.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -55,6 +62,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ListaAlbums.resx">
+      <DependentUpon>ListaAlbums.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
