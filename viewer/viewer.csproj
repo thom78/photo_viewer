@@ -45,6 +45,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Album.cs" />
+    <Compile Include="AddAlbumWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddAlbumWindow.Designer.cs">
+      <DependentUpon>AddAlbumWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="ListaAlbums.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -62,6 +68,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddAlbumWindow.resx">
+      <DependentUpon>AddAlbumWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ListaAlbums.resx">
       <DependentUpon>ListaAlbums.cs</DependentUpon>

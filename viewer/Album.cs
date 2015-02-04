@@ -21,7 +21,7 @@ namespace viewer
         public String Date { get; set; }
 
         //liste des photos contenues dans l'album
-        public List<Picture> Pictures;
+        public List<Picture> Pictures = new List<Picture>();
 
         #endregion Properties
 
@@ -29,6 +29,8 @@ namespace viewer
 
         public Album()
         {
+            //on ajoute le nouvel album crée a la liste chainée
+            Albums.Add(this);
         }
 
         public Album(String title, String subtitle, String date)
@@ -36,11 +38,15 @@ namespace viewer
             this.Title = title;
             this.SubTitle = subtitle;
             this.Date = date;
+            //on ajoute le nouvel album crée a la liste chainée
+            Albums.Add(this);
         }
 
         public Album(String title)
         {
             this.Title = title;
+            //on ajoute le nouvel album crée a la liste chainée
+            Albums.Add(this);
         }
 
         #endregion Constructor(s)
@@ -56,5 +62,8 @@ namespace viewer
 
         //creation d'une liste chainee d'Albums
         public static List<Album> Albums = new List<Album>();
+
+        //creation de l'album pellicule qui contient toutes les photos
+        public static Album Pellicule = new Album("Pellicule");
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,17 +24,31 @@ namespace viewer
         [XmlElement(ElementName = "Date")]
         public String Date { get; set; }
 
+        public Image Image;
+
         #endregion Properties
 
         #region Constructor(s)
 
         public Picture()
         {
+            //a chaque fois quon crée une photo, on l'ajoute a la liste chainee Picture et on l'ajoute à l'album "pellicule"
+            Album.Pellicule.Pictures.Add(this);
         }
 
-        public Picture(String Name)
+        public Picture(Image im)
         {
-            this.Name = Name;
+            this.Image = im;
+            //a chaque fois quon crée une photo, on l'ajoute a la liste chainee Picture et on l'ajoute à l'album "pellicule"
+            Album.Pellicule.Pictures.Add(this);
+        }
+
+        public Picture(String name, Image im)
+        {
+            this.Image = im;
+            this.Name = name;
+            //a chaque fois quon crée une photo, on l'ajoute a la liste chainee Picture et on l'ajoute à l'album "pellicule"
+            Album.Pellicule.Pictures.Add(this);
         }
 
         public Picture(String Name, Int32 rate, String comment, String date)
@@ -42,6 +57,8 @@ namespace viewer
             this.Rate = rate;
             this.Comment = comment;
             this.Date = date;
+            //a chaque fois quon crée une photo, on l'ajoute a la liste chainee Picture et on l'ajoute à l'album "pellicule"
+            Album.Pellicule.Pictures.Add(this);
         }
 
         #endregion Constructor(s)
@@ -54,8 +71,10 @@ namespace viewer
         }
 
         #endregion Method_Sort
-
-        //creation d'une liste chainee d'images
-        public static List<Picture> Pictures = new List<Picture>();
+        
+        public void AddPicture()
+        {
+            Album.Pellicule.Pictures.Add(this);
+        }
     }
 }
