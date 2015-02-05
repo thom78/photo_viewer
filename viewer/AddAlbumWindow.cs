@@ -12,6 +12,8 @@ namespace viewer
 {
     public partial class AddAlbum : Form
     {
+        public Album created_album;
+
         public AddAlbum()
         {
             InitializeComponent();
@@ -48,18 +50,20 @@ namespace viewer
         private void but_ok_Click(object sender, EventArgs e)
         {
             //creer album avec constructeur different enfonction de ce qui a été rempli
-            Album alb = new Album(textBox1.Text.ToString());
+            created_album = new Album(textBox1.Text.ToString());
 
             if (textBox2.Text.Trim().Length > 0) 
             {
-                alb.SubTitle = textBox2.Text.ToString();
+                created_album.SubTitle = textBox2.Text.ToString();
             }
             if (textBox3.Text.Trim().Length > 0)
             {
-                alb.Date = textBox3.Text.ToString();
+                created_album.Date = textBox3.Text.ToString();
             }
+            // Par defaut ajouter la premiere photo de la pellicule comme premiere photo de lalbum !!!!!!!!!A CHANGER!!!!!!!!
+            created_album.Pictures.Add(Album.Pellicule.Pictures[0]);
 
-            Album.Albums.Add(alb);
+            this.Close();
         }
     }
 }

@@ -7,7 +7,7 @@ using System.Xml.Serialization;
 
 namespace viewer
 {
-    class Album : IComparable<Album>
+    public class Album : IComparable<Album>
     {
         #region Properties
 
