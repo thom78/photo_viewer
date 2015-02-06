@@ -38,14 +38,14 @@ namespace viewer
             this.Title = title;
             this.SubTitle = subtitle;
             this.Date = date;
-            //on ajoute le nouvel album crée a la liste chainée
+            //on ajoute le nouvel album créé à la liste
             Albums.Add(this);
         }
 
         public Album(String title)
         {
             this.Title = title;
-            //on ajoute le nouvel album crée a la liste chainée
+            //on ajoute le nouvel album créé à la liste
             Albums.Add(this);
         }
 
