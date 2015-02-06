@@ -8,7 +8,7 @@ using System.Xml.Serialization;
 
 namespace viewer
 {
-    class Picture : IComparable<Picture>
+    public class Picture : IComparable<Picture>
     {
         #region Properties
 
