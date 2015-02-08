@@ -88,5 +88,16 @@ namespace viewer
 
         }
 
+        private void Diapo_Click(object sender, EventArgs e)
+        {
+            Diapo new_Diapo = new Diapo();
+            new_Diapo.ShowDialog();
+        }
+
+        private void ListaAlbums_Load(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }

@@ -51,6 +51,12 @@
     <Compile Include="AddAlbumWindow.Designer.cs">
       <DependentUpon>AddAlbumWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="Diapo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Diapo.Designer.cs">
+      <DependentUpon>Diapo.cs</DependentUpon>
+    </Compile>
     <Compile Include="ListaAlbums.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -66,6 +72,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Diapo.resx">
+      <DependentUpon>Diapo.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>

@@ -38,6 +38,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.AlbumGrid = new System.Windows.Forms.FlowLayoutPanel();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // AllPhotosGrid
@@ -110,11 +111,22 @@
             this.AlbumGrid.Size = new System.Drawing.Size(798, 235);
             this.AlbumGrid.TabIndex = 5;
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(191, 12);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(92, 23);
+            this.button1.TabIndex = 6;
+            this.button1.Text = "Diaporama";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.Diapo_Click);
+            // 
             // ListaAlbums
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(832, 515);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.AlbumGrid);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -123,6 +135,7 @@
             this.Controls.Add(this.AllPhotosGrid);
             this.Name = "ListaAlbums";
             this.Text = "Liste des albums ";
+            this.Load += new System.EventHandler(this.ListaAlbums_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -138,5 +151,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.FlowLayoutPanel AlbumGrid;
+        private System.Windows.Forms.Button button1;
     }
 }
