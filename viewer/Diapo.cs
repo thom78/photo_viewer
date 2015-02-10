@@ -43,11 +43,7 @@ namespace viewer
                 pictureBox1.Image = Album.Pellicule.Pictures[i].Image;
 
             }
-            
-        
-             //tableau d'images
-
-        
+                  
         
         private void Diapo_Load(object sender, EventArgs e)
         {
@@ -96,6 +92,48 @@ namespace viewer
 
             timer1.Enabled = true;
         }
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            bool ret = true;
+            switch (keyData)
+                    {
+                        case Keys.Right:
+                            {
+                                i++;
+
+                                //réinitialisation du compteur
+                                if (j == i)
+                                {
+                                    i = 0;
+                                }
+
+                                //affichage de l'image
+                                pictureBox1.Image = Album.Pellicule.Pictures[i].Image;
+                            }
+                            break;
+                        case Keys.Left:
+                           {
+                                //réinitialisation du compteur
+                                if (i == 0)
+                                {
+                                    i = j;
+                                }
+
+                                i--;
+
+                                //affichage de l'image
+                                pictureBox1.Image = Album.Pellicule.Pictures[i].Image;
+                            }
+                            break;
+                        case Keys.Up:  break;
+                        case Keys.Down:  break;
+                        default: ret = base.ProcessCmdKey(ref msg, keyData); break;
+                    }
+
+            return ret;
+         }
+               
    
     }
 }
