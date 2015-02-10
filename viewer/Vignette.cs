@@ -42,7 +42,7 @@ namespace viewer
             type = ALBUM;
             Alb = alb;
             //la vignette de lalbum correspond a la premiere photo de cet album (peut etre modifié)
-            if (Alb.Pictures.Count > 0)
+            if ((Alb!=null)&&(Alb.Pictures.Count > 0))
             {
                 Pic = Alb.Pictures[0];
                 InitializeComponent();

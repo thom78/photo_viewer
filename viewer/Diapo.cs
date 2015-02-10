@@ -39,9 +39,11 @@ namespace viewer
                     i = 0;
                 }
 
-                //affichage de l'image
-                pictureBox1.Image = Program.Pellicule.Pictures[i].Image;
-
+               //affichage de l'image
+                if (pictureBox1.Image != null)
+                {
+                    pictureBox1.Image = Program.Pellicule.Pictures[i].Image;
+                }
             }
             
         
@@ -65,8 +67,11 @@ namespace viewer
                 i = 0;
             }
 
-           //affichage de l'image
-           pictureBox1.Image = Program.Pellicule.Pictures[i].Image;
+            //affichage de l'image
+           if (Program.Pellicule.Pictures.Count > 0)
+           {
+               pictureBox1.Image = Program.Pellicule.Pictures[i].Image;
+           }
 
             //on remet le timer en route
             timer1.Enabled = true;
@@ -88,9 +93,11 @@ namespace viewer
             i--;
 
             //affichage de l'image
-            pictureBox1.Image = Program.Pellicule.Pictures[i].Image;
-
-            timer1.Enabled = true;
+            if (Program.Pellicule.Pictures.Count > 0)
+            {
+                pictureBox1.Image = Program.Pellicule.Pictures[i].Image;
+            }
+                timer1.Enabled = true;
         }
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)

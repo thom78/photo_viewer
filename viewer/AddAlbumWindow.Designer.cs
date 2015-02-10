@@ -103,6 +103,7 @@
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.textBox1);
             this.Name = "AddAlbumWindow";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Ajouter un Album";
             this.ResumeLayout(false);
             this.PerformLayout();
