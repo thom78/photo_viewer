@@ -72,6 +72,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Vignette.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Vignette.Designer.cs">
+      <DependentUpon>Vignette.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Diapo.resx">
       <DependentUpon>Diapo.cs</DependentUpon>
     </EmbeddedResource>
@@ -93,6 +99,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Vignette.resx">
+      <DependentUpon>Vignette.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

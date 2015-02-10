@@ -13,12 +13,29 @@ using System.Windows.Forms;
 /// --->>> a chaque fois quon importe des photos, ne pas oublier de les ajouter à lalbum "pellicule"!
 /// a faire: creation album, ajout de photos a album
 /// CREER UNE FONCTIN : AJOUT DE PHOTO DANS UNE GRID AU LIEU DE COPIER COLLER LE TEXTE TOUT LE TOUT LE TEMPS
+/// supprimer albums, photos
 /// *********************************************************************************************************************************************************
 
 namespace viewer
 {
     public partial class ListaAlbums : Form
     {
+        //definition de constantes
+        public const int ALBUM = 0;
+        public const int IMAGE = 1;
+
+        private void show_vignette(Picture pic)
+        {
+            Vignette vignet = new Vignette(pic);
+            AllPhotosGrid.Controls.Add(vignet);
+        }
+
+        private void show_vignette(Album alb)
+        {
+            Vignette vignet = new Vignette(alb);
+            AlbumGrid.Controls.Add(vignet);
+        }
+
         public ListaAlbums()
         {
             InitializeComponent();
@@ -34,11 +51,7 @@ namespace viewer
             AllPhotosGrid.AutoScroll = true;
             foreach (Picture t in Album.Pellicule.Pictures)
             {
-                PictureBox a = new PictureBox();
-                a.Image = t.Image;
-                a.SizeMode = PictureBoxSizeMode.Zoom;
-                a.Size = new Size(250, 250);
-                AllPhotosGrid.Controls.Add(a);
+                show_vignette(t);
             }
 
             /// Affichage des albums
@@ -46,12 +59,7 @@ namespace viewer
             AlbumGrid.AutoScroll = true;
             foreach (Album t in Album.Albums)
             {
-                PictureBox a = new PictureBox();
-                //on affiche la toute premiere image de lalbum (se change facilement)
-                a.Image = t.Pictures[0].Image;
-                a.SizeMode = PictureBoxSizeMode.Zoom;
-                a.Size = new Size(250, 250);
-                AlbumGrid.Controls.Add(a);
+                show_vignette(t);
             }
         }
         
@@ -61,12 +69,8 @@ namespace viewer
             AddAlbum new_album = new AddAlbum();
             new_album.ShowDialog();
             // on cree une nouvelle image de lalbum grid pour afficher le nouvel album
-            PictureBox pbx = new PictureBox();
             //on affiche la premiere photo de lalbum comme photo de couverture !!!!!!!!!!A CHA?GER!!!!!!!!!!!!!!!!!!!
-            pbx.Image = new_album.created_album.Pictures[0].Image;
-            pbx.SizeMode = PictureBoxSizeMode.Zoom;
-            pbx.Size = new Size(250, 250);
-            AlbumGrid.Controls.Add(pbx);
+            show_vignette(new_album.created_album);
         }
 
         private void but_import_Click(object sender, EventArgs e)
@@ -75,11 +79,7 @@ namespace viewer
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 Picture pic = new Picture(System.Drawing.Image.FromFile(openFileDialog1.FileName));
-                PictureBox pbx = new PictureBox();
-                pbx.Image = pic.Image;
-                pbx.SizeMode = PictureBoxSizeMode.Zoom;
-                pbx.Size = new Size(250, 250);
-                AllPhotosGrid.Controls.Add(pbx);
+                show_vignette(pic);
             }
         }
 
