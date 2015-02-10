@@ -65,9 +65,18 @@ namespace viewer
                 show_vignette(t);
             }
         }
-        
+       
+        private void AlbumGrid_Paint(object sender, PaintEventArgs e)
+        {
 
-        private void createAlbumButton_Click(object sender, EventArgs e)
+        }
+
+        private void ListAlbums_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void créerAlbumToolStripMenuItem_Click(object sender, EventArgs e)
         {
             AddAlbumWindow new_album = new AddAlbumWindow();
             new_album.ShowDialog();
@@ -75,37 +84,26 @@ namespace viewer
             //on affiche la premiere photo de lalbum comme photo de couverture !!!!!!!!!!A CHA?GER!!!!!!!!!!!!!!!!!!!
             show_vignette(new_album.created_album);
         }
-        
 
-        private void but_import_Click(object sender, EventArgs e)
+        private void importerPhotosToolStripMenuItem_Click(object sender, EventArgs e)
         {
             /// Ajoute la photo importée a la pellicule et laffiche dans la picturebox       
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 String fileName = openFileDialog1.FileName;
-                String name=Path.GetFileNameWithoutExtension(fileName);
+                String name = Path.GetFileNameWithoutExtension(fileName);
                 String date = File.GetCreationTimeUtc(fileName).ToShortDateString();
-                
-                Picture pic = new Picture(System.Drawing.Image.FromFile(fileName),fileName,name,0,"",date);
+
+                Picture pic = new Picture(System.Drawing.Image.FromFile(fileName), fileName, name, 0, "", date);
                 show_vignette(pic);
                 XML_Serialization.save_user_data();
             }
         }
 
-        private void AlbumGrid_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void Diapo_Click(object sender, EventArgs e)
+        private void diaporamaToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Diapo new_Diapo = new Diapo();
             new_Diapo.ShowDialog();
-        }
-
-        private void ListAlbums_Load(object sender, EventArgs e)
-        {
-
         }
 
     }
