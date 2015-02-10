@@ -1,6 +1,6 @@
 ﻿namespace viewer
 {
-    partial class AddAlbum
+    partial class AddAlbumWindow
     {
         /// <summary>
         /// Required designer variable.

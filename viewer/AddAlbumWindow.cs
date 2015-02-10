@@ -10,11 +10,11 @@ using System.Windows.Forms;
 
 namespace viewer
 {
-    public partial class AddAlbum : Form
+    public partial class AddAlbumWindow : Form
     {
         public Album created_album;
 
-        public AddAlbum()
+        public AddAlbumWindow()
         {
             InitializeComponent();
             but_ok.Enabled = false;
