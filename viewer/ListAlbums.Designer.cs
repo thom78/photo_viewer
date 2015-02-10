@@ -1,6 +1,6 @@
 ﻿namespace viewer
 {
-    partial class ListaAlbums
+    partial class ListAlbums
     {
         /// <summary>
         /// Required designer variable.
@@ -28,10 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ListaAlbums));
             this.AllPhotosGrid = new System.Windows.Forms.FlowLayoutPanel();
-            this.PhotosDeCouvertureAlbum = new System.Windows.Forms.ImageList(this.components);
             this.createAlbumButton = new System.Windows.Forms.Button();
             this.but_import = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
@@ -51,14 +48,6 @@
             this.AllPhotosGrid.Size = new System.Drawing.Size(808, 187);
             this.AllPhotosGrid.TabIndex = 0;
             this.AllPhotosGrid.Paint += new System.Windows.Forms.PaintEventHandler(this.AlbumGrid_Paint);
-            // 
-            // PhotosDeCouvertureAlbum
-            // 
-            this.PhotosDeCouvertureAlbum.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("PhotosDeCouvertureAlbum.ImageStream")));
-            this.PhotosDeCouvertureAlbum.TransparentColor = System.Drawing.Color.Transparent;
-            this.PhotosDeCouvertureAlbum.Images.SetKeyName(0, "022.jpg");
-            this.PhotosDeCouvertureAlbum.Images.SetKeyName(1, "118.jpg");
-            this.PhotosDeCouvertureAlbum.Images.SetKeyName(2, "181.jpg");
             // 
             // createAlbumButton
             // 
@@ -121,7 +110,7 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.Diapo_Click);
             // 
-            // ListaAlbums
+            // ListAlbums
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -133,9 +122,9 @@
             this.Controls.Add(this.but_import);
             this.Controls.Add(this.createAlbumButton);
             this.Controls.Add(this.AllPhotosGrid);
-            this.Name = "ListaAlbums";
+            this.Name = "ListAlbums";
             this.Text = "Liste des albums ";
-            this.Load += new System.EventHandler(this.ListaAlbums_Load);
+            this.Load += new System.EventHandler(this.ListAlbums_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -144,7 +133,6 @@
         #endregion
 
         private System.Windows.Forms.FlowLayoutPanel AllPhotosGrid;
-        private System.Windows.Forms.ImageList PhotosDeCouvertureAlbum;
         private System.Windows.Forms.Button createAlbumButton;
         private System.Windows.Forms.Button but_import;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;

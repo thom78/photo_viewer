@@ -16,7 +16,7 @@ namespace viewer
         {
             InitializeComponent();
             // détermination de la taille de l'album
-            foreach (Picture t in Album.Pellicule.Pictures)
+            foreach (Picture t in Program.Pellicule.Pictures)
             {
                 j++;
             }
@@ -40,7 +40,7 @@ namespace viewer
                 }
 
                 //affichage de l'image
-                pictureBox1.Image = Album.Pellicule.Pictures[i].Image;
+                pictureBox1.Image = Program.Pellicule.Pictures[i].Image;
 
             }
             
@@ -52,7 +52,7 @@ namespace viewer
         private void Diapo_Load(object sender, EventArgs e)
         {
             //affichage de la 1ere image.
-            pictureBox1.Image = Album.Pellicule.Pictures[0].Image;
+            pictureBox1.Image = Program.Pellicule.Pictures[0].Image;
         }
 
         private void toolStripButton3_Click(object sender, EventArgs e)
@@ -70,7 +70,7 @@ namespace viewer
             }
 
            //affichage de l'image
-           pictureBox1.Image = Album.Pellicule.Pictures[i].Image;
+           pictureBox1.Image = Program.Pellicule.Pictures[i].Image;
 
             //on remet le timer en route
             timer1.Enabled = true;
@@ -92,7 +92,7 @@ namespace viewer
             i--;
 
             //affichage de l'image
-            pictureBox1.Image = Album.Pellicule.Pictures[i].Image;
+            pictureBox1.Image = Program.Pellicule.Pictures[i].Image;
 
             timer1.Enabled = true;
         }

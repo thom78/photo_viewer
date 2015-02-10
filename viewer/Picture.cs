@@ -12,6 +12,9 @@ namespace viewer
     {
         #region Properties
 
+        [XmlElement(ElementName="Chemin")]
+        public String picturePath { get; set; }
+
         [XmlElement(ElementName = "Nom")]
         public String Name { get; set; }
 
@@ -24,41 +27,23 @@ namespace viewer
         [XmlElement(ElementName = "Date")]
         public String Date { get; set; }
 
+        [XmlIgnore]
         public Image Image;
 
         #endregion Properties
 
         #region Constructor(s)
-
-        public Picture()
+        public Picture() { }
+        public Picture(Image im,String path, String Name, Int32 rate, String comment, String date)
         {
-            //a chaque fois quon crée une photo, on l'ajoute a la liste chainee Picture et on l'ajoute à l'album "pellicule"
-            Album.Pellicule.Pictures.Add(this);
-        }
-
-        public Picture(Image im)
-        {
+            this.picturePath = path;
             this.Image = im;
-            //a chaque fois quon crée une photo, on l'ajoute a la liste chainee Picture et on l'ajoute à l'album "pellicule"
-            Album.Pellicule.Pictures.Add(this);
-        }
-
-        public Picture(String name, Image im)
-        {
-            this.Image = im;
-            this.Name = name;
-            //a chaque fois quon crée une photo, on l'ajoute a la liste chainee Picture et on l'ajoute à l'album "pellicule"
-            Album.Pellicule.Pictures.Add(this);
-        }
-
-        public Picture(String Name, Int32 rate, String comment, String date)
-        {
             this.Name = Name;
             this.Rate = rate;
             this.Comment = comment;
             this.Date = date;
             //a chaque fois quon crée une photo, on l'ajoute a la liste chainee Picture et on l'ajoute à l'album "pellicule"
-            Album.Pellicule.Pictures.Add(this);
+            Program.Pellicule.Pictures.Add(this);
         }
 
         #endregion Constructor(s)
@@ -74,7 +59,7 @@ namespace viewer
         
         public void AddPicture()
         {
-            Album.Pellicule.Pictures.Add(this);
+            Program.Pellicule.Pictures.Add(this);
         }
     }
 }

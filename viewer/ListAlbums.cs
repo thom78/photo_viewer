@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,22 +18,23 @@ using System.Windows.Forms;
 
 namespace viewer
 {
-    public partial class ListaAlbums : Form
+    public partial class ListAlbums : Form
     {
-        public ListaAlbums()
+        public ListAlbums()
         {
             InitializeComponent();
 
             //creation des images a partir de la picture box, et ajout dans lalbum pellicule
-            foreach (Image t in PhotosDeCouvertureAlbum.Images)
+            /*foreach (Image t in PhotosDeCouvertureAlbum.Images)
             {
-                new Picture(t);
-            }
+                new Picture(t,"",0,"","");
+                XML_Serialization.save_user_data();
+            }*/
 
             /// Affichage d'images en grid
             AllPhotosGrid.FlowDirection = FlowDirection.LeftToRight;
             AllPhotosGrid.AutoScroll = true;
-            foreach (Picture t in Album.Pellicule.Pictures)
+            foreach (Picture t in Program.Pellicule.Pictures)
             {
                 PictureBox a = new PictureBox();
                 a.Image = t.Image;
@@ -44,14 +46,18 @@ namespace viewer
             /// Affichage des albums
             AlbumGrid.FlowDirection = FlowDirection.LeftToRight;
             AlbumGrid.AutoScroll = true;
-            foreach (Album t in Album.Albums)
+
+            foreach (Album t in Program.Albums)
             {
                 PictureBox a = new PictureBox();
                 //on affiche la toute premiere image de lalbum (se change facilement)
-                a.Image = t.Pictures[0].Image;
-                a.SizeMode = PictureBoxSizeMode.Zoom;
-                a.Size = new Size(250, 250);
-                AlbumGrid.Controls.Add(a);
+                if (t.Pictures.Count>0)
+                {
+                    a.Image = t.Pictures[0].Image;
+                    a.SizeMode = PictureBoxSizeMode.Zoom;
+                    a.Size = new Size(250, 250);
+                    AlbumGrid.Controls.Add(a);
+                }
             }
         }
         
@@ -63,10 +69,13 @@ namespace viewer
             // on cree une nouvelle image de lalbum grid pour afficher le nouvel album
             PictureBox pbx = new PictureBox();
             //on affiche la premiere photo de lalbum comme photo de couverture !!!!!!!!!!A CHA?GER!!!!!!!!!!!!!!!!!!!
-            pbx.Image = new_album.created_album.Pictures[0].Image;
-            pbx.SizeMode = PictureBoxSizeMode.Zoom;
-            pbx.Size = new Size(250, 250);
-            AlbumGrid.Controls.Add(pbx);
+            if (new_album.created_album.Pictures.Count > 0)
+            {
+                pbx.Image = new_album.created_album.Pictures[0].Image;
+                pbx.SizeMode = PictureBoxSizeMode.Zoom;
+                pbx.Size = new Size(250, 250);
+                AlbumGrid.Controls.Add(pbx);
+            }
         }
 
         private void but_import_Click(object sender, EventArgs e)
@@ -74,12 +83,17 @@ namespace viewer
             /// Ajoute la photo importée a la pellicule et laffiche dans la picturebox       
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                Picture pic = new Picture(System.Drawing.Image.FromFile(openFileDialog1.FileName));
+                String fileName = openFileDialog1.FileName;
+                String name=Path.GetFileNameWithoutExtension(fileName);
+                String date = File.GetCreationTimeUtc(fileName).ToShortDateString();
+                
+                Picture pic = new Picture(System.Drawing.Image.FromFile(fileName),fileName,name,0,"",date);
                 PictureBox pbx = new PictureBox();
                 pbx.Image = pic.Image;
                 pbx.SizeMode = PictureBoxSizeMode.Zoom;
-                pbx.Size = new Size(250, 250);
+                pbx.Size = new Size(250, 250);                
                 AllPhotosGrid.Controls.Add(pbx);
+                XML_Serialization.save_user_data();
             }
         }
 
@@ -94,7 +108,7 @@ namespace viewer
             new_Diapo.ShowDialog();
         }
 
-        private void ListaAlbums_Load(object sender, EventArgs e)
+        private void ListAlbums_Load(object sender, EventArgs e)
         {
 
         }

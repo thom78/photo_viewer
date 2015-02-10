@@ -50,7 +50,7 @@ namespace viewer
         private void but_ok_Click(object sender, EventArgs e)
         {
             //creer album avec constructeur different enfonction de ce qui a été rempli
-            created_album = new Album(textBox1.Text.ToString());
+            created_album = new Album(textBox1.Text.ToString(),"","");
 
             if (textBox2.Text.Trim().Length > 0) 
             {
@@ -61,7 +61,7 @@ namespace viewer
                 created_album.Date = textBox3.Text.ToString();
             }
             // Par defaut ajouter la premiere photo de la pellicule comme premiere photo de lalbum !!!!!!!!!A CHANGER!!!!!!!!
-            created_album.Pictures.Add(Album.Pellicule.Pictures[0]);
+            created_album.Pictures.Add(Program.Pellicule.Pictures[0]);
 
             this.Close();
         }
