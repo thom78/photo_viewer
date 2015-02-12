@@ -49,13 +49,9 @@ namespace viewer
 
         private void but_ok_Click(object sender, EventArgs e)
         {
-            //creer album avec constructeur different enfonction de ce qui a été rempli
-            created_album = new Album(textBox1.Text.ToString(),"",DateTime.Now.ToShortDateString());
+            //creer album avec constructeur different en fonction de ce qui a été rempli
+            created_album = new Album(textBox1.Text.ToString(), textBox2.Text.ToString(), DateTime.Now.ToShortDateString());
 
-            if (textBox2.Text.Trim().Length > 0) 
-            {
-                created_album.SubTitle = textBox2.Text.ToString();
-            }
             // Par defaut ajouter la premiere photo de la pellicule comme premiere photo de lalbum !!!!!!!!!A CHANGER!!!!!!!!
             if (Program.Pellicule.Pictures.Count > 0) 
             {

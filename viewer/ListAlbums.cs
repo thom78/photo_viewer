@@ -88,18 +88,22 @@ namespace viewer
         private void importerPhotosToolStripMenuItem_Click(object sender, EventArgs e)
         {
             /// Ajoute la photo importée a la pellicule et laffiche dans la picturebox       
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            if (openPictureDialog.ShowDialog() == DialogResult.OK)
             {
-                String fileName = openFileDialog1.FileName;
+                foreach(String fileName in openPictureDialog.FileNames)
+                {
                 String name = Path.GetFileNameWithoutExtension(fileName);
                 String date = File.GetCreationTimeUtc(fileName).ToShortDateString();
 
                 Picture pic = new Picture(System.Drawing.Image.FromFile(fileName), fileName, name, 0, "", date);
                 show_vignette(pic);
+                }
                 XML_Serialization.save_user_data();
             }
         }
 
+        //En attendant de trouver mieux (méthode publique utilisée par Vignette.cs)
+        
         private void diaporamaToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Diapo new_Diapo = new Diapo();

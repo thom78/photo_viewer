@@ -52,7 +52,7 @@ namespace viewer
                 groupBox1.Visible = false;
             }
         }
-
+     
         private void PhotoVignette_MouseHover(object sender, EventArgs e)
         {
             //en fonction du type de la vignette on affiche soit les infos de lalbum, soit les infos de limage
@@ -72,6 +72,6 @@ namespace viewer
         private void PhotoVignette_MouseLeave(object sender, EventArgs e)
         {
             groupBox1.Visible = false;
-        }
+        }      
     }
 }

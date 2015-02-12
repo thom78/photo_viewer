@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.AllPhotosGrid = new System.Windows.Forms.FlowLayoutPanel();
-            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.openPictureDialog = new System.Windows.Forms.OpenFileDialog();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.AlbumGrid = new System.Windows.Forms.FlowLayoutPanel();
@@ -53,8 +53,9 @@
             this.AllPhotosGrid.Paint += new System.Windows.Forms.PaintEventHandler(this.AlbumGrid_Paint);
             // 
             // openFileDialog1
-            // 
-            this.openFileDialog1.FileName = "openFileDialog1";
+            //
+            this.openPictureDialog.Multiselect = true;
+            this.openPictureDialog.Filter = "Images (*.jpeg,*.jpg,*.png,*.bmp,*.gif)|*.jpeg;*.jpg;*.png;*.bmp;*.gif";
             // 
             // label1
             // 
@@ -141,7 +142,7 @@
         #endregion
 
         private System.Windows.Forms.FlowLayoutPanel AllPhotosGrid;
-        private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.OpenFileDialog openPictureDialog;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.FlowLayoutPanel AlbumGrid;
