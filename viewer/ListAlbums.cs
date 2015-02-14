@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,7 +19,7 @@ using System.Windows.Forms;
 
 namespace viewer
 {
-    public partial class ListaAlbums : Form
+    public partial class ListAlbums : Form
     {
         //definition de constantes
         public const int ALBUM = 0;
@@ -36,20 +37,21 @@ namespace viewer
             AlbumGrid.Controls.Add(vignet);
         }
 
-        public ListaAlbums()
+        public ListAlbums()
         {
             InitializeComponent();
 
             //creation des images a partir de la picture box, et ajout dans lalbum pellicule
-            foreach (Image t in PhotosDeCouvertureAlbum.Images)
+            /*foreach (Image t in PhotosDeCouvertureAlbum.Images)
             {
-                new Picture(t);
-            }
+                new Picture(t,"",0,"","");
+                XML_Serialization.save_user_data();
+            }*/
 
             /// Affichage d'images en grid
             AllPhotosGrid.FlowDirection = FlowDirection.LeftToRight;
             AllPhotosGrid.AutoScroll = true;
-            foreach (Picture t in Album.Pellicule.Pictures)
+            foreach (Picture t in Program.Pellicule.Pictures)
             {
                 show_vignette(t);
             }
@@ -57,46 +59,55 @@ namespace viewer
             /// Affichage des albums
             AlbumGrid.FlowDirection = FlowDirection.LeftToRight;
             AlbumGrid.AutoScroll = true;
-            foreach (Album t in Album.Albums)
+
+            foreach (Album t in Program.Albums)
             {
                 show_vignette(t);
             }
         }
-        
-
-        private void createAlbumButton_Click(object sender, EventArgs e)
+       
+        private void AlbumGrid_Paint(object sender, PaintEventArgs e)
         {
-            AddAlbum new_album = new AddAlbum();
+
+        }
+
+        private void ListAlbums_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void créerAlbumToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AddAlbumWindow new_album = new AddAlbumWindow();
             new_album.ShowDialog();
             // on cree une nouvelle image de lalbum grid pour afficher le nouvel album
             //on affiche la premiere photo de lalbum comme photo de couverture !!!!!!!!!!A CHA?GER!!!!!!!!!!!!!!!!!!!
             show_vignette(new_album.created_album);
         }
 
-        private void but_import_Click(object sender, EventArgs e)
+        private void importerPhotosToolStripMenuItem_Click(object sender, EventArgs e)
         {
             /// Ajoute la photo importée a la pellicule et laffiche dans la picturebox       
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            if (openPictureDialog.ShowDialog() == DialogResult.OK)
             {
-                Picture pic = new Picture(System.Drawing.Image.FromFile(openFileDialog1.FileName));
+                foreach(String fileName in openPictureDialog.FileNames)
+                {
+                String name = Path.GetFileNameWithoutExtension(fileName);
+                String date = File.GetCreationTimeUtc(fileName).ToShortDateString();
+
+                Picture pic = new Picture(System.Drawing.Image.FromFile(fileName), fileName, name, 0, "", date);
                 show_vignette(pic);
+                }
+                XML_Serialization.save_user_data();
             }
         }
 
-        private void AlbumGrid_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void Diapo_Click(object sender, EventArgs e)
+        //En attendant de trouver mieux (méthode publique utilisée par Vignette.cs)
+        
+        private void diaporamaToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Diapo new_Diapo = new Diapo();
             new_Diapo.ShowDialog();
-        }
-
-        private void ListaAlbums_Load(object sender, EventArgs e)
-        {
-
         }
 
     }

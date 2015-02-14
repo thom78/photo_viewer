@@ -42,12 +42,15 @@ namespace viewer
             type = ALBUM;
             Alb = alb;
             //la vignette de lalbum correspond a la premiere photo de cet album (peut etre modifié)
+            if ((Alb!=null)&&(Alb.Pictures.Count > 0))
+            {
             Pic = Alb.Pictures[0];
             InitializeComponent();
             PhotoVignette.Image = Pic.Image;
             PhotoVignette.SizeMode = PictureBoxSizeMode.Zoom;
             PhotoVignette.Size = new Size(250, 250);
             InfoBox.Visible = false;
+        }
         }
 
         private void Vignette_MouseEnter(object sender, EventArgs e)
