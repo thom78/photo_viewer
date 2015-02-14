@@ -108,7 +108,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.AlbumGrid.Location = new System.Drawing.Point(12, 59);
             this.AlbumGrid.Name = "AlbumGrid";
-            this.AlbumGrid.Size = new System.Drawing.Size(798, 235);
+            this.AlbumGrid.Size = new System.Drawing.Size(808, 235);
             this.AlbumGrid.TabIndex = 5;
             // 
             // button1

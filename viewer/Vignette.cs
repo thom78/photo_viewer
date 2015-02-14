@@ -13,7 +13,7 @@ namespace viewer
 {
     public partial class Vignette : UserControl
     {
-        //definition de limage de la vignette
+        //definition de limace de la vignette
         private Picture Pic;
 
         //definition de lalbum de la vignette
@@ -34,7 +34,7 @@ namespace viewer
             PhotoVignette.Image = Pic.Image;
             PhotoVignette.SizeMode = PictureBoxSizeMode.Zoom;
             PhotoVignette.Size = new Size(250, 250);
-            groupBox1.Visible = false;
+            InfoBox.Visible = false;
         }
 
         public Vignette(Album alb)
@@ -47,28 +47,45 @@ namespace viewer
             PhotoVignette.Image = Pic.Image;
             PhotoVignette.SizeMode = PictureBoxSizeMode.Zoom;
             PhotoVignette.Size = new Size(250, 250);
-            groupBox1.Visible = false;
+            InfoBox.Visible = false;
         }
 
-        private void PhotoVignette_MouseHover(object sender, EventArgs e)
+        private void Vignette_MouseEnter(object sender, EventArgs e)
+        {
+           
+        }
+
+        private void Vignette_MouseLeave(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void PhotoVignette_MouseEnter(object sender, EventArgs e)
         {
             //en fonction du type de la vignette on affiche soit les infos de lalbum, soit les infos de limage
-            if(type==IMAGE)
+            if (type == IMAGE)
             {
-                groupBox1.Visible = true;
-                MessageBox.Show(Pic.Name);
+                InfoBox.Visible = true;
+                info1.Text = Pic.Name;
+                info2.Text = Pic.Date;
+                info3.Text = " ";
+                // MessageBox.Show(Pic.Name);
             }
             else
             {
-                groupBox1.Visible = true;
-                MessageBox.Show(Alb.Title);
+                InfoBox.Visible = true;
+                info1.Text = Alb.Title;
+                info2.Text = Alb.SubTitle;
+                info3.Text = Alb.Date;
             }
-            
         }
 
         private void PhotoVignette_MouseLeave(object sender, EventArgs e)
         {
-            groupBox1.Visible = false;
+            if (!this.Bounds.Contains(PointToClient(MousePosition)))
+            {
+                InfoBox.Visible = false;
+            }
         }
     }
 }
