@@ -13,10 +13,10 @@ namespace viewer
 {
     public partial class Vignette : UserControl
     {
-        //definition de limace de la vignette
+        //definition de l'image de la vignette
         private Picture Pic;
 
-        //definition de lalbum de la vignette
+        //definition de l'album de la vignette
         private Album Alb;
 
         //definition des constantes
@@ -29,7 +29,7 @@ namespace viewer
         public Vignette(Picture pic)
         {
             type = IMAGE;
-            Pic=pic;
+            Pic = pic;
             InitializeComponent();
             PhotoVignette.Image = Pic.Image;
             PhotoVignette.SizeMode = PictureBoxSizeMode.Zoom;
@@ -42,25 +42,25 @@ namespace viewer
             type = ALBUM;
             Alb = alb;
             //la vignette de lalbum correspond a la premiere photo de cet album (peut etre modifié)
-            if ((Alb!=null)&&(Alb.Pictures.Count > 0))
+            if ((Alb != null) && (Alb.Pictures.Count > 0))
             {
-            Pic = Alb.Pictures[0];
-            InitializeComponent();
-            PhotoVignette.Image = Pic.Image;
-            PhotoVignette.SizeMode = PictureBoxSizeMode.Zoom;
-            PhotoVignette.Size = new Size(250, 250);
-            InfoBox.Visible = false;
-        }
+                Pic = Alb.Pictures[0];
+                InitializeComponent();
+                PhotoVignette.Image = Pic.Image;
+                PhotoVignette.SizeMode = PictureBoxSizeMode.Zoom;
+                PhotoVignette.Size = new Size(250, 250);
+                InfoBox.Visible = false;
+            }
         }
 
         private void Vignette_MouseEnter(object sender, EventArgs e)
         {
-           
+
         }
 
         private void Vignette_MouseLeave(object sender, EventArgs e)
         {
-            
+
         }
 
         private void PhotoVignette_MouseEnter(object sender, EventArgs e)

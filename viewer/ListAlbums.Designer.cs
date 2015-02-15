@@ -50,7 +50,6 @@
             this.AllPhotosGrid.Name = "AllPhotosGrid";
             this.AllPhotosGrid.Size = new System.Drawing.Size(808, 187);
             this.AllPhotosGrid.TabIndex = 0;
-            this.AllPhotosGrid.Paint += new System.Windows.Forms.PaintEventHandler(this.AlbumGrid_Paint);
             // 
             // openFileDialog1
             //
@@ -131,7 +130,6 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "ListAlbums";
             this.Text = "Liste des albums ";
-            this.Load += new System.EventHandler(this.ListAlbums_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);

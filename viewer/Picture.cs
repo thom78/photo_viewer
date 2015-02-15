@@ -42,7 +42,9 @@ namespace viewer
             this.Rate = rate;
             this.Comment = comment;
             this.Date = date;
+
             //a chaque fois quon crée une photo, on l'ajoute a la liste chainee Picture et on l'ajoute à l'album "pellicule"
+            //A dégager: Pellicule doit utiliser le contenu d'Albums (List<Album>)
             Program.Pellicule.Pictures.Add(this);
         }
 
@@ -57,6 +59,7 @@ namespace viewer
 
         #endregion Method_Sort
         
+        //Inutile
         public void AddPicture()
         {
             Program.Pellicule.Pictures.Add(this);

@@ -41,20 +41,21 @@ namespace viewer
         {
             InitializeComponent();
 
-            //creation des images a partir de la picture box, et ajout dans lalbum pellicule
-            /*foreach (Image t in PhotosDeCouvertureAlbum.Images)
+            //On charge les données utilisateurs si elles existent.
+            if (File.Exists("user_data.xml"))
             {
-                new Picture(t,"",0,"","");
-                XML_Serialization.save_user_data();
-            }*/
-
+                XML_Serialization.load_user_data();
+            }
+       
             /// Affichage d'images en grid
             AllPhotosGrid.FlowDirection = FlowDirection.LeftToRight;
             AllPhotosGrid.AutoScroll = true;
+
             foreach (Picture t in Program.Pellicule.Pictures)
             {
                 show_vignette(t);
             }
+                
 
             /// Affichage des albums
             AlbumGrid.FlowDirection = FlowDirection.LeftToRight;
@@ -65,23 +66,11 @@ namespace viewer
                 show_vignette(t);
             }
         }
-       
-        private void AlbumGrid_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void ListAlbums_Load(object sender, EventArgs e)
-        {
-
-        }
 
         private void créerAlbumToolStripMenuItem_Click(object sender, EventArgs e)
         {
             AddAlbumWindow new_album = new AddAlbumWindow();
             new_album.ShowDialog();
-            // on cree une nouvelle image de lalbum grid pour afficher le nouvel album
-            //on affiche la premiere photo de lalbum comme photo de couverture !!!!!!!!!!A CHA?GER!!!!!!!!!!!!!!!!!!!
             show_vignette(new_album.created_album);
         }
 
@@ -98,12 +87,11 @@ namespace viewer
                 Picture pic = new Picture(System.Drawing.Image.FromFile(fileName), fileName, name, 0, "", date);
                 show_vignette(pic);
                 }
+                //Emplacement temporaire pour l'appel à la méthode de sérialisation. //A changer.//
                 XML_Serialization.save_user_data();
             }
         }
 
-        //En attendant de trouver mieux (méthode publique utilisée par Vignette.cs)
-        
         private void diaporamaToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Diapo new_Diapo = new Diapo();
