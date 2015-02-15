@@ -25,11 +25,6 @@ namespace viewer
             InitializeComponent();
         }
 
-        protected virtual void PhotoVignette_MouseEnter(object sender, EventArgs e)
-            {
-
-        }
-
         private void PhotoVignette_MouseLeave(object sender, EventArgs e)
         {
             if (!this.Bounds.Contains(PointToClient(MousePosition)))
@@ -37,5 +32,8 @@ namespace viewer
                 InfoBox.Visible = false;
             }
         }
+
+        protected abstract void PhotoVignette_Click(object sender, EventArgs e);
+        protected abstract void PhotoVignette_MouseEnter(object sender, EventArgs e);
     }
 }

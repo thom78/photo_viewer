@@ -51,7 +51,7 @@ namespace viewer
             AllPhotosGrid.FlowDirection = FlowDirection.LeftToRight;
             AllPhotosGrid.AutoScroll = true;
 
-            foreach (Picture t in Program.Pellicule.Pictures)
+            foreach (Picture t in Program.Albums.FirstOrDefault().Pictures)
             {
                 show_vignette(t);
             }

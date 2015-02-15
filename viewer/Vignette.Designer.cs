@@ -49,6 +49,7 @@
             this.PhotoVignette.Size = new System.Drawing.Size(249, 245);
             this.PhotoVignette.TabIndex = 0;
             this.PhotoVignette.TabStop = false;
+            this.PhotoVignette.Click += new System.EventHandler(this.PhotoVignette_Click);
             this.PhotoVignette.MouseEnter += new System.EventHandler(this.PhotoVignette_MouseEnter);
             this.PhotoVignette.MouseLeave += new System.EventHandler(this.PhotoVignette_MouseLeave);
             // 

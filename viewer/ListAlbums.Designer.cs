@@ -37,6 +37,9 @@
             this.créerAlbumToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.importerPhotosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.diaporamaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.créerUnAlbumToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.importerDesPhotosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -86,6 +89,10 @@
             // 
             // menuStrip1
             // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.créerUnAlbumToolStripMenuItem,
+            this.importerDesPhotosToolStripMenuItem,
+            this.toolStripMenuItem1});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(832, 24);
@@ -112,6 +119,23 @@
             this.diaporamaToolStripMenuItem.Size = new System.Drawing.Size(77, 20);
             this.diaporamaToolStripMenuItem.Text = "Diaporama";
             this.diaporamaToolStripMenuItem.Click += new System.EventHandler(this.diaporamaToolStripMenuItem_Click);
+            // 
+            // créerUnAlbumToolStripMenuItem
+            // 
+            this.créerUnAlbumToolStripMenuItem.Name = "créerUnAlbumToolStripMenuItem";
+            this.créerUnAlbumToolStripMenuItem.Size = new System.Drawing.Size(101, 20);
+            this.créerUnAlbumToolStripMenuItem.Text = "Créer un album";
+            // 
+            // importerDesPhotosToolStripMenuItem
+            // 
+            this.importerDesPhotosToolStripMenuItem.Name = "importerDesPhotosToolStripMenuItem";
+            this.importerDesPhotosToolStripMenuItem.Size = new System.Drawing.Size(126, 20);
+            this.importerDesPhotosToolStripMenuItem.Text = "Importer des photos";
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(94, 20);
             // 
             // ListAlbums
             // 
@@ -144,5 +168,8 @@
         private System.Windows.Forms.ToolStripMenuItem créerAlbumToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem importerPhotosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem diaporamaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem créerUnAlbumToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem importerDesPhotosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
     }
 }

@@ -23,13 +23,14 @@ namespace viewer
 
         protected override void PhotoVignette_MouseEnter(object sender, EventArgs e)
         {
-            base.PhotoVignette_MouseEnter(sender, e);
+            //base.PhotoVignette_MouseEnter(sender, e);
             InfoBox.Visible = true;
             info1.Text = Pic.Name;
             info2.Text = Pic.Date;
             info3.Text = " ";
             // MessageBox.Show(Pic.Name);
         }
+        protected override void PhotoVignette_Click(object sender, EventArgs e) { }
 
     }
 }

@@ -31,12 +31,15 @@ namespace viewer
 
         protected override void PhotoVignette_MouseEnter(object sender, EventArgs e)
         {
-            base.PhotoVignette_MouseEnter(sender, e);
+            //base.PhotoVignette_MouseEnter(sender, e);
             InfoBox.Visible = true;
             info1.Text = Alb.Title;
             info2.Text = Alb.SubTitle;
             info3.Text = Alb.Date;
         }
-
+        protected override void PhotoVignette_Click(object sender, EventArgs e)
+        {
+            Program.selectedAlbum = this.Alb;
+        }
     }
 }
