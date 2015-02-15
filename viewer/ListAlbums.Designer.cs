@@ -37,32 +37,29 @@
             this.créerAlbumToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.importerPhotosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.diaporamaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.créerUnAlbumToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.importerDesPhotosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // AllPhotosGrid
             // 
-            this.AllPhotosGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.AllPhotosGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.AllPhotosGrid.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.AllPhotosGrid.Location = new System.Drawing.Point(12, 356);
+            this.AllPhotosGrid.Location = new System.Drawing.Point(12, 316);
             this.AllPhotosGrid.Name = "AllPhotosGrid";
-            this.AllPhotosGrid.Size = new System.Drawing.Size(808, 196);
+            this.AllPhotosGrid.Size = new System.Drawing.Size(808, 187);
             this.AllPhotosGrid.TabIndex = 0;
             // 
-            // openPictureDialog
-            // 
-            this.openPictureDialog.Filter = "Images (*.jpeg,*.jpg,*.png,*.bmp,*.gif)|*.jpeg;*.jpg;*.png;*.bmp;*.gif";
+            // openFileDialog1
+            //
             this.openPictureDialog.Multiselect = true;
+            this.openPictureDialog.Filter = "Images (*.jpeg,*.jpg,*.png,*.bmp,*.gif)|*.jpeg;*.jpg;*.png;*.bmp;*.gif";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(13, 339);
+            this.label1.Location = new System.Drawing.Point(13, 297);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(40, 13);
             this.label1.TabIndex = 3;
@@ -79,20 +76,20 @@
             // 
             // AlbumGrid
             // 
-            this.AlbumGrid.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.AlbumGrid.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.AlbumGrid.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.AlbumGrid.Location = new System.Drawing.Point(12, 59);
             this.AlbumGrid.Name = "AlbumGrid";
-            this.AlbumGrid.Size = new System.Drawing.Size(808, 277);
+            this.AlbumGrid.Size = new System.Drawing.Size(808, 235);
             this.AlbumGrid.TabIndex = 5;
             // 
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.créerUnAlbumToolStripMenuItem,
-            this.importerDesPhotosToolStripMenuItem,
-            this.toolStripMenuItem1});
+            this.créerAlbumToolStripMenuItem,
+            this.importerPhotosToolStripMenuItem,
+            this.diaporamaToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(832, 24);
@@ -120,28 +117,11 @@
             this.diaporamaToolStripMenuItem.Text = "Diaporama";
             this.diaporamaToolStripMenuItem.Click += new System.EventHandler(this.diaporamaToolStripMenuItem_Click);
             // 
-            // créerUnAlbumToolStripMenuItem
-            // 
-            this.créerUnAlbumToolStripMenuItem.Name = "créerUnAlbumToolStripMenuItem";
-            this.créerUnAlbumToolStripMenuItem.Size = new System.Drawing.Size(101, 20);
-            this.créerUnAlbumToolStripMenuItem.Text = "Créer un album";
-            // 
-            // importerDesPhotosToolStripMenuItem
-            // 
-            this.importerDesPhotosToolStripMenuItem.Name = "importerDesPhotosToolStripMenuItem";
-            this.importerDesPhotosToolStripMenuItem.Size = new System.Drawing.Size(126, 20);
-            this.importerDesPhotosToolStripMenuItem.Text = "Importer des photos";
-            // 
-            // toolStripMenuItem1
-            // 
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(94, 20);
-            // 
             // ListAlbums
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(832, 564);
+            this.ClientSize = new System.Drawing.Size(832, 515);
             this.Controls.Add(this.AlbumGrid);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -168,8 +148,5 @@
         private System.Windows.Forms.ToolStripMenuItem créerAlbumToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem importerPhotosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem diaporamaToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem créerUnAlbumToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem importerDesPhotosToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
     }
 }
