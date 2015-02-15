@@ -8,7 +8,7 @@ namespace viewer
 {
     static class Program
     {
-        //creation d'une liste chainee d'Albums
+        //creation d'une liste d'Albums
         public static List<Album> Albums = new List<Album>();
 
         //creation de l'album pellicule qui contient toutes les photos
