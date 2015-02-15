@@ -26,7 +26,7 @@
         /// Méthode requise pour la prise en charge du concepteur - ne modifiez pas 
         /// le contenu de cette méthode avec l'éditeur de code.
         /// </summary>
-        private void InitializeComponent()
+        protected void InitializeComponent()
         {
             this.PhotoVignette = new System.Windows.Forms.PictureBox();
             this.InfoBox = new System.Windows.Forms.GroupBox();
@@ -122,8 +122,9 @@
             // 
             // info3
             // 
+            this.info3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.info3.AutoSize = true;
-            this.info3.Location = new System.Drawing.Point(119, 50);
+            this.info3.Location = new System.Drawing.Point(105, 33);
             this.info3.Name = "info3";
             this.info3.Size = new System.Drawing.Size(35, 13);
             this.info3.TabIndex = 2;
@@ -131,8 +132,9 @@
             // 
             // info2
             // 
+            this.info2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.info2.AutoSize = true;
-            this.info2.Location = new System.Drawing.Point(119, 33);
+            this.info2.Location = new System.Drawing.Point(106, 50);
             this.info2.Name = "info2";
             this.info2.Size = new System.Drawing.Size(35, 13);
             this.info2.TabIndex = 1;
@@ -141,7 +143,7 @@
             // info1
             // 
             this.info1.AutoSize = true;
-            this.info1.Location = new System.Drawing.Point(119, 16);
+            this.info1.Location = new System.Drawing.Point(106, 16);
             this.info1.Name = "info1";
             this.info1.Size = new System.Drawing.Size(35, 13);
             this.info1.TabIndex = 0;
@@ -155,8 +157,6 @@
             this.Controls.Add(this.PhotoVignette);
             this.Name = "Vignette";
             this.Size = new System.Drawing.Size(266, 256);
-            this.MouseEnter += new System.EventHandler(this.Vignette_MouseEnter);
-            this.MouseLeave += new System.EventHandler(this.Vignette_MouseLeave);
             ((System.ComponentModel.ISupportInitialize)(this.PhotoVignette)).EndInit();
             this.InfoBox.ResumeLayout(false);
             this.InfoBox.PerformLayout();
@@ -166,15 +166,15 @@
 
         #endregion
 
-        private System.Windows.Forms.PictureBox PhotoVignette;
-        private System.Windows.Forms.GroupBox InfoBox;
+        protected System.Windows.Forms.PictureBox PhotoVignette;
+        protected System.Windows.Forms.GroupBox InfoBox;
         private System.Windows.Forms.RadioButton rate5;
         private System.Windows.Forms.RadioButton rate4;
         private System.Windows.Forms.RadioButton rate3;
         private System.Windows.Forms.RadioButton rate2;
         private System.Windows.Forms.RadioButton rate1;
-        private System.Windows.Forms.Label info3;
-        private System.Windows.Forms.Label info2;
-        private System.Windows.Forms.Label info1;
+        protected System.Windows.Forms.Label info3;
+        protected System.Windows.Forms.Label info2;
+        protected System.Windows.Forms.Label info1;
     }
 }

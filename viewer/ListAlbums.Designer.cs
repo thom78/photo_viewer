@@ -46,20 +46,20 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.AllPhotosGrid.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.AllPhotosGrid.Location = new System.Drawing.Point(12, 316);
+            this.AllPhotosGrid.Location = new System.Drawing.Point(12, 356);
             this.AllPhotosGrid.Name = "AllPhotosGrid";
-            this.AllPhotosGrid.Size = new System.Drawing.Size(808, 187);
+            this.AllPhotosGrid.Size = new System.Drawing.Size(808, 196);
             this.AllPhotosGrid.TabIndex = 0;
             // 
-            // openFileDialog1
-            //
-            this.openPictureDialog.Multiselect = true;
+            // openPictureDialog
+            // 
             this.openPictureDialog.Filter = "Images (*.jpeg,*.jpg,*.png,*.bmp,*.gif)|*.jpeg;*.jpg;*.png;*.bmp;*.gif";
+            this.openPictureDialog.Multiselect = true;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(13, 297);
+            this.label1.Location = new System.Drawing.Point(13, 339);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(40, 13);
             this.label1.TabIndex = 3;
@@ -81,15 +81,11 @@
             this.AlbumGrid.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.AlbumGrid.Location = new System.Drawing.Point(12, 59);
             this.AlbumGrid.Name = "AlbumGrid";
-            this.AlbumGrid.Size = new System.Drawing.Size(808, 235);
+            this.AlbumGrid.Size = new System.Drawing.Size(808, 277);
             this.AlbumGrid.TabIndex = 5;
             // 
             // menuStrip1
             // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.créerAlbumToolStripMenuItem,
-            this.importerPhotosToolStripMenuItem,
-            this.diaporamaToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(832, 24);
@@ -121,7 +117,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(832, 515);
+            this.ClientSize = new System.Drawing.Size(832, 564);
             this.Controls.Add(this.AlbumGrid);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);

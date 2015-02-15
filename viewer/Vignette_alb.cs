@@ -1,0 +1,42 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing;
+using System.Data;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace viewer
+{
+    public partial class Vignette_alb : Vignette
+    {
+        //definition de lalbum de la vignette
+        private Album Alb;
+ 
+        public Vignette_alb(Album alb)
+        {
+            Alb = alb;
+            //la vignette de lalbum correspond a la premiere photo de cet album (peut etre modifié)
+            if ((Alb != null) && (Alb.Pictures.Count > 0))
+            {
+                Pic = Alb.Pictures[0];
+                PhotoVignette.Image = Pic.Image;
+                PhotoVignette.SizeMode = PictureBoxSizeMode.Zoom;
+                PhotoVignette.Size = new Size(250, 250);
+                InfoBox.Visible = false;
+            }
+        }
+
+        protected override void PhotoVignette_MouseEnter(object sender, EventArgs e)
+        {
+            base.PhotoVignette_MouseEnter(sender, e);
+            InfoBox.Visible = true;
+            info1.Text = Alb.Title;
+            info2.Text = Alb.SubTitle;
+            info3.Text = Alb.Date;
+        }
+
+    }
+}

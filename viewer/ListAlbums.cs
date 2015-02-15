@@ -27,13 +27,13 @@ namespace viewer
 
         private void show_vignette(Picture pic)
         {
-            Vignette vignet = new Vignette(pic);
+            Vignette vignet = new Vignette_image(pic);
             AllPhotosGrid.Controls.Add(vignet);
         }
 
         private void show_vignette(Album alb)
         {
-            Vignette vignet = new Vignette(alb);
+            Vignette vignet = new Vignette_alb(alb);
             AlbumGrid.Controls.Add(vignet);
         }
 
@@ -46,7 +46,7 @@ namespace viewer
             {
                 XML_Serialization.load_user_data();
             }
-       
+
             /// Affichage d'images en grid
             AllPhotosGrid.FlowDirection = FlowDirection.LeftToRight;
             AllPhotosGrid.AutoScroll = true;
@@ -55,7 +55,7 @@ namespace viewer
             {
                 show_vignette(t);
             }
-                
+
 
             /// Affichage des albums
             AlbumGrid.FlowDirection = FlowDirection.LeftToRight;
