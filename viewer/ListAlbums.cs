@@ -21,20 +21,17 @@ namespace viewer
 {
     public partial class ListAlbums : Form
     {
-        //definition de constantes
-        public const int ALBUM = 0;
-        public const int IMAGE = 1;
-
         private void show_vignette(Picture pic)
         {
-            Vignette vignet = new Vignette_image(pic);
-            AllPhotosGrid.Controls.Add(vignet);
+            Vignette vignetteImage = new Vignette_image(pic);
+            AllPhotosGrid.Controls.Add(vignetteImage);
         }
 
         private void show_vignette(Album alb)
         {
-            Vignette vignet = new Vignette_alb(alb);
-            AlbumGrid.Controls.Add(vignet);
+            Vignette_alb vignetteAlbum = new Vignette_alb(alb);
+            vignetteAlbum.clickOnAlbum += new EventHandler(vignette_AlbumWasClicked);
+            AlbumGrid.Controls.Add(vignetteAlbum);
         }
 
         public ListAlbums()
@@ -51,9 +48,9 @@ namespace viewer
             AllPhotosGrid.FlowDirection = FlowDirection.LeftToRight;
             AllPhotosGrid.AutoScroll = true;
 
-            foreach (Picture t in Program.Albums.FirstOrDefault().Pictures)
-            {
-                show_vignette(t);
+            foreach (Picture picture in Program.Albums.FirstOrDefault().Pictures)
+            {                
+                show_vignette(picture);
             }
 
 
@@ -61,9 +58,9 @@ namespace viewer
             AlbumGrid.FlowDirection = FlowDirection.LeftToRight;
             AlbumGrid.AutoScroll = true;
 
-            foreach (Album t in Program.Albums)
+            foreach (Album album in Program.Albums)
             {
-                show_vignette(t);
+                show_vignette(album);
             }
         }
 
@@ -97,6 +94,14 @@ namespace viewer
             Diapo new_Diapo = new Diapo();
             new_Diapo.ShowDialog();
         }
-
+        private void vignette_AlbumWasClicked(object sender, EventArgs e)
+        {
+            Vignette_alb vignette_album = sender as Vignette_alb;
+            AllPhotosGrid.Controls.Clear();
+                foreach(Picture pic in vignette_album.Alb.Pictures)
+                {
+                    show_vignette(pic);
+                }
+        }
     }
 }

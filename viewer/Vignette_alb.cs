@@ -13,7 +13,8 @@ namespace viewer
     public partial class Vignette_alb : Vignette
     {
         //definition de lalbum de la vignette
-        private Album Alb;
+        public Album Alb;
+        public event EventHandler clickOnAlbum;
  
         public Vignette_alb(Album alb)
         {
@@ -39,7 +40,15 @@ namespace viewer
         }
         protected override void PhotoVignette_Click(object sender, EventArgs e)
         {
-            Program.selectedAlbum = this.Alb;
+            VignetteWasClicked(null);            
+        }
+        protected virtual void VignetteWasClicked(EventArgs e)
+        {
+            EventHandler eh = clickOnAlbum;
+            if (eh != null)
+            {
+                eh(this, e);
+            }
         }
     }
 }
