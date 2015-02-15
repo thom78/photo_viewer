@@ -40,10 +40,13 @@ namespace viewer
         }
         protected override void PhotoVignette_Click(object sender, EventArgs e)
         {
+            //On appelle la méthode qui créé un évènement
             VignetteWasClicked(null);            
         }
+
         protected virtual void VignetteWasClicked(EventArgs e)
         {
+            //L'évènement est créé et envoyé aux objets abonnés
             EventHandler eh = clickOnAlbum;
             if (eh != null)
             {

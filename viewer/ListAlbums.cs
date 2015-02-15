@@ -30,6 +30,8 @@ namespace viewer
         private void show_vignette(Album alb)
         {
             Vignette_alb vignetteAlbum = new Vignette_alb(alb);
+            //ListAlbums s'abonne à l'évènement de la vignette d'album correspondant à un clic de l'utilisateur.
+            //Cet évènement sera traité avec la méthode vignette_AlbumWasClicked
             vignetteAlbum.clickOnAlbum += new EventHandler(vignette_AlbumWasClicked);
             AlbumGrid.Controls.Add(vignetteAlbum);
         }
@@ -96,7 +98,10 @@ namespace viewer
         }
         private void vignette_AlbumWasClicked(object sender, EventArgs e)
         {
+            //La vignette d'albums dont on souhaite afficher le contenu est l'émetteur de l'évènement. (C'est celle sur laquelle l'utilisateur a cliqué)
             Vignette_alb vignette_album = sender as Vignette_alb;
+
+            //On rafraichit la liste de photos du contrôle AllPhotosGrid à partir des photos contenu dans l'album de la vignette.
             AllPhotosGrid.Controls.Clear();
                 foreach(Picture pic in vignette_album.Alb.Pictures)
                 {
