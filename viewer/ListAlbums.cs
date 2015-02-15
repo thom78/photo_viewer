@@ -27,13 +27,13 @@ namespace viewer
 
         private void show_vignette(Picture pic)
         {
-            Vignette vignet = new Vignette(pic);
+            Vignette vignet = new Vignette_image(pic);
             AllPhotosGrid.Controls.Add(vignet);
         }
 
         private void show_vignette(Album alb)
         {
-            Vignette vignet = new Vignette(alb);
+            Vignette vignet = new Vignette_alb(alb);
             AlbumGrid.Controls.Add(vignet);
         }
 
@@ -81,7 +81,6 @@ namespace viewer
             AddAlbumWindow new_album = new AddAlbumWindow();
             new_album.ShowDialog();
             // on cree une nouvelle image de lalbum grid pour afficher le nouvel album
-            //on affiche la premiere photo de lalbum comme photo de couverture !!!!!!!!!!A CHA?GER!!!!!!!!!!!!!!!!!!!
             show_vignette(new_album.created_album);
         }
 

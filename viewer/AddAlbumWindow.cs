@@ -55,7 +55,7 @@ namespace viewer
             // Par defaut ajouter la premiere photo de la pellicule comme premiere photo de lalbum !!!!!!!!!A CHANGER!!!!!!!!
             if (Program.Pellicule.Pictures.Count > 0) 
             {
-            created_album.Pictures.Add(Program.Pellicule.Pictures[0]);
+                created_album.Pictures.Add(Program.Pellicule.Pictures[0]);
             }
             this.Close();
         }
