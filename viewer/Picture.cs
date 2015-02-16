@@ -34,7 +34,7 @@ namespace viewer
 
         #region Constructor(s)
         public Picture() { }
-        public Picture(Image im,String path, String Name, Int32 rate, String comment, String date)
+        public Picture(Image im,String path, String Name, Int32 rate, String comment, String date, Album album)
         {
             this.picturePath = path;
             this.Image = im;
@@ -43,9 +43,11 @@ namespace viewer
             this.Comment = comment;
             this.Date = date;
 
-            //a chaque fois quon crée une photo, on l'ajoute a la liste chainee Picture et on l'ajoute à l'album "pellicule"
-            //A dégager: Pellicule doit utiliser le contenu d'Albums (List<Album>)
-            Program.Pellicule.Pictures.Add(this);
+            //Les photos sont ajoutées dans l'album spécifié en paramètre, si elles n'existent pas déjà dedans.
+            if (!album.Pictures.Exists(a=>a.picturePath==path))
+            {
+                album.Pictures.Add(this);
+            }
         }
 
         #endregion Constructor(s)

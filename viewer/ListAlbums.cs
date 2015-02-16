@@ -21,6 +21,8 @@ namespace viewer
 {
     public partial class ListAlbums : Form
     {
+        private Vignette_alb albumSelected = null;
+
         private void show_vignette(Picture pic)
         {
             Vignette vignetteImage = new Vignette_image(pic);
@@ -51,7 +53,7 @@ namespace viewer
             AllPhotosGrid.AutoScroll = true;
 
             foreach (Picture picture in Program.Albums.FirstOrDefault().Pictures)
-            {                
+            {
                 show_vignette(picture);
             }
 
@@ -75,16 +77,16 @@ namespace viewer
 
         private void importerPhotosToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            /// Ajoute la photo importée a la pellicule et laffiche dans la picturebox       
+            /// Ajoute la photo importée àl'album sélectionné et l'affiche dans la picturebox       
             if (openPictureDialog.ShowDialog() == DialogResult.OK)
             {
-                foreach(String fileName in openPictureDialog.FileNames)
+                foreach (String fileName in openPictureDialog.FileNames)
                 {
-                String name = Path.GetFileNameWithoutExtension(fileName);
-                String date = File.GetCreationTimeUtc(fileName).ToShortDateString();
+                    String name = Path.GetFileNameWithoutExtension(fileName);
+                    String date = File.GetCreationTimeUtc(fileName).ToShortDateString();
 
-                Picture pic = new Picture(System.Drawing.Image.FromFile(fileName), fileName, name, 0, "", date);
-                show_vignette(pic);
+                    Picture pic = new Picture(System.Drawing.Image.FromFile(fileName), fileName, name, 0, "", date, albumSelected.Alb);
+                    show_vignette(pic);
                 }
                 //Emplacement temporaire pour l'appel à la méthode de sérialisation. //A changer.//
                 XML_Serialization.save_user_data();
@@ -99,14 +101,14 @@ namespace viewer
         private void vignette_AlbumWasClicked(object sender, EventArgs e)
         {
             //La vignette d'albums dont on souhaite afficher le contenu est l'émetteur de l'évènement. (C'est celle sur laquelle l'utilisateur a cliqué)
-            Vignette_alb vignette_album = sender as Vignette_alb;
+            albumSelected = sender as Vignette_alb;
 
             //On rafraichit la liste de photos du contrôle AllPhotosGrid à partir des photos contenu dans l'album de la vignette.
             AllPhotosGrid.Controls.Clear();
-                foreach(Picture pic in vignette_album.Alb.Pictures)
-                {
-                    show_vignette(pic);
-                }
+            foreach (Picture pic in albumSelected.Alb.Pictures)
+            {
+                show_vignette(pic);
+            }
         }
     }
 }
