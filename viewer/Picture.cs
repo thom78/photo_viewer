@@ -12,7 +12,7 @@ namespace viewer
     {
         #region Properties
 
-        [XmlElement(ElementName="Chemin")]
+        [XmlElement(ElementName = "Chemin")]
         public String picturePath { get; set; }
 
         [XmlElement(ElementName = "Nom")]
@@ -34,7 +34,7 @@ namespace viewer
 
         #region Constructor(s)
         public Picture() { }
-        public Picture(Image im,String path, String Name, Int32 rate, String comment, String date, Album album)
+        public Picture(Image im, String path, String Name, Int32 rate, String comment, String date, Album album)
         {
             this.picturePath = path;
             this.Image = im;
@@ -43,10 +43,13 @@ namespace viewer
             this.Comment = comment;
             this.Date = date;
 
-            //Les photos sont ajoutées dans l'album spécifié en paramètre, si elles n'existent pas déjà dedans.
-            if (!album.Pictures.Exists(a=>a.picturePath==path))
+            if (album != null)
             {
-                album.Pictures.Add(this);
+                //Les photos sont ajoutées dans l'album spécifié en paramètre, si elles n'existent pas déjà dedans.
+                if (!(album.Pictures.Exists(a => a.picturePath==path)))
+                {
+                    album.Pictures.Add(this);
+                }
             }
         }
 
@@ -60,7 +63,7 @@ namespace viewer
         }
 
         #endregion Method_Sort
-        
+
         //Inutile
         public void AddPicture()
         {
