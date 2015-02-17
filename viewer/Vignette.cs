@@ -15,11 +15,6 @@ namespace viewer
     {
         //definition de limage de la vignette
         protected Picture Pic;
-
-        //definition des constantes
-        public const Int16 IMAGE = 0;
-        public const Int16 ALBUM = 1;
-
         public Vignette()
         {
             InitializeComponent();

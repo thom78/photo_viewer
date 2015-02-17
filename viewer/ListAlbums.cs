@@ -21,7 +21,7 @@ namespace viewer
 {
     public partial class ListAlbums : Form
     {
-        private Vignette_alb albumSelected = new Vignette_alb(null);
+        private Vignette_alb vignetteAlbumSelected = new Vignette_alb(null);
 
         private void show_vignette(Picture pic)
         {
@@ -85,10 +85,11 @@ namespace viewer
                     String name = Path.GetFileNameWithoutExtension(fileName);
                     String date = File.GetCreationTimeUtc(fileName).ToShortDateString();
 
-                    if((albumSelected.Alb!=null)&&(!(albumSelected.Alb.Pictures.Exists(a=>a.picturePath==fileName))))
+                    if ((vignetteAlbumSelected.linkedAlb != null) && (!(vignetteAlbumSelected.linkedAlb.Pictures.Exists(a => a.picturePath == fileName))))
                     {
-                    Picture pic = new Picture(System.Drawing.Image.FromFile(fileName), fileName, name, 0, "", date, albumSelected.Alb);
-                    show_vignette(pic);
+                        Picture pic = new Picture(System.Drawing.Image.FromFile(fileName), fileName, name, 0, "", date, vignetteAlbumSelected.linkedAlb);
+                        show_vignette(pic);
+                        vignetteAlbumSelected.refreshPreviewPicture();
                     }
                 }
                 //Emplacement temporaire pour l'appel à la méthode de sérialisation. //A changer.//
@@ -104,11 +105,11 @@ namespace viewer
         private void vignette_AlbumWasClicked(object sender, EventArgs e)
         {
             //La vignette d'albums dont on souhaite afficher le contenu est l'émetteur de l'évènement. (C'est celle sur laquelle l'utilisateur a cliqué)
-            albumSelected = sender as Vignette_alb;
+            vignetteAlbumSelected = sender as Vignette_alb;
 
             //On rafraichit la liste de photos du contrôle AllPhotosGrid à partir des photos contenu dans l'album de la vignette.
             AllPhotosGrid.Controls.Clear();
-            foreach (Picture pic in albumSelected.Alb.Pictures)
+            foreach (Picture pic in vignetteAlbumSelected.linkedAlb.Pictures)
             {
                 show_vignette(pic);
             }

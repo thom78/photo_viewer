@@ -13,16 +13,21 @@ namespace viewer
     public partial class Vignette_alb : Vignette
     {
         //definition de lalbum de la vignette
-        public Album Alb;
+        public Album linkedAlb;
         public event EventHandler clickOnAlbum;
  
         public Vignette_alb(Album alb)
         {
-            Alb = alb;
+            linkedAlb = alb;
             //la vignette de lalbum correspond a la premiere photo de cet album (peut etre modifié)
-            if ((Alb != null) && (Alb.Pictures.Count > 0))
+            this.refreshPreviewPicture();
+        }
+
+        public void refreshPreviewPicture()
+        {
+            if ((linkedAlb != null) && (linkedAlb.Pictures.Count > 0))
             {
-                Pic = Alb.Pictures[0];
+                Pic = linkedAlb.Pictures[0];
                 PhotoVignette.Image = Pic.Image;
                 PhotoVignette.SizeMode = PictureBoxSizeMode.Zoom;
                 PhotoVignette.Size = new Size(250, 250);
@@ -34,9 +39,9 @@ namespace viewer
         {
             //base.PhotoVignette_MouseEnter(sender, e);
             InfoBox.Visible = true;
-            info1.Text = Alb.Title;
-            info2.Text = Alb.SubTitle;
-            info3.Text = Alb.Date;
+            info1.Text = linkedAlb.Title;
+            info2.Text = linkedAlb.SubTitle;
+            info3.Text = linkedAlb.Date;
         }
         protected override void PhotoVignette_Click(object sender, EventArgs e)
         {
