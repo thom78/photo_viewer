@@ -81,6 +81,12 @@
     <Compile Include="Vignette.Designer.cs">
       <DependentUpon>Vignette.cs</DependentUpon>
     </Compile>
+    <Compile Include="Vignette_test.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Vignette_test.Designer.cs">
+      <DependentUpon>Vignette_test.cs</DependentUpon>
+    </Compile>
     <Compile Include="XML_Serialization.cs" />
     <EmbeddedResource Include="Diapo.resx">
       <DependentUpon>Diapo.cs</DependentUpon>
@@ -102,6 +108,9 @@
     </Compile>
     <EmbeddedResource Include="Vignette.resx">
       <DependentUpon>Vignette.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vignette_test.resx">
+      <DependentUpon>Vignette_test.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="ClassDiagram1.cd" />
     <None Include="Properties\Settings.settings">
