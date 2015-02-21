@@ -152,7 +152,7 @@
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
             this.toolStripStatusLabel1.Size = new System.Drawing.Size(60, 17);
-            this.toolStripStatusLabel1.Text = "En attente";
+            this.toolStripStatusLabel1.Text = "En attente"; 
             // 
             // supprimerToolStripMenuItem
             // 
