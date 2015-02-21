@@ -50,6 +50,7 @@
             this.AllPhotosGrid.Name = "AllPhotosGrid";
             this.AllPhotosGrid.Size = new System.Drawing.Size(688, 594);
             this.AllPhotosGrid.TabIndex = 0;
+            this.AllPhotosGrid.MouseClick += new System.Windows.Forms.MouseEventHandler(this.AllPhotosGrid_MouseClick);
             // 
             // openPictureDialog
             // 

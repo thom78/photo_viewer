@@ -32,7 +32,7 @@ namespace viewer
             // test présence de photos dans l'album 
             if (album_length == 0)
             {
-                System.Windows.Forms.MessageBox.Show("Aucun album disponible");
+                //System.Windows.Forms.MessageBox.Show("Aucun album disponible");
                 interrupteur = 0;
                 
             }

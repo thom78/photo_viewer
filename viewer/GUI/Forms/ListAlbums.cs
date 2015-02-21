@@ -81,24 +81,26 @@ namespace viewer
 
         private void importerPhotosToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            /// Ajoute la photo importée àl'album sélectionné et l'affiche dans la picturebox       
-            if (openPictureDialog.ShowDialog() == DialogResult.OK)
-            {
-                foreach (String fileName in openPictureDialog.FileNames)
+           
+                /// Ajoute la photo importée àl'album sélectionné et l'affiche dans la picturebox       
+                if (openPictureDialog.ShowDialog() == DialogResult.OK)
                 {
-                    String name = Path.GetFileNameWithoutExtension(fileName);
-                    String date = File.GetCreationTimeUtc(fileName).ToShortDateString();
-
-                    if ((vignetteAlbumSelected.linkedAlb != null) && (!(vignetteAlbumSelected.linkedAlb.Pictures.Exists(a => a.picturePath == fileName))))
+                    foreach (String fileName in openPictureDialog.FileNames)
                     {
-                        Picture pic = new Picture(System.Drawing.Image.FromFile(fileName), fileName, name, 0, "", date, vignetteAlbumSelected.linkedAlb);
-                        show_vignette(pic);
-                        vignetteAlbumSelected.refreshPreviewPicture();
+                        String name = Path.GetFileNameWithoutExtension(fileName);
+                        String date = File.GetCreationTimeUtc(fileName).ToShortDateString();
+
+                        if ((vignetteAlbumSelected.linkedAlb != null) && (!(vignetteAlbumSelected.linkedAlb.Pictures.Exists(a => a.picturePath == fileName))))
+                        {
+                            Picture pic = new Picture(System.Drawing.Image.FromFile(fileName), fileName, name, 0, "", date, vignetteAlbumSelected.linkedAlb);
+                            show_vignette(pic);
+                            vignetteAlbumSelected.refreshPreviewPicture();
+                        }
                     }
+                    //Emplacement temporaire pour l'appel à la méthode de sérialisation. //A changer.//
+                    XML_Serialization.save_user_data();
                 }
-                //Emplacement temporaire pour l'appel à la méthode de sérialisation. //A changer.//
-                XML_Serialization.save_user_data();
-            }
+            
         }
 
         private void diaporamaToolStripMenuItem_Click(object sender, EventArgs e)
@@ -118,5 +120,18 @@ namespace viewer
                 show_vignette(pic);
             }
         }
+
+        private void AllPhotosGrid_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                
+            }
+                
+        }
+
+     
+
+       
     }
 }
