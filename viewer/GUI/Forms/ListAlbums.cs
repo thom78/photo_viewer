@@ -24,6 +24,10 @@ namespace viewer
     {
         private VignetteNVAlbum vignetteAlbumSelected;
         
+        private VignetteNVPhoto vignettePhotoSelected;
+        private List<Picture> Photo_a_suppr = new List<Picture>();
+        private List<string> Name_photo_suppr = new List<string>();
+
         /// <summary>
         /// Fonction qui instancie une nouvelle vignette correspondant à une image d'un album afin de l'afficher sur l'interface.
         /// </summary>
@@ -128,32 +132,11 @@ namespace viewer
 
         private void AllPhotosGrid_MouseClick(object sender, MouseEventArgs e)
         {
-            vignettePhotoSelected = sender as VignetteNVPhoto;
-            Name_photo_suppr.Add(vignettePhotoSelected.pic.Name);
-
-            //System.Windows.Forms.MessageBox.Show(vignettePhotoSelected.pic.Name);
-           
-        }
-
-        }
-
-        /// <summary>
-        ///  Fonction appelée pour ajouter des images dans un album photo à partir des chemins de fichiers (et qui les sérialise).
-        /// </summary>
-        /// <param name="strFileName">Chemin du fichier correspondant à l'image.</param>
-        private void importPictures(String strFileName)
-        {
-            String strName = Path.GetFileNameWithoutExtension(strFileName);
-            String strDate = File.GetCreationTimeUtc(strFileName).ToShortDateString();
-
-            if ((vignetteAlbumSelected != null))
+            if (e.Button == MouseButtons.Right)
             {
-                if (!(vignetteAlbumSelected.albumLinked.Pictures.Exists(a => a.picturePath == strFileName)))
-                {
-                    Picture pic = new Picture(System.Drawing.Image.FromFile(strFileName), strFileName, strName, 0, "", strDate, vignetteAlbumSelected.albumLinked);
-                    AddControlVignettePhoto(pic);
-                    vignetteAlbumSelected.refreshPreviewPicture();
-                }
+                
+        }
+
             }
             else if ((vignetteAlbumSelected == null))
             {
@@ -161,6 +144,7 @@ namespace viewer
                 this.toolStripStatusLabel1.Text = "Aucun album sélectionné!";
             }
         }
+
 
         //Les fichiers déplacés sont copiés en mémoire lorsque la souris arrive sur le contrôle avec les fichiers déplacés.
         void AllPhotosGrid_DragEnter(object sender, DragEventArgs e)
@@ -173,6 +157,7 @@ namespace viewer
         {
             List<String> listAllowedFileExt=new List<String>(){".jpeg",".jpg",".png",".bmp",".gif"};
     
+    }
             string[] files = e.Data.GetData(DataFormats.FileDrop) as string[];
 
             //On teste si les fichiers déplacés correspondent à des images.
