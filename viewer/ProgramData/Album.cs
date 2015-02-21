@@ -7,7 +7,7 @@ using System.Xml.Serialization;
 
 namespace viewer
 {
-    public class Album : IComparable<Album>
+    public class Album
     {
         #region Properties
 
@@ -38,14 +38,5 @@ namespace viewer
         }
 
         #endregion Constructor(s)
-
-        #region Method_Sort
-
-        int IComparable<Album>.CompareTo(Album other)
-        {
-            return this.Title.CompareTo(other.Title);
-        }
-
-        #endregion Method_Sort
     }
 }
