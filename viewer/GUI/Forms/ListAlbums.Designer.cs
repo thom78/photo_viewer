@@ -36,6 +36,7 @@
             this.importerPhotosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.diaporamaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.supprToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -50,7 +51,6 @@
             this.AllPhotosGrid.Name = "AllPhotosGrid";
             this.AllPhotosGrid.Size = new System.Drawing.Size(688, 594);
             this.AllPhotosGrid.TabIndex = 0;
-            this.AllPhotosGrid.MouseClick += new System.Windows.Forms.MouseEventHandler(this.AllPhotosGrid_MouseClick);
             // 
             // openPictureDialog
             // 
@@ -70,7 +70,8 @@
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.créerAlbumToolStripMenuItem,
             this.importerPhotosToolStripMenuItem,
-            this.diaporamaToolStripMenuItem});
+            this.diaporamaToolStripMenuItem,
+            this.supprToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1044, 24);
@@ -115,6 +116,13 @@
             this.splitContainer1.SplitterDistance = 352;
             this.splitContainer1.TabIndex = 9;
             // 
+            // supprToolStripMenuItem
+            // 
+            this.supprToolStripMenuItem.Name = "supprToolStripMenuItem";
+            this.supprToolStripMenuItem.Size = new System.Drawing.Size(50, 20);
+            this.supprToolStripMenuItem.Text = "Suppr";
+            this.supprToolStripMenuItem.Click += new System.EventHandler(this.supprToolStripMenuItem_Click);
+            // 
             // ListAlbums
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -147,5 +155,6 @@
         private System.Windows.Forms.ToolStripMenuItem importerPhotosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem diaporamaToolStripMenuItem;
         private System.Windows.Forms.SplitContainer splitContainer1;
+        private System.Windows.Forms.ToolStripMenuItem supprToolStripMenuItem;
     }
 }

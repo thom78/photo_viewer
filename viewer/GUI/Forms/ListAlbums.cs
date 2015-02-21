@@ -23,19 +23,28 @@ namespace viewer
     public partial class ListAlbums : Form
     {
         private VignetteNVAlbum vignetteAlbumSelected = new VignetteNVAlbum(null);
+        
+        private VignetteNVPhoto vignettePhotoSelected;
+        private List<Picture> Photo_a_suppr = new List<Picture>();
+        private List<string> Name_photo_suppr = new List<string>();
 
         private void show_vignette(Picture pic)
         {
             VignetteNV vignetteImage = new VignetteNVPhoto(pic);
             AllPhotosGrid.Controls.Add(vignetteImage);
+
+            vignetteImage.ehClickOnAlbum += new EventHandler(ClickOnVignettePhoto);
         }
+
 
         private void show_vignette(Album alb)
         {
             VignetteNV vignetteAlbum = new VignetteNVAlbum(alb);
+        
             //ListAlbums s'abonne à l'évènement de la vignette d'album correspondant à un clic de l'utilisateur.
             //Cet évènement sera traité avec la méthode ClickOnVignetteAlbum
             vignetteAlbum.ehClickOnAlbum += new EventHandler(ClickOnVignetteAlbum);
+
             AlbumGrid.Controls.Add(vignetteAlbum);
         }
 
@@ -121,17 +130,64 @@ namespace viewer
             }
         }
 
-        private void AllPhotosGrid_MouseClick(object sender, MouseEventArgs e)
+
+        private void ClickOnVignettePhoto(object sender, EventArgs e)
         {
-            if (e.Button == MouseButtons.Right)
-            {
-                
-            }
-                
+            vignettePhotoSelected = sender as VignetteNVPhoto;
+            Name_photo_suppr.Add(vignettePhotoSelected.pic.Name);
+
+            //System.Windows.Forms.MessageBox.Show(vignettePhotoSelected.pic.Name);
+           
         }
 
-     
+        private void supprToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            /*foreach (VignetteNVPhoto pic in vignettePhotoSelected)
+            {
+                Name_photo_suppr.Add(pic.Name);
+                System.Windows.Forms.MessageBox.Show(pic.Name);
 
+            }*/
+            //System.Windows.Forms.MessageBox.Show(vignettePhotoSelected.pic.Name);
+
+            foreach (Picture photo in vignetteAlbumSelected.linkedAlb.Pictures)
+            {
+                
+                foreach (string name in Name_photo_suppr)
+                {
+                    if (photo.Name == name)
+                    {
+                        Photo_a_suppr.Add(photo);
+                        //System.Windows.Forms.MessageBox.Show(photo.Name);
+                    }
+                }
+            }
+
+            foreach (Picture pic in Photo_a_suppr)
+            {
+                vignetteAlbumSelected.linkedAlb.Pictures.Remove(pic);
+                              
+            }
+            vignetteAlbumSelected.refreshPreviewPicture();
+            AllPhotosGrid.Controls.Clear();
+            foreach (Picture pic in vignetteAlbumSelected.linkedAlb.Pictures)
+            {
+                show_vignette(pic);
+            }
+
+        }
        
-    }
+    }  
+    
 }
+
+/*private void AllPhotosGrid_MouseClick(object sender, MouseEventArgs e)
+       {
+           vignetteAlbumSelected = sender as VignetteNVAlbum;
+
+           if (e.Button == MouseButtons.Right)
+           {
+               AllPhotosGrid.Controls.Clear();          
+           }
+                
+       }*/
