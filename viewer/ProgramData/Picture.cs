@@ -63,5 +63,11 @@ namespace viewer
         }
 
         #endregion Method_Sort
+
+        //Inutile
+        public void AddPicture()
+        {
+            Program.Pellicule.Pictures.Add(this);
+        }
     }
 }
