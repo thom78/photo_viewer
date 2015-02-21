@@ -12,7 +12,7 @@ namespace viewer
 {
     public partial class VignetteNV : UserControl
     {
-        public Picture pic;
+        protected Picture pic;
         public event EventHandler ehClickOnAlbum;
         public VignetteNV()
         {
