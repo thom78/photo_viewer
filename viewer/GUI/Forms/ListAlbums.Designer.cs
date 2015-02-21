@@ -48,7 +48,7 @@
             this.AllPhotosGrid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.AllPhotosGrid.Location = new System.Drawing.Point(0, 0);
             this.AllPhotosGrid.Name = "AllPhotosGrid";
-            this.AllPhotosGrid.Size = new System.Drawing.Size(547, 491);
+            this.AllPhotosGrid.Size = new System.Drawing.Size(688, 594);
             this.AllPhotosGrid.TabIndex = 0;
             // 
             // openPictureDialog
@@ -61,7 +61,7 @@
             this.AlbumGrid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.AlbumGrid.Location = new System.Drawing.Point(0, 0);
             this.AlbumGrid.Name = "AlbumGrid";
-            this.AlbumGrid.Size = new System.Drawing.Size(281, 491);
+            this.AlbumGrid.Size = new System.Drawing.Size(352, 594);
             this.AlbumGrid.TabIndex = 5;
             // 
             // menuStrip1
@@ -72,7 +72,7 @@
             this.diaporamaToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(832, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1044, 24);
             this.menuStrip1.TabIndex = 7;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -110,15 +110,15 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.AllPhotosGrid);
-            this.splitContainer1.Size = new System.Drawing.Size(832, 491);
-            this.splitContainer1.SplitterDistance = 281;
+            this.splitContainer1.Size = new System.Drawing.Size(1044, 594);
+            this.splitContainer1.SplitterDistance = 352;
             this.splitContainer1.TabIndex = 9;
             // 
             // ListAlbums
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(832, 515);
+            this.ClientSize = new System.Drawing.Size(1044, 618);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
