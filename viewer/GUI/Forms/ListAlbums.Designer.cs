@@ -39,6 +39,7 @@
             this.supprToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.supprToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -60,6 +61,7 @@
             this.AllPhotosGrid.DragDrop += new System.Windows.Forms.DragEventHandler(this.AllPhotosGrid_DragDrop);
             this.AllPhotosGrid.DragEnter += new System.Windows.Forms.DragEventHandler(this.AllPhotosGrid_DragEnter);
             this.AllPhotosGrid.MouseClick += new System.Windows.Forms.MouseEventHandler(this.AllPhotosGrid_MouseClick);
+
             // 
             // openPictureDialog
             // 
@@ -81,8 +83,7 @@
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.créerAlbumToolStripMenuItem,
             this.importerPhotosToolStripMenuItem,
-            this.diaporamaToolStripMenuItem,
-            this.supprToolStripMenuItem});
+            this.diaporamaToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(824, 24);
@@ -129,8 +130,7 @@
             this.splitContainer1.SplitterDistance = 266;
             this.splitContainer1.SplitterIncrement = 16;
             this.splitContainer1.TabIndex = 9;
-            // 
-            // statusStrip1
+            // // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1});
@@ -144,7 +144,13 @@
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
             this.toolStripStatusLabel1.Size = new System.Drawing.Size(60, 17);
-            this.toolStripStatusLabel1.Text = "En attente";
+            this.toolStripStatusLabel1.Text = "En attente"; 
+            // supprToolStripMenuItem
+            // 
+            this.supprToolStripMenuItem.Name = "supprToolStripMenuItem";
+            this.supprToolStripMenuItem.Size = new System.Drawing.Size(50, 20);
+            this.supprToolStripMenuItem.Text = "Suppr";
+            this.supprToolStripMenuItem.Click += new System.EventHandler(this.supprToolStripMenuItem_Click);
             // 
             // ListAlbums
             // 
@@ -183,5 +189,6 @@
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.ToolStripMenuItem supprToolStripMenuItem;
     }
 }
