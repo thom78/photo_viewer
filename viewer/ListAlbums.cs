@@ -25,7 +25,7 @@ namespace viewer
 
         private void show_vignette(Picture pic)
         {
-            Vignette vignetteImage = new Vignette_image(pic);
+            VignettePhoto vignetteImage = new VignettePhoto(pic);
             AllPhotosGrid.Controls.Add(vignetteImage);
         }
 
@@ -72,7 +72,10 @@ namespace viewer
         {
             AddAlbumWindow new_album = new AddAlbumWindow();
             new_album.ShowDialog();
-            show_vignette(new_album.created_album);
+            if (new_album.DialogResult == DialogResult.OK)
+            {
+                show_vignette(new_album.created_album);
+            }
         }
 
         private void importerPhotosToolStripMenuItem_Click(object sender, EventArgs e)

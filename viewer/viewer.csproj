@@ -34,6 +34,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -81,11 +82,11 @@
     <Compile Include="Vignette.Designer.cs">
       <DependentUpon>Vignette.cs</DependentUpon>
     </Compile>
-    <Compile Include="Vignette_test.cs">
+    <Compile Include="VignettePhoto.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Vignette_test.Designer.cs">
-      <DependentUpon>Vignette_test.cs</DependentUpon>
+    <Compile Include="VignettePhoto.Designer.cs">
+      <DependentUpon>VignettePhoto.cs</DependentUpon>
     </Compile>
     <Compile Include="XML_Serialization.cs" />
     <EmbeddedResource Include="Diapo.resx">
@@ -109,10 +110,10 @@
     <EmbeddedResource Include="Vignette.resx">
       <DependentUpon>Vignette.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Vignette_test.resx">
-      <DependentUpon>Vignette_test.cs</DependentUpon>
+    <EmbeddedResource Include="VignettePhoto.resx">
+      <DependentUpon>VignettePhoto.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="ClassDiagram1.cd" />
+    <None Include="Properties\DataSources\Picture.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

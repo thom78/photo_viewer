@@ -19,7 +19,7 @@ namespace viewer
         public String Name { get; set; }
 
         [XmlElement(ElementName = "Rating")]
-        public Int32 Rate { get; set; }
+        public Int32 intPicRating { get; set; }
 
         [XmlElement(ElementName = "Commentaire")]
         public String Comment { get; set; }
@@ -39,7 +39,7 @@ namespace viewer
             this.picturePath = path;
             this.Image = im;
             this.Name = Name;
-            this.Rate = rate;
+            this.intPicRating = rate;
             this.Comment = comment;
             this.Date = date;
 

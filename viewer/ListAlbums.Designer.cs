@@ -30,58 +30,39 @@
         {
             this.AllPhotosGrid = new System.Windows.Forms.FlowLayoutPanel();
             this.openPictureDialog = new System.Windows.Forms.OpenFileDialog();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.AlbumGrid = new System.Windows.Forms.FlowLayoutPanel();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.créerAlbumToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.importerPhotosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.diaporamaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.menuStrip1.SuspendLayout();
+            this.tabControl1.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
             this.SuspendLayout();
             // 
             // AllPhotosGrid
             // 
-            this.AllPhotosGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.AllPhotosGrid.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.AllPhotosGrid.Location = new System.Drawing.Point(12, 316);
+            this.AllPhotosGrid.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.AllPhotosGrid.Location = new System.Drawing.Point(3, 3);
             this.AllPhotosGrid.Name = "AllPhotosGrid";
-            this.AllPhotosGrid.Size = new System.Drawing.Size(808, 187);
+            this.AllPhotosGrid.Size = new System.Drawing.Size(818, 459);
             this.AllPhotosGrid.TabIndex = 0;
             // 
-            // openFileDialog1
-            //
-            this.openPictureDialog.Multiselect = true;
+            // openPictureDialog
+            // 
             this.openPictureDialog.Filter = "Images (*.jpeg,*.jpg,*.png,*.bmp,*.gif)|*.jpeg;*.jpg;*.png;*.bmp;*.gif";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(13, 297);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(40, 13);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "Photos";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 42);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(41, 13);
-            this.label2.TabIndex = 4;
-            this.label2.Text = "Albums";
+            this.openPictureDialog.Multiselect = true;
             // 
             // AlbumGrid
             // 
-            this.AlbumGrid.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.AlbumGrid.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.AlbumGrid.Location = new System.Drawing.Point(12, 59);
+            this.AlbumGrid.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.AlbumGrid.Location = new System.Drawing.Point(3, 3);
             this.AlbumGrid.Name = "AlbumGrid";
-            this.AlbumGrid.Size = new System.Drawing.Size(808, 235);
+            this.AlbumGrid.Size = new System.Drawing.Size(818, 459);
             this.AlbumGrid.TabIndex = 5;
             // 
             // menuStrip1
@@ -117,21 +98,56 @@
             this.diaporamaToolStripMenuItem.Text = "Diaporama";
             this.diaporamaToolStripMenuItem.Click += new System.EventHandler(this.diaporamaToolStripMenuItem_Click);
             // 
+            // tabControl1
+            // 
+            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControl1.HotTrack = true;
+            this.tabControl1.Location = new System.Drawing.Point(0, 24);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(832, 491);
+            this.tabControl1.TabIndex = 8;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.AlbumGrid);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(824, 465);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "tabPage1";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.AllPhotosGrid);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(824, 465);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "tabPage2";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
             // ListAlbums
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(832, 515);
-            this.Controls.Add(this.AlbumGrid);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.AllPhotosGrid);
+            this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "ListAlbums";
-            this.Text = "Liste des albums ";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "PhotoViewer";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.tabControl1.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -141,12 +157,13 @@
 
         private System.Windows.Forms.FlowLayoutPanel AllPhotosGrid;
         private System.Windows.Forms.OpenFileDialog openPictureDialog;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.FlowLayoutPanel AlbumGrid;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem créerAlbumToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem importerPhotosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem diaporamaToolStripMenuItem;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tabPage2;
     }
 }

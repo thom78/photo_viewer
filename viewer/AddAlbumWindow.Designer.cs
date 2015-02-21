@@ -71,7 +71,7 @@
             this.but_ko.UseVisualStyleBackColor = true;
             this.but_ko.Click += new System.EventHandler(this.KO_but_Click);
             // 
-            // label1
+            // labelTitrePhoto
             // 
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(12, 18);
@@ -81,7 +81,7 @@
             this.label1.Text = "Titre";
             this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
-            // label2
+            // labelDate
             // 
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(12, 45);
