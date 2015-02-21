@@ -12,7 +12,7 @@ namespace viewer
         public static List<Album> Albums = new List<Album>();
 
         //creation de l'album pellicule qui contient toutes les photos
-        public static Album Pellicule = new Album("Pellicule","",DateTime.Now.ToShortDateString());
+        //public static Album Pellicule = new Album("Pellicule","",DateTime.Now.ToShortDateString());
 
         /// <summary>
         /// Point d'entrée principal de l'application.

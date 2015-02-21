@@ -11,24 +11,24 @@ namespace viewer.GUI.UserControls
     public partial class VignetteNVAlbum : viewer.VignetteNV
     {
         #region Properties
-        public Album linkedAlb;
+        public Album albumLinked;
         #endregion Properties
         public VignetteNVAlbum(Album alb)
         {
             InitializeComponent();
-            linkedAlb = alb;
+            albumLinked = alb;
             this.refreshPreviewPicture();
         }
 
         public void refreshPreviewPicture()
         {
-            if ((linkedAlb != null) && (linkedAlb.Pictures.Count > 0))
+            if ((albumLinked != null) && (albumLinked.Pictures.Count > 0))
             {
-                this.labelDate.Text = linkedAlb.Date;
-                this.labelName.Text = linkedAlb.Title;
-                this.labelSubtitle.Text = linkedAlb.SubTitle;
-                this.labelNumPhotos.Text = linkedAlb.Pictures.Count.ToString() + " Images";
-                pic = linkedAlb.Pictures[0];
+                this.labelDate.Text = albumLinked.Date;
+                this.labelName.Text = albumLinked.Title;
+                this.labelSubtitle.Text = albumLinked.SubTitle;
+                this.labelNumPhotos.Text = albumLinked.Pictures.Count.ToString() + " Images";
+                pic = albumLinked.Pictures[0];
                 this.pbPreviewPicture.Image = pic.Image;
                 this.pbPreviewPicture.SizeMode = PictureBoxSizeMode.Zoom;
                 this.pbPreviewPicture.Size = new Size(256, 256);

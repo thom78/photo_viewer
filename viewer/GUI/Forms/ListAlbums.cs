@@ -22,30 +22,31 @@ namespace viewer
 {
     public partial class ListAlbums : Form
     {
-        private VignetteNVAlbum vignetteAlbumSelected = new VignetteNVAlbum(null);
-        
-        private VignetteNVPhoto vignettePhotoSelected;
-        private List<Picture> Photo_a_suppr = new List<Picture>();
-        private List<string> Name_photo_suppr = new List<string>();
+        private VignetteNVAlbum vignetteAlbumSelected;
 
-        private void show_vignette(Picture pic)
+        /// <summary>
+        /// Fonction qui instancie une nouvelle vignette correspondant à une image d'un album afin de l'afficher sur l'interface.
+        /// </summary>
+        /// <param name="pic">Objet Picture correspondant à la vignette.</param>
+        private void AddControlVignettePhoto(Picture pic)
         {
             VignetteNV vignetteImage = new VignetteNVPhoto(pic);
             AllPhotosGrid.Controls.Add(vignetteImage);
-
-            vignetteImage.ehClickOnAlbum += new EventHandler(ClickOnVignettePhoto);
         }
 
-
-        private void show_vignette(Album alb)
+        /// <summary>
+        /// Fonction qui instancie une nouvelle vignette correspondant à un album afin de l'afficher sur l'interface.
+        /// </summary>
+        /// <param name="pic">Objet Album correspondant à la vignette.</param>
+        private void AddControlVignetteAlbum(Album alb)
         {
             VignetteNV vignetteAlbum = new VignetteNVAlbum(alb);
-        
             //ListAlbums s'abonne à l'évènement de la vignette d'album correspondant à un clic de l'utilisateur.
             //Cet évènement sera traité avec la méthode ClickOnVignetteAlbum
             vignetteAlbum.ehClickOnAlbum += new EventHandler(ClickOnVignetteAlbum);
-
             AlbumGrid.Controls.Add(vignetteAlbum);
+
+            vignetteAlbumSelected = vignetteAlbum as VignetteNVAlbum;
         }
 
         public ListAlbums()
@@ -58,63 +59,58 @@ namespace viewer
                 XML_Serialization.load_user_data();
             }
 
-            /// Affichage d'images en grid
-            AllPhotosGrid.FlowDirection = FlowDirection.LeftToRight;
-            AllPhotosGrid.AutoScroll = true;
-
-            foreach (Picture picture in Program.Albums.FirstOrDefault().Pictures)
+            //On définit l'album par défaut si il existe
+            if (Program.Albums.Count > 0)
             {
-                show_vignette(picture);
-            }
+                /// Affichage d'images en grid
+                AllPhotosGrid.FlowDirection = FlowDirection.LeftToRight;
+                AllPhotosGrid.AutoScroll = true;
 
-
-            /// Affichage des albums
-            AlbumGrid.FlowDirection = FlowDirection.LeftToRight;
-            AlbumGrid.AutoScroll = true;
-
-            foreach (Album album in Program.Albums)
-            {
-                show_vignette(album);
-            }
-        }
-
-        private void créerAlbumToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            AddAlbumWindow new_album = new AddAlbumWindow();
-            new_album.ShowDialog();
-            if (new_album.DialogResult == DialogResult.OK)
-            {
-                show_vignette(new_album.created_album);
-            }
-        }
-
-        private void importerPhotosToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-           
-                /// Ajoute la photo importée àl'album sélectionné et l'affiche dans la picturebox       
-                if (openPictureDialog.ShowDialog() == DialogResult.OK)
+                foreach (Picture picture in Program.Albums.FirstOrDefault().Pictures)
                 {
-                    foreach (String fileName in openPictureDialog.FileNames)
-                    {
-                        String name = Path.GetFileNameWithoutExtension(fileName);
-                        String date = File.GetCreationTimeUtc(fileName).ToShortDateString();
-
-                        if ((vignetteAlbumSelected.linkedAlb != null) && (!(vignetteAlbumSelected.linkedAlb.Pictures.Exists(a => a.picturePath == fileName))))
-                        {
-                            Picture pic = new Picture(System.Drawing.Image.FromFile(fileName), fileName, name, 0, "", date, vignetteAlbumSelected.linkedAlb);
-                            show_vignette(pic);
-                            vignetteAlbumSelected.refreshPreviewPicture();
-                        }
-                    }
-                    //Emplacement temporaire pour l'appel à la méthode de sérialisation. //A changer.//
-                    XML_Serialization.save_user_data();
+                    AddControlVignettePhoto(picture);
                 }
-            
+
+                /// Affichage des albums
+                AlbumGrid.FlowDirection = FlowDirection.LeftToRight;
+                AlbumGrid.AutoScroll = true;
+
+                foreach (Album album in Program.Albums)
+                {
+                    AddControlVignetteAlbum(album);
+                }
+            }
+        }
+
+        private void createAlbumToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AddAlbumWindow dialogNewAlbum = new AddAlbumWindow();
+            dialogNewAlbum.ShowDialog();
+            if (dialogNewAlbum.DialogResult == DialogResult.OK)
+            {
+                AddControlVignetteAlbum(dialogNewAlbum.created_album);
+            }
+        }
+
+        private void importPhotosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            /// Ajoute la photo importée à l'album sélectionné et l'affiche dans la picturebox       
+            if (openPictureDialog.ShowDialog() == DialogResult.OK)
+            {
+                foreach (String fileName in openPictureDialog.FileNames)
+                {
+                    importPictures(fileName);
+                }
+                //Emplacement temporaire pour l'appel à la méthode de sérialisation. //A changer.//
+                XML_Serialization.save_user_data();
+            }
+
         }
 
         private void diaporamaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Diapo new_Diapo = new Diapo(this.vignetteAlbumSelected.linkedAlb);
+            Diapo new_Diapo = new Diapo(this.vignetteAlbumSelected.albumLinked);
             new_Diapo.ShowDialog();
         }
         private void ClickOnVignetteAlbum(object sender, EventArgs e)
@@ -124,70 +120,68 @@ namespace viewer
 
             //On rafraichit la liste de photos du contrôle AllPhotosGrid à partir des photos contenu dans l'album de la vignette.
             AllPhotosGrid.Controls.Clear();
-            foreach (Picture pic in vignetteAlbumSelected.linkedAlb.Pictures)
+            foreach (Picture pic in vignetteAlbumSelected.albumLinked.Pictures)
             {
-                show_vignette(pic);
+                AddControlVignettePhoto(pic);
             }
         }
 
-
-        private void ClickOnVignettePhoto(object sender, EventArgs e)
+        private void AllPhotosGrid_MouseClick(object sender, MouseEventArgs e)
         {
-            vignettePhotoSelected = sender as VignetteNVPhoto;
-            Name_photo_suppr.Add(vignettePhotoSelected.pic.Name);
+            if (e.Button == MouseButtons.Right)
+            {
 
-            //System.Windows.Forms.MessageBox.Show(vignettePhotoSelected.pic.Name);
-           
+            }
+
         }
 
-        private void supprToolStripMenuItem_Click(object sender, EventArgs e)
+        /// <summary>
+        ///  Fonction appelée pour ajouter des images dans un album photo à partir des chemins de fichiers (et qui les sérialise).
+        /// </summary>
+        /// <param name="strFileName">Chemin du fichier correspondant à l'image.</param>
+        private void importPictures(String strFileName)
         {
-            /*foreach (VignetteNVPhoto pic in vignettePhotoSelected)
-            {
-                Name_photo_suppr.Add(pic.Name);
-                System.Windows.Forms.MessageBox.Show(pic.Name);
+            String strName = Path.GetFileNameWithoutExtension(strFileName);
+            String strDate = File.GetCreationTimeUtc(strFileName).ToShortDateString();
 
-            }*/
-            //System.Windows.Forms.MessageBox.Show(vignettePhotoSelected.pic.Name);
-
-            foreach (Picture photo in vignetteAlbumSelected.linkedAlb.Pictures)
+            if ((vignetteAlbumSelected != null))
             {
-                
-                foreach (string name in Name_photo_suppr)
+                if (!(vignetteAlbumSelected.albumLinked.Pictures.Exists(a => a.picturePath == strFileName)))
                 {
-                    if (photo.Name == name)
-                    {
-                        Photo_a_suppr.Add(photo);
-                        //System.Windows.Forms.MessageBox.Show(photo.Name);
-                    }
+                    Picture pic = new Picture(System.Drawing.Image.FromFile(strFileName), strFileName, strName, 0, "", strDate, vignetteAlbumSelected.albumLinked);
+                    AddControlVignettePhoto(pic);
+                    vignetteAlbumSelected.refreshPreviewPicture();
                 }
             }
-
-            foreach (Picture pic in Photo_a_suppr)
+            else if ((vignetteAlbumSelected == null))
             {
-                vignetteAlbumSelected.linkedAlb.Pictures.Remove(pic);
-                              
+                this.toolStripStatusLabel1.ForeColor = System.Drawing.Color.Red;
+                this.toolStripStatusLabel1.Text = "Aucun album sélectionné!";
             }
-            vignetteAlbumSelected.refreshPreviewPicture();
-            AllPhotosGrid.Controls.Clear();
-            foreach (Picture pic in vignetteAlbumSelected.linkedAlb.Pictures)
-            {
-                show_vignette(pic);
-            }
-
         }
-       
-    }  
-    
+
+        //Les fichiers déplacés sont copiés en mémoire lorsque la souris arrive sur le contrôle avec les fichiers déplacés.
+        void AllPhotosGrid_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop)) e.Effect = DragDropEffects.Copy;
+        }
+
+        //On récupère le chemin des fichiers déplacés sous forme de String lorsque le bouton de la souris est relâché ("drop").
+        void AllPhotosGrid_DragDrop(object sender, DragEventArgs e)
+        {
+            List<String> listAllowedFileExt=new List<String>(){".jpeg",".jpg",".png",".bmp",".gif"};
+
+            string[] files = e.Data.GetData(DataFormats.FileDrop) as string[];
+
+            //On teste si les fichiers déplacés correspondent à des images.
+            foreach (string strFileName in files)
+            {
+                if(listAllowedFileExt.Contains(Path.GetExtension(strFileName)))
+                {
+                    //On les ajoute à l'album sélectionné si il existe.
+                    importPictures(strFileName);
+                }
+            }
+        }
+    }
 }
-
-/*private void AllPhotosGrid_MouseClick(object sender, MouseEventArgs e)
-       {
-           vignetteAlbumSelected = sender as VignetteNVAlbum;
-
-           if (e.Button == MouseButtons.Right)
-           {
-               AllPhotosGrid.Controls.Clear();          
-           }
-                
-       }*/
