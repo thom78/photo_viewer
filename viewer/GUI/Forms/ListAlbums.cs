@@ -23,7 +23,7 @@ namespace viewer
     public partial class ListAlbums : Form
     {
         private VignetteNVAlbum vignetteAlbumSelected;
-
+        
         /// <summary>
         /// Fonction qui instancie une nouvelle vignette correspondant à une image d'un album afin de l'afficher sur l'interface.
         /// </summary>
@@ -62,24 +62,24 @@ namespace viewer
             //On définit l'album par défaut si il existe
             if (Program.Albums.Count > 0)
             {
-                /// Affichage d'images en grid
-                AllPhotosGrid.FlowDirection = FlowDirection.LeftToRight;
-                AllPhotosGrid.AutoScroll = true;
+            /// Affichage d'images en grid
+            AllPhotosGrid.FlowDirection = FlowDirection.LeftToRight;
+            AllPhotosGrid.AutoScroll = true;
 
-                foreach (Picture picture in Program.Albums.FirstOrDefault().Pictures)
-                {
+            foreach (Picture picture in Program.Albums.FirstOrDefault().Pictures)
+            {
                     AddControlVignettePhoto(picture);
-                }
-
-                /// Affichage des albums
-                AlbumGrid.FlowDirection = FlowDirection.LeftToRight;
-                AlbumGrid.AutoScroll = true;
-
-                foreach (Album album in Program.Albums)
-                {
-                    AddControlVignetteAlbum(album);
-                }
             }
+
+            /// Affichage des albums
+            AlbumGrid.FlowDirection = FlowDirection.LeftToRight;
+            AlbumGrid.AutoScroll = true;
+
+            foreach (Album album in Program.Albums)
+            {
+                    AddControlVignetteAlbum(album);
+            }
+        }
         }
 
         private void createAlbumToolStripMenuItem_Click(object sender, EventArgs e)
@@ -94,18 +94,18 @@ namespace viewer
 
         private void importPhotosToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+           
             /// Ajoute la photo importée à l'album sélectionné et l'affiche dans la picturebox       
-            if (openPictureDialog.ShowDialog() == DialogResult.OK)
-            {
-                foreach (String fileName in openPictureDialog.FileNames)
+                if (openPictureDialog.ShowDialog() == DialogResult.OK)
                 {
+                    foreach (String fileName in openPictureDialog.FileNames)
+                    {
                     importPictures(fileName);
+                        }
+                    //Emplacement temporaire pour l'appel à la méthode de sérialisation. //A changer.//
+                    XML_Serialization.save_user_data();
                 }
-                //Emplacement temporaire pour l'appel à la méthode de sérialisation. //A changer.//
-                XML_Serialization.save_user_data();
-            }
-
+            
         }
 
         private void diaporamaToolStripMenuItem_Click(object sender, EventArgs e)
@@ -128,10 +128,12 @@ namespace viewer
 
         private void AllPhotosGrid_MouseClick(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Right)
-            {
+            vignettePhotoSelected = sender as VignetteNVPhoto;
+            Name_photo_suppr.Add(vignettePhotoSelected.pic.Name);
 
-            }
+            //System.Windows.Forms.MessageBox.Show(vignettePhotoSelected.pic.Name);
+           
+        }
 
         }
 
@@ -165,12 +167,12 @@ namespace viewer
         {
             if (e.Data.GetDataPresent(DataFormats.FileDrop)) e.Effect = DragDropEffects.Copy;
         }
-
+       
         //On récupère le chemin des fichiers déplacés sous forme de String lorsque le bouton de la souris est relâché ("drop").
         void AllPhotosGrid_DragDrop(object sender, DragEventArgs e)
         {
             List<String> listAllowedFileExt=new List<String>(){".jpeg",".jpg",".png",".bmp",".gif"};
-
+    
             string[] files = e.Data.GetData(DataFormats.FileDrop) as string[];
 
             //On teste si les fichiers déplacés correspondent à des images.
@@ -184,4 +186,4 @@ namespace viewer
             }
         }
     }
-}
+           }
