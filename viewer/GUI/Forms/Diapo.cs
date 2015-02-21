@@ -12,11 +12,14 @@ namespace viewer
 {
     public partial class Diapo : Form
     {
-        public Diapo()
+        private Album albDisplayedAlbum;
+        public Diapo(Album alb)
         {
             InitializeComponent();
+            this.albDisplayedAlbum = alb;
             // détermination de la taille de l'album
-            foreach (Picture t in Album.Pellicule.Pictures)
+
+            foreach (Picture t in albDisplayedAlbum.Pictures)
             {
                 j++;
             }
@@ -39,16 +42,18 @@ namespace viewer
                     i = 0;
                 }
 
-                //affichage de l'image
-                pictureBox1.Image = Album.Pellicule.Pictures[i].Image;
-
+               //affichage de l'image
+                if (pictureBox1.Image != null)
+                {
+                    pictureBox1.Image = albDisplayedAlbum.Pictures[i].Image;
+                }
             }
-                  
+            
         
         private void Diapo_Load(object sender, EventArgs e)
         {
             //affichage de la 1ere image.
-            pictureBox1.Image = Album.Pellicule.Pictures[0].Image;
+            pictureBox1.Image = albDisplayedAlbum.Pictures[0].Image;
         }
 
         private void toolStripButton3_Click(object sender, EventArgs e)
@@ -65,8 +70,11 @@ namespace viewer
                 i = 0;
             }
 
-           //affichage de l'image
-           pictureBox1.Image = Album.Pellicule.Pictures[i].Image;
+            //affichage de l'image
+           if (albDisplayedAlbum.Pictures.Count > 0)
+           {
+               pictureBox1.Image = albDisplayedAlbum.Pictures[i].Image;
+           }
 
             //on remet le timer en route
             timer1.Enabled = true;
@@ -88,9 +96,11 @@ namespace viewer
             i--;
 
             //affichage de l'image
-            pictureBox1.Image = Album.Pellicule.Pictures[i].Image;
-
-            timer1.Enabled = true;
+            if (albDisplayedAlbum.Pictures.Count > 0)
+            {
+                pictureBox1.Image = albDisplayedAlbum.Pictures[i].Image;
+            }
+                timer1.Enabled = true;
         }
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
@@ -109,7 +119,7 @@ namespace viewer
                                 }
 
                                 //affichage de l'image
-                                pictureBox1.Image = Album.Pellicule.Pictures[i].Image;
+                                pictureBox1.Image = albDisplayedAlbum.Pictures[i].Image;
                             }
                             break;
                         case Keys.Left:
@@ -123,7 +133,7 @@ namespace viewer
                                 i--;
 
                                 //affichage de l'image
-                                pictureBox1.Image = Album.Pellicule.Pictures[i].Image;
+                                pictureBox1.Image = albDisplayedAlbum.Pictures[i].Image;
                             }
                             break;
                         case Keys.Up:  break;

@@ -21,32 +21,20 @@ namespace viewer
         public String Date { get; set; }
 
         //liste des photos contenues dans l'album
+        //[XmlIgnore]
         public List<Picture> Pictures = new List<Picture>();
-
+        
         #endregion Properties
 
         #region Constructor(s)
-
-        public Album()
-        {
-            //on ajoute le nouvel album crée a la liste chainée
-            Albums.Add(this);
-        }
-
+        public Album() { }
         public Album(String title, String subtitle, String date)
         {
             this.Title = title;
             this.SubTitle = subtitle;
             this.Date = date;
             //on ajoute le nouvel album créé à la liste
-            Albums.Add(this);
-        }
-
-        public Album(String title)
-        {
-            this.Title = title;
-            //on ajoute le nouvel album créé à la liste
-            Albums.Add(this);
+            Program.Albums.Add(this);
         }
 
         #endregion Constructor(s)
@@ -59,11 +47,5 @@ namespace viewer
         }
 
         #endregion Method_Sort
-
-        //creation d'une liste chainee d'Albums
-        public static List<Album> Albums = new List<Album>();
-
-        //creation de l'album pellicule qui contient toutes les photos
-        public static Album Pellicule = new Album("Pellicule");
     }
 }

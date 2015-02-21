@@ -34,6 +34,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -44,45 +45,61 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Album.cs" />
-    <Compile Include="AddAlbumWindow.cs">
+    <Compile Include="GUI\UserControls\VignetteNVAlbum.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\UserControls\VignetteNVAlbum.Designer.cs">
+      <DependentUpon>VignetteNVAlbum.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\UserControls\VignetteNVPhoto.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\UserControls\VignetteNVPhoto.Designer.cs">
+      <DependentUpon>VignetteNVPhoto.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ProgramData\Album.cs" />
+    <Compile Include="GUI\Forms\AddAlbumWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AddAlbumWindow.Designer.cs">
+    <Compile Include="GUI\Forms\AddAlbumWindow.Designer.cs">
       <DependentUpon>AddAlbumWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="Diapo.cs">
+    <Compile Include="GUI\UserControls\VignetteNV.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\UserControls\VignetteNV.Designer.cs">
+      <DependentUpon>VignetteNV.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Forms\Diapo.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Diapo.Designer.cs">
+    <Compile Include="GUI\Forms\Diapo.Designer.cs">
       <DependentUpon>Diapo.cs</DependentUpon>
     </Compile>
-    <Compile Include="ListaAlbums.cs">
+    <Compile Include="GUI\Forms\ListAlbums.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ListaAlbums.Designer.cs">
-      <DependentUpon>ListaAlbums.cs</DependentUpon>
+    <Compile Include="GUI\Forms\ListAlbums.Designer.cs">
+      <DependentUpon>ListAlbums.cs</DependentUpon>
     </Compile>
-    <Compile Include="Picture.cs" />
-    <Compile Include="Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Program.cs" />
+    <Compile Include="ProgramData\Picture.cs" />
+    <Compile Include="Process\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Diapo.resx">
+    <Compile Include="Process\XML_Serialization.cs" />
+    <EmbeddedResource Include="GUI\Forms\Diapo.resx">
       <DependentUpon>Diapo.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="AddAlbumWindow.resx">
+    <EmbeddedResource Include="GUI\Forms\AddAlbumWindow.resx">
       <DependentUpon>AddAlbumWindow.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ListaAlbums.resx">
-      <DependentUpon>ListaAlbums.cs</DependentUpon>
+    <EmbeddedResource Include="GUI\Forms\ListAlbums.resx">
+      <DependentUpon>ListAlbums.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\UserControls\VignetteNVAlbum.resx">
+      <DependentUpon>VignetteNVAlbum.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\UserControls\VignetteNVPhoto.resx">
+      <DependentUpon>VignetteNVPhoto.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -92,7 +109,11 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="GUI\UserControls\VignetteNV.resx">
+      <DependentUpon>VignetteNV.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -105,6 +126,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\empty.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
