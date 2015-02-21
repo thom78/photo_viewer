@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using viewer.GUI.UserControls;
 
 ///**********************************************************************************************************************************************************
 /// NB: Le premier album en haut a gauche sera toujours l'album "Pellicule" dans lequel on trouve l'integralité des photos 
@@ -21,20 +22,20 @@ namespace viewer
 {
     public partial class ListAlbums : Form
     {
-        private Vignette_alb vignetteAlbumSelected = new Vignette_alb(null);
+        private VignetteNVAlbum vignetteAlbumSelected = new VignetteNVAlbum(null);
 
         private void show_vignette(Picture pic)
         {
-            VignettePhoto vignetteImage = new VignettePhoto(pic);
+            VignetteNV vignetteImage = new VignetteNVPhoto(pic);
             AllPhotosGrid.Controls.Add(vignetteImage);
         }
 
         private void show_vignette(Album alb)
         {
-            Vignette_alb vignetteAlbum = new Vignette_alb(alb);
+            VignetteNV vignetteAlbum = new VignetteNVAlbum(alb);
             //ListAlbums s'abonne à l'évènement de la vignette d'album correspondant à un clic de l'utilisateur.
-            //Cet évènement sera traité avec la méthode vignette_AlbumWasClicked
-            vignetteAlbum.clickOnAlbum += new EventHandler(vignette_AlbumWasClicked);
+            //Cet évènement sera traité avec la méthode ClickOnVignetteAlbum
+            vignetteAlbum.ehClickOnAlbum += new EventHandler(ClickOnVignetteAlbum);
             AlbumGrid.Controls.Add(vignetteAlbum);
         }
 
@@ -72,10 +73,7 @@ namespace viewer
         {
             AddAlbumWindow new_album = new AddAlbumWindow();
             new_album.ShowDialog();
-            if (new_album.DialogResult == DialogResult.OK)
-            {
-                show_vignette(new_album.created_album);
-            }
+            show_vignette(new_album.created_album);
         }
 
         private void importerPhotosToolStripMenuItem_Click(object sender, EventArgs e)
@@ -105,10 +103,10 @@ namespace viewer
             Diapo new_Diapo = new Diapo();
             new_Diapo.ShowDialog();
         }
-        private void vignette_AlbumWasClicked(object sender, EventArgs e)
+        private void ClickOnVignetteAlbum(object sender, EventArgs e)
         {
             //La vignette d'albums dont on souhaite afficher le contenu est l'émetteur de l'évènement. (C'est celle sur laquelle l'utilisateur a cliqué)
-            vignetteAlbumSelected = sender as Vignette_alb;
+            vignetteAlbumSelected = sender as VignetteNVAlbum;
 
             //On rafraichit la liste de photos du contrôle AllPhotosGrid à partir des photos contenu dans l'album de la vignette.
             AllPhotosGrid.Controls.Clear();

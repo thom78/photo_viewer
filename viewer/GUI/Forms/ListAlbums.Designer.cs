@@ -35,21 +35,20 @@
             this.créerAlbumToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.importerPhotosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.diaporamaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.menuStrip1.SuspendLayout();
-            this.tabControl1.SuspendLayout();
-            this.tabPage1.SuspendLayout();
-            this.tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
+            this.splitContainer1.Panel1.SuspendLayout();
+            this.splitContainer1.Panel2.SuspendLayout();
+            this.splitContainer1.SuspendLayout();
             this.SuspendLayout();
             // 
             // AllPhotosGrid
             // 
             this.AllPhotosGrid.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.AllPhotosGrid.Location = new System.Drawing.Point(3, 3);
+            this.AllPhotosGrid.Location = new System.Drawing.Point(0, 0);
             this.AllPhotosGrid.Name = "AllPhotosGrid";
-            this.AllPhotosGrid.Size = new System.Drawing.Size(818, 459);
+            this.AllPhotosGrid.Size = new System.Drawing.Size(551, 491);
             this.AllPhotosGrid.TabIndex = 0;
             // 
             // openPictureDialog
@@ -60,9 +59,9 @@
             // AlbumGrid
             // 
             this.AlbumGrid.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.AlbumGrid.Location = new System.Drawing.Point(3, 3);
+            this.AlbumGrid.Location = new System.Drawing.Point(0, 0);
             this.AlbumGrid.Name = "AlbumGrid";
-            this.AlbumGrid.Size = new System.Drawing.Size(818, 459);
+            this.AlbumGrid.Size = new System.Drawing.Size(277, 491);
             this.AlbumGrid.TabIndex = 5;
             // 
             // menuStrip1
@@ -98,46 +97,29 @@
             this.diaporamaToolStripMenuItem.Text = "Diaporama";
             this.diaporamaToolStripMenuItem.Click += new System.EventHandler(this.diaporamaToolStripMenuItem_Click);
             // 
-            // tabControl1
+            // splitContainer1
             // 
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl1.HotTrack = true;
-            this.tabControl1.Location = new System.Drawing.Point(0, 24);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(832, 491);
-            this.tabControl1.TabIndex = 8;
+            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer1.Location = new System.Drawing.Point(0, 24);
+            this.splitContainer1.Name = "splitContainer1";
             // 
-            // tabPage1
+            // splitContainer1.Panel1
             // 
-            this.tabPage1.Controls.Add(this.AlbumGrid);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(824, 465);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "tabPage1";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            this.splitContainer1.Panel1.Controls.Add(this.AlbumGrid);
             // 
-            // tabPage2
+            // splitContainer1.Panel2
             // 
-            this.tabPage2.Controls.Add(this.AllPhotosGrid);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(824, 465);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "tabPage2";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            this.splitContainer1.Panel2.Controls.Add(this.AllPhotosGrid);
+            this.splitContainer1.Size = new System.Drawing.Size(832, 491);
+            this.splitContainer1.SplitterDistance = 277;
+            this.splitContainer1.TabIndex = 9;
             // 
             // ListAlbums
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(832, 515);
-            this.Controls.Add(this.tabControl1);
+            this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "ListAlbums";
@@ -145,9 +127,10 @@
             this.Text = "PhotoViewer";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            this.tabControl1.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
-            this.tabPage2.ResumeLayout(false);
+            this.splitContainer1.Panel1.ResumeLayout(false);
+            this.splitContainer1.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
+            this.splitContainer1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -162,8 +145,6 @@
         private System.Windows.Forms.ToolStripMenuItem créerAlbumToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem importerPhotosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem diaporamaToolStripMenuItem;
-        private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.SplitContainer splitContainer1;
     }
 }
