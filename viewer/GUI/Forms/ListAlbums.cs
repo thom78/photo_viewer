@@ -157,7 +157,7 @@ namespace viewer
         {
             List<String> listAllowedFileExt=new List<String>(){".jpeg",".jpg",".png",".bmp",".gif"};
     
-    }
+    
             string[] files = e.Data.GetData(DataFormats.FileDrop) as string[];
 
             //On teste si les fichiers déplacés correspondent à des images.
@@ -171,4 +171,5 @@ namespace viewer
             }
         }
     }
-           }
+}
+           
