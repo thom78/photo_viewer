@@ -73,7 +73,10 @@ namespace viewer
         {
             AddAlbumWindow new_album = new AddAlbumWindow();
             new_album.ShowDialog();
-            show_vignette(new_album.created_album);
+            if (new_album.DialogResult == DialogResult.OK)
+            {
+                show_vignette(new_album.created_album);
+            }
         }
 
         private void importerPhotosToolStripMenuItem_Click(object sender, EventArgs e)
@@ -100,7 +103,7 @@ namespace viewer
 
         private void diaporamaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Diapo new_Diapo = new Diapo();
+            Diapo new_Diapo = new Diapo(this.vignetteAlbumSelected.linkedAlb);
             new_Diapo.ShowDialog();
         }
         private void ClickOnVignetteAlbum(object sender, EventArgs e)

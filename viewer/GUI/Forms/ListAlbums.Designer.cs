@@ -48,7 +48,7 @@
             this.AllPhotosGrid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.AllPhotosGrid.Location = new System.Drawing.Point(0, 0);
             this.AllPhotosGrid.Name = "AllPhotosGrid";
-            this.AllPhotosGrid.Size = new System.Drawing.Size(551, 491);
+            this.AllPhotosGrid.Size = new System.Drawing.Size(547, 491);
             this.AllPhotosGrid.TabIndex = 0;
             // 
             // openPictureDialog
@@ -61,7 +61,7 @@
             this.AlbumGrid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.AlbumGrid.Location = new System.Drawing.Point(0, 0);
             this.AlbumGrid.Name = "AlbumGrid";
-            this.AlbumGrid.Size = new System.Drawing.Size(277, 491);
+            this.AlbumGrid.Size = new System.Drawing.Size(281, 491);
             this.AlbumGrid.TabIndex = 5;
             // 
             // menuStrip1
@@ -111,7 +111,7 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.AllPhotosGrid);
             this.splitContainer1.Size = new System.Drawing.Size(832, 491);
-            this.splitContainer1.SplitterDistance = 277;
+            this.splitContainer1.SplitterDistance = 281;
             this.splitContainer1.TabIndex = 9;
             // 
             // ListAlbums

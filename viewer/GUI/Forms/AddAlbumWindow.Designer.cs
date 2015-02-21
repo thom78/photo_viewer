@@ -79,7 +79,6 @@
             this.label1.Size = new System.Drawing.Size(28, 13);
             this.label1.TabIndex = 5;
             this.label1.Text = "Titre";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // labelDate
             // 
@@ -89,7 +88,6 @@
             this.label2.Size = new System.Drawing.Size(55, 13);
             this.label2.TabIndex = 6;
             this.label2.Text = "Sous-Titre";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // AddAlbumWindow
             // 
