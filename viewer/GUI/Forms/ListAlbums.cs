@@ -314,11 +314,14 @@ namespace viewer
             dialogNewAlbum.ShowDialog();
             if (dialogNewAlbum.DialogResult == DialogResult.OK)
             {
-                AddControlVignetteAlbum(dialogNewAlbum.created_album);
+                vignetteAlbumSelected=AddControlVignetteAlbum(dialogNewAlbum.created_album);
+                vignetteAlbumSelected.BackColor = System.Drawing.SystemColors.Highlight;
+                refreshViewPicturesList();
+
                 this.toolStripStatusLabel1.ForeColor = System.Drawing.Color.Black;
-                this.toolStripStatusLabel1.Text = dialogNewAlbum.created_album.Title + " a été créé avec succès.";
-            }
-            XML_Serialization.save_user_data();
+                this.toolStripStatusLabel1.Text = dialogNewAlbum.created_album.Title + " a été créé avec succès.";                
+                XML_Serialization.save_user_data();
+            }            
         }
 
         private void importPhotosToolStripMenuItem_Click(object sender, EventArgs e)
