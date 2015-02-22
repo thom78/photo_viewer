@@ -119,7 +119,7 @@ namespace viewer
         {
             //La vignette d'albums dont on souhaite afficher le contenu est l'émetteur de l'évènement. (C'est celle sur laquelle l'utilisateur a cliqué)
             vignetteAlbumSelected = sender as VignetteNVAlbum;
-            refreshViewPicturesList();            
+            refreshViewPicturesList();
         }
 
         /// <summary>
@@ -176,12 +176,24 @@ namespace viewer
         }
         private void refreshViewPicturesList()
         {
-        //On rafraichit la liste de photos du contrôle AllPhotosGrid à partir des photos contenu dans l'album de la vignette.
+            //On rafraichit la liste de photos du contrôle AllPhotosGrid à partir des photos contenu dans l'album de la vignette.
             AllPhotosGrid.Controls.Clear();
             foreach (Picture pic in vignetteAlbumSelected.albumLinked.Pictures)
             {
                 AddControlVignettePhoto(pic);
             }
+        }
+
+        private void dateToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            vignetteAlbumSelected.albumLinked.Pictures = vignetteAlbumSelected.albumLinked.Pictures.OrderBy(a => a.Date).ToList();
+            refreshViewPicturesList();
+        }
+
+        private void nomToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            vignetteAlbumSelected.albumLinked.Pictures = vignetteAlbumSelected.albumLinked.Pictures.OrderBy(a => a.Name).ToList();
+            refreshViewPicturesList();
         }
     }
 }

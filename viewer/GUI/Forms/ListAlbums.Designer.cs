@@ -38,6 +38,10 @@
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.trierToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.nomToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.dateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.noteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -79,7 +83,8 @@
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.créerAlbumToolStripMenuItem,
             this.importerPhotosToolStripMenuItem,
-            this.diaporamaToolStripMenuItem});
+            this.diaporamaToolStripMenuItem,
+            this.trierToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(824, 24);
@@ -143,6 +148,36 @@
             this.toolStripStatusLabel1.Size = new System.Drawing.Size(60, 17);
             this.toolStripStatusLabel1.Text = "En attente";
             // 
+            // trierToolStripMenuItem
+            // 
+            this.trierToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.nomToolStripMenuItem,
+            this.dateToolStripMenuItem,
+            this.noteToolStripMenuItem});
+            this.trierToolStripMenuItem.Name = "trierToolStripMenuItem";
+            this.trierToolStripMenuItem.Size = new System.Drawing.Size(43, 20);
+            this.trierToolStripMenuItem.Text = "Trier";
+            // 
+            // nomToolStripMenuItem
+            // 
+            this.nomToolStripMenuItem.Name = "nomToolStripMenuItem";
+            this.nomToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.nomToolStripMenuItem.Text = "Nom";
+            this.nomToolStripMenuItem.Click += new System.EventHandler(this.nomToolStripMenuItem_Click);
+            // 
+            // dateToolStripMenuItem
+            // 
+            this.dateToolStripMenuItem.Name = "dateToolStripMenuItem";
+            this.dateToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.dateToolStripMenuItem.Text = "Date";
+            this.dateToolStripMenuItem.Click += new System.EventHandler(this.dateToolStripMenuItem_Click);
+            // 
+            // noteToolStripMenuItem
+            // 
+            this.noteToolStripMenuItem.Name = "noteToolStripMenuItem";
+            this.noteToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.noteToolStripMenuItem.Text = "Note";
+            // 
             // ListAlbums
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -180,5 +215,9 @@
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.ToolStripMenuItem trierToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem nomToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem dateToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem noteToolStripMenuItem;
     }
 }
