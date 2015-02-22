@@ -222,10 +222,7 @@ namespace viewer
             if (vignettePhotoSelected == null)
             {
                 vignetteAlbumSelected.albumLinked.Pictures.Clear();
-                    foreach (Album album in Program.Albums)
-                    {
-                        AddControlVignetteAlbum(album);
-                    }
+                   
             }
             
             else
