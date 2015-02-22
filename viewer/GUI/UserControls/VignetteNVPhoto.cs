@@ -57,30 +57,35 @@ namespace viewer.GUI.UserControls
         {
             this.intRating = 1;
             this.pic.intPicRating = intRating;
+            XML_Serialization.save_user_data();
         }
 
         private void rbNote2_CheckedChanged(object sender, EventArgs e)
         {
             this.intRating = 2;
             this.pic.intPicRating = intRating;
+            XML_Serialization.save_user_data();
         }
 
         private void rbNote3_CheckedChanged(object sender, EventArgs e)
         {
             this.intRating = 3;
             this.pic.intPicRating = intRating;
+            XML_Serialization.save_user_data();
         }
 
         private void rbNote4_CheckedChanged(object sender, EventArgs e)
         {
             this.intRating = 4;
             this.pic.intPicRating = intRating;
+            XML_Serialization.save_user_data();
         }
 
         private void rbNote5_CheckedChanged(object sender, EventArgs e)
         {
             this.intRating = 5;
             this.pic.intPicRating = intRating;
+            XML_Serialization.save_user_data();
         }
         #endregion radioButtonsChecked
     }
