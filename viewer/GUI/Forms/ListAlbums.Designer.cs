@@ -59,8 +59,7 @@
             this.AllPhotosGrid.Size = new System.Drawing.Size(554, 572);
             this.AllPhotosGrid.TabIndex = 0;
             this.AllPhotosGrid.DragDrop += new System.Windows.Forms.DragEventHandler(this.AllPhotosGrid_DragDrop);
-            this.AllPhotosGrid.DragEnter += new System.Windows.Forms.DragEventHandler(this.AllPhotosGrid_DragEnter);
-            this.AllPhotosGrid.MouseClick += new System.Windows.Forms.MouseEventHandler(this.AllPhotosGrid_MouseClick);
+            this.AllPhotosGrid.DragEnter += new System.Windows.Forms.DragEventHandler(this.AllPhotosGrid_DragEnter);         
             // 
             // openPictureDialog
             // 
@@ -136,7 +135,6 @@
             this.supprToolStripMenuItem.Name = "supprToolStripMenuItem";
             this.supprToolStripMenuItem.Size = new System.Drawing.Size(50, 20);
             this.supprToolStripMenuItem.Text = "Suppr";
-            this.supprToolStripMenuItem.Click += new System.EventHandler(this.supprToolStripMenuItem_Click);
             // 
             // statusStrip1
             // 
@@ -152,14 +150,14 @@
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
             this.toolStripStatusLabel1.Size = new System.Drawing.Size(60, 17);
-            this.toolStripStatusLabel1.Text = "En attente"; 
+            this.toolStripStatusLabel1.Text = "En attente";
             // 
             // supprimerToolStripMenuItem
             // 
             this.supprimerToolStripMenuItem.Name = "supprimerToolStripMenuItem";
             this.supprimerToolStripMenuItem.Size = new System.Drawing.Size(74, 20);
             this.supprimerToolStripMenuItem.Text = "Supprimer";
-            this.supprimerToolStripMenuItem.Click += new System.EventHandler(this.supprimerToolStripMenuItem_Click);
+            this.supprimerToolStripMenuItem.Click += new System.EventHandler(this.supprimerToolStripMenuItem_Click_1);
             // 
             // ListAlbums
             // 
