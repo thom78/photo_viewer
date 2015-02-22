@@ -315,6 +315,7 @@ namespace viewer
             if (dialogNewAlbum.DialogResult == DialogResult.OK)
             {
                 vignetteAlbumSelected=AddControlVignetteAlbum(dialogNewAlbum.created_album);
+                listAlbumsSelected.Add(vignetteAlbumSelected);
                 vignetteAlbumSelected.BackColor = System.Drawing.SystemColors.Highlight;
                 refreshViewPicturesList();
 
