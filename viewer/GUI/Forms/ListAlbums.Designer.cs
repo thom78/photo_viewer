@@ -58,7 +58,6 @@
             this.AllPhotosGrid.TabIndex = 0;
             this.AllPhotosGrid.DragDrop += new System.Windows.Forms.DragEventHandler(this.AllPhotosGrid_DragDrop);
             this.AllPhotosGrid.DragEnter += new System.Windows.Forms.DragEventHandler(this.AllPhotosGrid_DragEnter);
-            this.AllPhotosGrid.MouseClick += new System.Windows.Forms.MouseEventHandler(this.AllPhotosGrid_MouseClick);
             // 
             // openPictureDialog
             // 

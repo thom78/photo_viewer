@@ -89,6 +89,8 @@ namespace viewer
             if (dialogNewAlbum.DialogResult == DialogResult.OK)
             {
                 AddControlVignetteAlbum(dialogNewAlbum.created_album);
+                this.toolStripStatusLabel1.ForeColor = System.Drawing.Color.Black;
+                this.toolStripStatusLabel1.Text = dialogNewAlbum.created_album.Title + " a été créé avec succès.";
             }
         }
 
@@ -105,7 +107,6 @@ namespace viewer
                 //Emplacement temporaire pour l'appel à la méthode de sérialisation. //A changer.//
                 XML_Serialization.save_user_data();
             }
-
         }
 
         private void diaporamaToolStripMenuItem_Click(object sender, EventArgs e)
@@ -126,15 +127,6 @@ namespace viewer
             }
         }
 
-        private void AllPhotosGrid_MouseClick(object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Right)
-            {
-
-            }
-
-        }
-
         /// <summary>
         ///  Fonction appelée pour ajouter des images dans un album photo à partir des chemins de fichiers (et qui les sérialise).
         /// </summary>
@@ -151,6 +143,8 @@ namespace viewer
                     Picture pic = new Picture(System.Drawing.Image.FromFile(strFileName), strFileName, strName, 0, "", strDate, vignetteAlbumSelected.albumLinked);
                     AddControlVignettePhoto(pic);
                     vignetteAlbumSelected.refreshPreviewPicture();
+                    this.toolStripStatusLabel1.ForeColor = System.Drawing.Color.Black;
+                    this.toolStripStatusLabel1.Text = pic.Name + " a été importée avec succès.";
                 }
             }
             else if ((vignetteAlbumSelected == null))
@@ -169,19 +163,21 @@ namespace viewer
         //On récupère le chemin des fichiers déplacés sous forme de String lorsque le bouton de la souris est relâché ("drop").
         void AllPhotosGrid_DragDrop(object sender, DragEventArgs e)
         {
-            List<String> listAllowedFileExt=new List<String>(){".jpeg",".jpg",".png",".bmp",".gif"};
+            List<String> listAllowedFileExt = new List<String>() { ".jpeg", ".jpg", ".png", ".bmp", ".gif" };
 
             string[] files = e.Data.GetData(DataFormats.FileDrop) as string[];
 
             //On teste si les fichiers déplacés correspondent à des images.
             foreach (string strFileName in files)
             {
-                if(listAllowedFileExt.Contains(Path.GetExtension(strFileName)))
+                if (listAllowedFileExt.Contains(Path.GetExtension(strFileName)))
                 {
                     //On les ajoute à l'album sélectionné si il existe.
                     importPictures(strFileName);
                 }
             }
+            //On sauvegarde les données.
+            XML_Serialization.save_user_data();
         }
     }
 }
