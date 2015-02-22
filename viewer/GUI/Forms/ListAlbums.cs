@@ -237,6 +237,14 @@ namespace viewer
                 vignettePhotoSelected.BackColor = System.Drawing.SystemColors.Highlight;
             }
         }
+        private void ClickOnVignetteAlbum(object sender, EventArgs e)
+        {
+            //La vignette d'albums dont on souhaite afficher le contenu est l'émetteur de l'évènement. (C'est celle sur laquelle l'utilisateur a cliqué)
+            vignetteAlbumSelected = sender as VignetteNVAlbum;
+
+            listPhotosSelected.Clear();
+            refreshViewPicturesList();
+        }
         #endregion Evènements
 
         #region Boutons
@@ -266,14 +274,6 @@ namespace viewer
         {
             Diapo new_Diapo = new Diapo(this.vignetteAlbumSelected.albumLinked);
             new_Diapo.ShowDialog();
-        }
-        private void ClickOnVignetteAlbum(object sender, EventArgs e)
-        {
-            //La vignette d'albums dont on souhaite afficher le contenu est l'émetteur de l'évènement. (C'est celle sur laquelle l'utilisateur a cliqué)
-            vignetteAlbumSelected = sender as VignetteNVAlbum;
-
-            listPhotosSelected.Clear();
-            refreshViewPicturesList();
         }
 
         private void supprimerToolStripMenuItem_Click(object sender, EventArgs e)
