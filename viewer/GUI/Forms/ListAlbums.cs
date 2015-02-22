@@ -93,7 +93,7 @@ namespace viewer
                 {
                     Program.Albums.Remove(alb);
                 }
-
+                listAlbumsSelected.Clear();
                 vignetteAlbumSelected = null;
                 //On rafraichit la vue des albums.
                 AlbumGrid.Controls.Clear();
