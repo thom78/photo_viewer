@@ -22,14 +22,17 @@ namespace viewer
 {
     public partial class ListAlbums : Form
     {
-        private VignetteNVAlbum vignetteAlbumSelected;
-        private VignetteNVPhoto vignettePhotoSelected;
+        #region Attributs
+        private VignetteNVAlbum vignetteAlbumSelected = null;
+        private VignetteNVPhoto vignettePhotoSelected = null;
         private List<VignetteNVPhoto> listPhotosSelected = new List<VignetteNVPhoto>();
-        private List<string> Name_photo_suppr = new List<string>();        
+        private List<VignetteNVAlbum> listAlbumsSelected = new List<VignetteNVAlbum>();
+        #endregion Attributs
 
         #region ConstructeurEtInit
         public ListAlbums()
         {
+            List<VignetteNVAlbum> listVignetteTemp = new List<VignetteNVAlbum>();
             InitializeComponent();
 
             //On charge les données utilisateurs si elles existent.
@@ -56,48 +59,70 @@ namespace viewer
 
                 foreach (Album album in Program.Albums)
                 {
-                    AddControlVignetteAlbum(album);
+                    listVignetteTemp.Add(AddControlVignetteAlbum(album));
+                }
+                if (listVignetteTemp.Count > 0)
+                {
+                    vignetteAlbumSelected = listVignetteTemp.FirstOrDefault();
+                    listAlbumsSelected.Add(vignetteAlbumSelected);
+                    vignetteAlbumSelected.BackColor = System.Drawing.SystemColors.Highlight;
+                    refreshViewPicturesList();
                 }
             }
         }
-        #endregion ConstructeurEtInit        
+        #endregion ConstructeurEtInit
 
         #region SuppressionAlbumsOuPhotos
         private void deletePhotosOrAlbums()
         {
             List<Picture> listTempRemPic = new List<Picture>();
+            List<Album> listTempRemAlb = new List<Album>();
+            List<VignetteNVAlbum> listVignetteTemp = new List<VignetteNVAlbum>();
+            String strName = "";
 
-            if ((listPhotosSelected.Count == 0) && (vignetteAlbumSelected != null))
+            if ((listAlbumsSelected.Count > 0) && (listPhotosSelected.Count == 0))
             {
-                //On vide l'album avant de le supprimer et on rafraichit la vue des images.
-                vignetteAlbumSelected.albumLinked.Pictures.Clear();
-                refreshViewPicturesList();
-                //On supprime l'album de la liste d'album.
-                Program.Albums.Remove(vignetteAlbumSelected.albumLinked);
+                foreach (VignetteNVAlbum vignetteAlb in listAlbumsSelected)
+                {
+                    listTempRemAlb.Add(vignetteAlb.albumLinked);
+                    vignetteAlb.albumLinked.Pictures.Clear();
+                    strName = strName + vignetteAlb.albumLinked.Title + ", ";
+                }
+                strName=strName.TrimEnd((','),(' '));
+                foreach (Album alb in listTempRemAlb)
+                {
+                    Program.Albums.Remove(alb);
+                }
+
+                vignetteAlbumSelected = null;
                 //On rafraichit la vue des albums.
                 AlbumGrid.Controls.Clear();
-                foreach (Album alb in Program.Albums)
+                if (Program.Albums.Count > 0)
                 {
-                    AddControlVignetteAlbum(alb);
+                    foreach (Album alb in Program.Albums)
+                    {
+                        listVignetteTemp.Add(AddControlVignetteAlbum(alb));
+                    }
+                    vignetteAlbumSelected = listVignetteTemp.LastOrDefault();
+                    listAlbumsSelected.Add(vignetteAlbumSelected);
+                    vignetteAlbumSelected.BackColor = System.Drawing.SystemColors.Highlight;                    
                 }
+                refreshViewPicturesList();
                 //On sauvegarde les modifications.
                 XML_Serialization.save_user_data();
 
                 this.toolStripStatusLabel1.ForeColor = System.Drawing.SystemColors.ControlText;
-                this.toolStripStatusLabel1.Text = vignetteAlbumSelected.albumLinked.Title + " a été supprimé avec succès.";
-
-                vignetteAlbumSelected = null;
+                this.toolStripStatusLabel1.Text = "Album(s) " + strName + " supprimé(s) avec succès.";
             }
             else if (listPhotosSelected.Count > 0)
             {
-                String strPicName = "";
                 foreach (VignetteNVPhoto vignettePic in listPhotosSelected)
                 {
                     listTempRemPic.Add(vignettePic.pic);
-                    strPicName = strPicName + vignettePic.pic.Name + ", ";
+                    strName = strName + vignettePic.pic.Name + ", ";
                 }
                 //On enlève la dernière virgule
-                strPicName = strPicName.TrimEnd((','), (' '));
+                strName = strName.TrimEnd((','), (' '));
 
                 foreach (Picture pic in listTempRemPic)
                 {
@@ -112,7 +137,7 @@ namespace viewer
                 listPhotosSelected.Clear();
 
                 this.toolStripStatusLabel1.ForeColor = System.Drawing.SystemColors.ControlText;
-                this.toolStripStatusLabel1.Text = "Image(s) " + strPicName + " supprimée(s) avec succès.";
+                this.toolStripStatusLabel1.Text = "Image(s) " + strName + " supprimée(s) avec succès.";
 
                 vignetteAlbumSelected.refreshPreviewPicture();
                 refreshViewPicturesList();
@@ -185,23 +210,32 @@ namespace viewer
         #region TriePhotos
         private void dateToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            vignetteAlbumSelected.albumLinked.Pictures = vignetteAlbumSelected.albumLinked.Pictures.OrderBy(a => a.Date).ToList();
-            refreshViewPicturesList();
-            XML_Serialization.save_user_data();
+            if (vignetteAlbumSelected != null)
+            {
+                vignetteAlbumSelected.albumLinked.Pictures = vignetteAlbumSelected.albumLinked.Pictures.OrderBy(a => a.Date).ToList();
+                refreshViewPicturesList();
+                XML_Serialization.save_user_data();
+            }
         }
 
         private void nomToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            vignetteAlbumSelected.albumLinked.Pictures = vignetteAlbumSelected.albumLinked.Pictures.OrderBy(a => a.Name).ToList();
-            refreshViewPicturesList();
-            XML_Serialization.save_user_data();
+            if (vignetteAlbumSelected != null)
+            {
+                vignetteAlbumSelected.albumLinked.Pictures = vignetteAlbumSelected.albumLinked.Pictures.OrderBy(a => a.Name).ToList();
+                refreshViewPicturesList();
+                XML_Serialization.save_user_data();
+            }
         }
 
         private void noteToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            vignetteAlbumSelected.albumLinked.Pictures = vignetteAlbumSelected.albumLinked.Pictures.OrderBy(a => a.intPicRating).ToList();
-            refreshViewPicturesList();
-            XML_Serialization.save_user_data();
+            if (vignetteAlbumSelected != null)
+            {
+                vignetteAlbumSelected.albumLinked.Pictures = vignetteAlbumSelected.albumLinked.Pictures.OrderBy(a => a.intPicRating).ToList();
+                refreshViewPicturesList();
+                XML_Serialization.save_user_data();
+            }
         }
         #endregion TriePhotos
 
@@ -230,6 +264,14 @@ namespace viewer
             {
                 listPhotosSelected.Remove(vignettePhotoSelected);
                 vignettePhotoSelected.BackColor = System.Drawing.SystemColors.Control;
+                if (listPhotosSelected.Count > 0)
+                {
+                    vignettePhotoSelected = listPhotosSelected.LastOrDefault();
+                }
+                else if (listPhotosSelected.Count == 0)
+                {
+                    vignettePhotoSelected = null;
+                }
             }
             else if (!listPhotosSelected.Contains(vignettePhotoSelected))
             {
@@ -239,11 +281,30 @@ namespace viewer
         }
         private void ClickOnVignetteAlbum(object sender, EventArgs e)
         {
-            //La vignette d'albums dont on souhaite afficher le contenu est l'émetteur de l'évènement. (C'est celle sur laquelle l'utilisateur a cliqué)
             vignetteAlbumSelected = sender as VignetteNVAlbum;
 
+            if (listAlbumsSelected.Contains(vignetteAlbumSelected))
+            {
+                listAlbumsSelected.Remove(vignetteAlbumSelected);
+                vignetteAlbumSelected.BackColor = System.Drawing.SystemColors.Control;
+
+                //Tests peu utiles étant donné que si il n'y plus de vignette sur l'interface (Ce qui implique que listAlbumsSelected.Count==0), l'utilisateur ne pourra pas cliquer dessus.
+                if (listAlbumsSelected.Count > 0)
+                {
+                    vignetteAlbumSelected = listAlbumsSelected.LastOrDefault();
+                }
+                else if (listAlbumsSelected.Count == 0)
+                {
+                    vignetteAlbumSelected = null;
+                }
+            }
+            else if (!listAlbumsSelected.Contains(vignetteAlbumSelected))
+            {
+                listAlbumsSelected.Add(vignetteAlbumSelected);
+                vignetteAlbumSelected.BackColor = System.Drawing.SystemColors.Highlight;
+                refreshViewPicturesList();
+            }
             listPhotosSelected.Clear();
-            refreshViewPicturesList();
         }
         #endregion Evènements
 
@@ -272,8 +333,16 @@ namespace viewer
 
         private void diaporamaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Diapo new_Diapo = new Diapo(this.vignetteAlbumSelected.albumLinked);
-            new_Diapo.ShowDialog();
+            if (vignetteAlbumSelected != null)
+            {
+                Diapo new_Diapo = new Diapo(this.vignetteAlbumSelected.albumLinked);
+                new_Diapo.ShowDialog();
+            }
+            else
+            {
+                this.toolStripStatusLabel1.ForeColor = System.Drawing.Color.Red;
+                this.toolStripStatusLabel1.Text = "Aucun album sélectionné!";
+            }
         }
 
         private void supprimerToolStripMenuItem_Click(object sender, EventArgs e)
@@ -299,25 +368,27 @@ namespace viewer
         /// Fonction qui instancie une nouvelle vignette correspondant à un album afin de l'afficher sur l'interface.
         /// </summary>
         /// <param name="pic">Objet Album correspondant à la vignette.</param>
-        private void AddControlVignetteAlbum(Album alb)
+        private VignetteNVAlbum AddControlVignetteAlbum(Album alb)
         {
-            VignetteNV vignetteAlbum = new VignetteNVAlbum(alb);
+            VignetteNVAlbum vignetteAlbum = new VignetteNVAlbum(alb);
             //ListAlbums s'abonne à l'évènement de la vignette d'album correspondant à un clic de l'utilisateur.
             //Cet évènement sera traité avec la méthode ClickOnVignetteAlbum
             AlbumGrid.Controls.Add(vignetteAlbum);
 
             vignetteAlbum.ehClickOnAlbum += new EventHandler(ClickOnVignetteAlbum);
 
-            vignetteAlbumSelected = vignetteAlbum as VignetteNVAlbum;
-            refreshViewPicturesList();
+            return vignetteAlbum;
         }
         private void refreshViewPicturesList()
         {
             //On rafraichit la liste de photos du contrôle AllPhotosGrid à partir des photos contenu dans l'album de la vignette.
             AllPhotosGrid.Controls.Clear();
-            foreach (Picture pic in vignetteAlbumSelected.albumLinked.Pictures)
+            if (vignetteAlbumSelected != null)
             {
-                AddControlVignettePhoto(pic);
+                foreach (Picture pic in vignetteAlbumSelected.albumLinked.Pictures)
+                {
+                    AddControlVignettePhoto(pic);
+                }
             }
         }
         #endregion AffichageDesVignettes
