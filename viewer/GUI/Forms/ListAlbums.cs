@@ -108,12 +108,7 @@ namespace viewer
             /// Ajoute la photo importée à l'album sélectionné et l'affiche dans la picturebox       
             if (openPictureDialog.ShowDialog() == DialogResult.OK)
             {
-                foreach (String fileName in openPictureDialog.FileNames)
-                {
-                    importPictures(fileName);
-                }
-                //Emplacement temporaire pour l'appel à la méthode de sérialisation. //A changer.//
-                XML_Serialization.save_user_data();
+                importPictures(openPictureDialog.FileNames);
             }
         }
 
@@ -136,20 +131,50 @@ namespace viewer
         ///  Fonction appelée pour ajouter des images dans un album photo à partir des chemins de fichiers (et qui les sérialise).
         /// </summary>
         /// <param name="strFileName">Chemin du fichier correspondant à l'image.</param>
-        private void importPictures(String strFileName)
+        private void importPictures(String[] astrFileNames)
         {
-            String strName = Path.GetFileNameWithoutExtension(strFileName);
-            String strDate = File.GetCreationTimeUtc(strFileName).ToShortDateString();
+            Boolean boolAtLeastOnePicAdded = false;
+            List<String> listAllowedFileExt = new List<String>() { ".jpeg", ".jpg", ".png", ".bmp", ".gif" };
+            String strPicName = "";
 
             if ((vignetteAlbumSelected != null))
             {
-                if (!(vignetteAlbumSelected.albumLinked.Pictures.Exists(a => a.picturePath == strFileName)))
+
+                foreach (String strFileName in astrFileNames)
                 {
-                    Picture pic = new Picture(System.Drawing.Image.FromFile(strFileName), strFileName, strName, 0, "", strDate, vignetteAlbumSelected.albumLinked);
-                    AddControlVignettePhoto(pic);
-                    vignetteAlbumSelected.refreshPreviewPicture();
-                    this.toolStripStatusLabel1.ForeColor = System.Drawing.Color.Black;
-                    this.toolStripStatusLabel1.Text = pic.Name + " a été importée avec succès.";
+
+                    if (listAllowedFileExt.Contains(Path.GetExtension(strFileName)))
+                    {
+                        if (!(vignetteAlbumSelected.albumLinked.Pictures.Exists(a => a.picturePath == strFileName)))
+                        {
+                            String strName = Path.GetFileNameWithoutExtension(strFileName);
+                            String strDate = File.GetCreationTimeUtc(strFileName).ToShortDateString();
+
+                            strPicName = strPicName + strName + ", ";
+
+                            Picture pic = new Picture(System.Drawing.Image.FromFile(strFileName), strFileName, strName, 0, "", strDate, vignetteAlbumSelected.albumLinked);
+                            AddControlVignettePhoto(pic);
+                            boolAtLeastOnePicAdded = true;
+                        }
+                    }
+                }
+                vignetteAlbumSelected.refreshPreviewPicture();
+
+                if (boolAtLeastOnePicAdded)
+                {
+                    //On enlève la dernière virgule.
+                    strPicName = strPicName.TrimEnd((','), (' '));
+
+                    this.toolStripStatusLabel1.ForeColor = System.Drawing.SystemColors.ControlText;
+                    this.toolStripStatusLabel1.Text = "Image(s) " + strPicName + " importée(s) avec succès.";
+
+                    //On sauvegarde les modifications.
+                    XML_Serialization.save_user_data();
+                }
+                else
+                {
+                    this.toolStripStatusLabel1.ForeColor = System.Drawing.SystemColors.ControlText;
+                    this.toolStripStatusLabel1.Text = "Aucune image importée.";
                 }
             }
             else if ((vignetteAlbumSelected == null))
@@ -168,21 +193,10 @@ namespace viewer
         //On récupère le chemin des fichiers déplacés sous forme de String lorsque le bouton de la souris est relâché ("drop").
         private void AllPhotosGrid_DragDrop(object sender, DragEventArgs e)
         {
-            List<String> listAllowedFileExt = new List<String>() { ".jpeg", ".jpg", ".png", ".bmp", ".gif" };
-
             string[] files = e.Data.GetData(DataFormats.FileDrop) as string[];
 
-            //On teste si les fichiers déplacés correspondent à des images.
-            foreach (string strFileName in files)
-            {
-                if (listAllowedFileExt.Contains(Path.GetExtension(strFileName)))
-                {
-                    //On les ajoute à l'album sélectionné si il existe.
-                    importPictures(strFileName);
-                }
-            }
-            //On sauvegarde les données.
-            XML_Serialization.save_user_data();
+            //On les ajoute à l'album sélectionné si il existe.
+            importPictures(files);
         }
         private void refreshViewPicturesList()
         {
@@ -223,14 +237,13 @@ namespace viewer
             if (listPhotosSelected.Contains(vignettePhotoSelected))
             {
                 listPhotosSelected.Remove(vignettePhotoSelected);
-                vignettePhotoSelected.BackColor = System.Drawing.Color.White;
+                vignettePhotoSelected.BackColor = System.Drawing.SystemColors.Control;
             }
             else if (!listPhotosSelected.Contains(vignettePhotoSelected))
             {
                 listPhotosSelected.Add(vignettePhotoSelected);
-                vignettePhotoSelected.BackColor = System.Drawing.Color.DodgerBlue;
+                vignettePhotoSelected.BackColor = System.Drawing.SystemColors.Highlight;
             }
-            //Name_photo_suppr.Add(vignettePhotoSelected.pic.Name);
         }
 
 
@@ -238,21 +251,37 @@ namespace viewer
         {
             List<Picture> listTempRemPic = new List<Picture>();
 
-            if (listPhotosSelected.Count == 0)
+            if ((listPhotosSelected.Count == 0) && (vignetteAlbumSelected != null))
             {
+                //On vide l'album avant de le supprimer et on rafraichit la vue des images.
+                vignetteAlbumSelected.albumLinked.Pictures.Clear();
+                refreshViewPicturesList();
+                //On supprime l'album de la liste d'album.
                 Program.Albums.Remove(vignetteAlbumSelected.albumLinked);
+                //On rafraichit la vue des albums.
                 AlbumGrid.Controls.Clear();
-                foreach(Album alb in Program.Albums)
+                foreach (Album alb in Program.Albums)
                 {
                     AddControlVignetteAlbum(alb);
                 }
+                //On sauvegarde les modifications.
+                XML_Serialization.save_user_data();
+
+                this.toolStripStatusLabel1.ForeColor = System.Drawing.SystemColors.ControlText;
+                this.toolStripStatusLabel1.Text = vignetteAlbumSelected.albumLinked.Title + " a été supprimé avec succès.";
+
+                vignetteAlbumSelected = null;
             }
             else if (listPhotosSelected.Count > 0)
             {
+                String strPicName = "";
                 foreach (VignetteNVPhoto vignettePic in listPhotosSelected)
                 {
                     listTempRemPic.Add(vignettePic.pic);
+                    strPicName = strPicName + vignettePic.pic.Name + ", ";
                 }
+                //On enlève la dernière virgule
+                strPicName = strPicName.TrimEnd((','), (' '));
 
                 foreach (Picture pic in listTempRemPic)
                 {
@@ -266,12 +295,13 @@ namespace viewer
                 //On vide la liste des vignettes sélectionnées en mémoire.
                 listPhotosSelected.Clear();
 
+                this.toolStripStatusLabel1.ForeColor = System.Drawing.SystemColors.ControlText;
+                this.toolStripStatusLabel1.Text = "Image(s) " + strPicName + " supprimée(s) avec succès.";
+
                 vignetteAlbumSelected.refreshPreviewPicture();
                 refreshViewPicturesList();
                 XML_Serialization.save_user_data();
             }
         }
-
     }
-
 }
