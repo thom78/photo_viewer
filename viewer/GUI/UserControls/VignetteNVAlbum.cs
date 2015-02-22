@@ -20,19 +20,27 @@ namespace viewer.GUI.UserControls
             this.refreshPreviewPicture();
         }
 
+        /// <summary>
+        /// Met à jour les composants de la vignette avec les données de l'album lié.
+        /// </summary>
         public void refreshPreviewPicture()
         {
-            if ((linkedAlb != null) && (linkedAlb.Pictures.Count > 0))
+            if (albumLinked != null)
             {
-                this.labelDate.Text = linkedAlb.Date;
-                this.labelName.Text = linkedAlb.Title;
-                this.labelSubtitle.Text = linkedAlb.SubTitle;
-                this.labelNumPhotos.Text = linkedAlb.Pictures.Count.ToString() + " Images";
-                pic = linkedAlb.Pictures[0];
+                this.labelDate.Text = albumLinked.Date;
+                this.labelName.Text = albumLinked.Title;
+                this.labelSubtitle.Text = albumLinked.SubTitle;
+                this.labelNumPhotos.Text = albumLinked.Pictures.Count.ToString() + " Images";
+
+                //Si l'album contient des images, alors:
+                if (albumLinked.Pictures.Count > 0)
+                {
+                    pic = albumLinked.Pictures[0];
                 this.pbPreviewPicture.Image = pic.Image;
                 this.pbPreviewPicture.SizeMode = PictureBoxSizeMode.Zoom;
                 this.pbPreviewPicture.Size = new Size(256, 256);
             }
         }
     }
+}
 }

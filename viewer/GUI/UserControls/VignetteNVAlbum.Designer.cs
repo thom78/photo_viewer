@@ -33,14 +33,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbPreviewPicture)).BeginInit();
             this.SuspendLayout();
             // 
-            // labelDate
-            // 
-            this.labelDate.Location = new System.Drawing.Point(181, 241);
-            // 
-            // pbPreviewPicture
-            // 
-            this.pbPreviewPicture.Size = new System.Drawing.Size(254, 254);
-            // 
             // labelSubtitle
             // 
             this.labelSubtitle.AutoSize = true;
@@ -54,7 +46,7 @@
             // 
             this.labelNumPhotos.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.labelNumPhotos.AutoSize = true;
-            this.labelNumPhotos.Location = new System.Drawing.Point(7, 241);
+            this.labelNumPhotos.Location = new System.Drawing.Point(7, 243);
             this.labelNumPhotos.Name = "labelNumPhotos";
             this.labelNumPhotos.Size = new System.Drawing.Size(50, 13);
             this.labelNumPhotos.TabIndex = 3;
@@ -63,11 +55,9 @@
             // VignetteNVAlbum
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Controls.Add(this.labelNumPhotos);
             this.Controls.Add(this.labelSubtitle);
             this.Name = "VignetteNVAlbum";
-            this.Size = new System.Drawing.Size(254, 254);
             this.Controls.SetChildIndex(this.pbPreviewPicture, 0);
             this.Controls.SetChildIndex(this.labelName, 0);
             this.Controls.SetChildIndex(this.labelDate, 0);

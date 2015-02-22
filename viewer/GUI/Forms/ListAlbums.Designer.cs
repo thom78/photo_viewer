@@ -39,7 +39,10 @@
             this.supprToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.supprimerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.trierToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.nomToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.dateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.noteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -59,7 +62,7 @@
             this.AllPhotosGrid.Size = new System.Drawing.Size(554, 572);
             this.AllPhotosGrid.TabIndex = 0;
             this.AllPhotosGrid.DragDrop += new System.Windows.Forms.DragEventHandler(this.AllPhotosGrid_DragDrop);
-            this.AllPhotosGrid.DragEnter += new System.Windows.Forms.DragEventHandler(this.AllPhotosGrid_DragEnter);         
+            this.AllPhotosGrid.DragEnter += new System.Windows.Forms.DragEventHandler(this.AllPhotosGrid_DragEnter);
             // 
             // openPictureDialog
             // 
@@ -82,7 +85,7 @@
             this.créerAlbumToolStripMenuItem,
             this.importerPhotosToolStripMenuItem,
             this.diaporamaToolStripMenuItem,
-            this.supprimerToolStripMenuItem});
+            this.trierToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(824, 24);
@@ -152,12 +155,35 @@
             this.toolStripStatusLabel1.Size = new System.Drawing.Size(60, 17);
             this.toolStripStatusLabel1.Text = "En attente";
             // 
-            // supprimerToolStripMenuItem
+            // trierToolStripMenuItem
             // 
-            this.supprimerToolStripMenuItem.Name = "supprimerToolStripMenuItem";
-            this.supprimerToolStripMenuItem.Size = new System.Drawing.Size(74, 20);
-            this.supprimerToolStripMenuItem.Text = "Supprimer";
-            this.supprimerToolStripMenuItem.Click += new System.EventHandler(this.supprimerToolStripMenuItem_Click_1);
+            this.trierToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.nomToolStripMenuItem,
+            this.dateToolStripMenuItem,
+            this.noteToolStripMenuItem});
+            this.trierToolStripMenuItem.Name = "trierToolStripMenuItem";
+            this.trierToolStripMenuItem.Size = new System.Drawing.Size(43, 20);
+            this.trierToolStripMenuItem.Text = "Trier";
+            // 
+            // nomToolStripMenuItem
+            // 
+            this.nomToolStripMenuItem.Name = "nomToolStripMenuItem";
+            this.nomToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.nomToolStripMenuItem.Text = "Nom";
+            this.nomToolStripMenuItem.Click += new System.EventHandler(this.nomToolStripMenuItem_Click);
+            // 
+            // dateToolStripMenuItem
+            // 
+            this.dateToolStripMenuItem.Name = "dateToolStripMenuItem";
+            this.dateToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.dateToolStripMenuItem.Text = "Date";
+            this.dateToolStripMenuItem.Click += new System.EventHandler(this.dateToolStripMenuItem_Click);
+            // 
+            // noteToolStripMenuItem
+            // 
+            this.noteToolStripMenuItem.Name = "noteToolStripMenuItem";
+            this.noteToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.noteToolStripMenuItem.Text = "Note";
             // 
             // ListAlbums
             // 
@@ -196,7 +222,9 @@
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
-        private System.Windows.Forms.ToolStripMenuItem supprToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem supprimerToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem trierToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem nomToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem dateToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem noteToolStripMenuItem;
     }
 }

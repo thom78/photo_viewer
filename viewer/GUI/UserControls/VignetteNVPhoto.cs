@@ -10,7 +10,7 @@ namespace viewer.GUI.UserControls
 {
     public partial class VignetteNVPhoto : viewer.VignetteNV
     {
-        protected int intRating=0;
+        protected int intRating = 0;
         public VignetteNVPhoto(Picture picParam)
         {
             InitializeComponent();

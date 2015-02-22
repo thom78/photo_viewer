@@ -51,6 +51,7 @@ namespace viewer
             AlbumGrid.Controls.Add(vignetteAlbum);
 
             vignetteAlbumSelected = vignetteAlbum as VignetteNVAlbum;
+            refreshViewPicturesList();
         }
 
        
@@ -98,6 +99,8 @@ namespace viewer
             if (dialogNewAlbum.DialogResult == DialogResult.OK)
             {
                 AddControlVignetteAlbum(dialogNewAlbum.created_album);
+                this.toolStripStatusLabel1.ForeColor = System.Drawing.Color.Black;
+                this.toolStripStatusLabel1.Text = dialogNewAlbum.created_album.Title + " a été créé avec succès.";
             }
         }
 
@@ -114,7 +117,6 @@ namespace viewer
                 //Emplacement temporaire pour l'appel à la méthode de sérialisation. //A changer.//
                 XML_Serialization.save_user_data();
             }
-
         }
 
         private void diaporamaToolStripMenuItem_Click(object sender, EventArgs e)
@@ -126,22 +128,8 @@ namespace viewer
         {
             //La vignette d'albums dont on souhaite afficher le contenu est l'émetteur de l'évènement. (C'est celle sur laquelle l'utilisateur a cliqué)
             vignetteAlbumSelected = sender as VignetteNVAlbum;
-
-            //On rafraichit la liste de photos du contrôle AllPhotosGrid à partir des photos contenu dans l'album de la vignette.
-            AllPhotosGrid.Controls.Clear();
-            foreach (Picture pic in vignetteAlbumSelected.linkedAlb.Pictures)
-            {
-                AddControlVignettePhoto(pic);
+            refreshViewPicturesList();
             }
-        }
-
-        private void show_vignette(Picture pic)
-        {
-            VignetteNV vignetteImage = new VignetteNVPhoto(pic);
-            AllPhotosGrid.Controls.Add(vignetteImage);
-
-            vignetteImage.ehClickOnAlbum += new EventHandler(ClickOnVignettePhoto);
-        }
 
         /// <summary>
         ///  Fonction appelée pour ajouter des images dans un album photo à partir des chemins de fichiers (et qui les sérialise).
@@ -159,6 +147,8 @@ namespace viewer
                     Picture pic = new Picture(System.Drawing.Image.FromFile(strFileName), strFileName, strName, 0, "", strDate, vignetteAlbumSelected.linkedAlb);
                     AddControlVignettePhoto(pic);
                     vignetteAlbumSelected.refreshPreviewPicture();
+                    this.toolStripStatusLabel1.ForeColor = System.Drawing.Color.Black;
+                    this.toolStripStatusLabel1.Text = pic.Name + " a été importée avec succès.";
                 }
             }
             else if ((vignetteAlbumSelected == null))
@@ -169,13 +159,13 @@ namespace viewer
         }
 
         //Les fichiers déplacés sont copiés en mémoire lorsque la souris arrive sur le contrôle avec les fichiers déplacés.
-        void AllPhotosGrid_DragEnter(object sender, DragEventArgs e)
+        private void AllPhotosGrid_DragEnter(object sender, DragEventArgs e)
         {
             if (e.Data.GetDataPresent(DataFormats.FileDrop)) e.Effect = DragDropEffects.Copy;
         }
 
         //On récupère le chemin des fichiers déplacés sous forme de String lorsque le bouton de la souris est relâché ("drop").
-        void AllPhotosGrid_DragDrop(object sender, DragEventArgs e)
+        private void AllPhotosGrid_DragDrop(object sender, DragEventArgs e)
         {
             List<String> listAllowedFileExt = new List<String>() { ".jpeg", ".jpg", ".png", ".bmp", ".gif" };
 
@@ -190,6 +180,29 @@ namespace viewer
                     importPictures(strFileName);
                 }
             }
+            //On sauvegarde les données.
+            XML_Serialization.save_user_data();
+        }
+        private void refreshViewPicturesList()
+        {
+            //On rafraichit la liste de photos du contrôle AllPhotosGrid à partir des photos contenu dans l'album de la vignette.
+            AllPhotosGrid.Controls.Clear();
+            foreach (Picture pic in vignetteAlbumSelected.albumLinked.Pictures)
+            {
+                AddControlVignettePhoto(pic);
+            }
+        }
+
+        private void dateToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            vignetteAlbumSelected.albumLinked.Pictures = vignetteAlbumSelected.albumLinked.Pictures.OrderBy(a => a.Date).ToList();
+            refreshViewPicturesList();
+            }
+
+        private void nomToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            vignetteAlbumSelected.albumLinked.Pictures = vignetteAlbumSelected.albumLinked.Pictures.OrderBy(a => a.Name).ToList();
+            refreshViewPicturesList();
         }
 
         private void ClickOnVignettePhoto(object sender, EventArgs e)
@@ -199,7 +212,7 @@ namespace viewer
 
             
            
-        }
+    }
 
 
         private void supprimerToolStripMenuItem_Click_1(object sender, EventArgs e)
