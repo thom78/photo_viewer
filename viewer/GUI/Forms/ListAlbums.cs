@@ -36,6 +36,8 @@ namespace viewer
         {
             VignetteNV vignetteImage = new VignetteNVPhoto(pic);
             AllPhotosGrid.Controls.Add(vignetteImage);
+
+            vignetteImage.ehClickOnAlbum += new EventHandler(ClickOnVignettePhoto);
         }
 
         /// <summary>
@@ -121,7 +123,7 @@ namespace viewer
 
         private void diaporamaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Diapo new_Diapo = new Diapo(this.vignetteAlbumSelected.linkedAlb);
+            Diapo new_Diapo = new Diapo(this.vignetteAlbumSelected.albumLinked);
             new_Diapo.ShowDialog();
         }
         private void ClickOnVignetteAlbum(object sender, EventArgs e)
@@ -142,9 +144,9 @@ namespace viewer
 
             if ((vignetteAlbumSelected != null))
             {
-                if (!(vignetteAlbumSelected.linkedAlb.Pictures.Exists(a => a.picturePath == strFileName)))
+                if (!(vignetteAlbumSelected.albumLinked.Pictures.Exists(a => a.picturePath == strFileName)))
                 {
-                    Picture pic = new Picture(System.Drawing.Image.FromFile(strFileName), strFileName, strName, 0, "", strDate, vignetteAlbumSelected.linkedAlb);
+                    Picture pic = new Picture(System.Drawing.Image.FromFile(strFileName), strFileName, strName, 0, "", strDate, vignetteAlbumSelected.albumLinked);
                     AddControlVignettePhoto(pic);
                     vignetteAlbumSelected.refreshPreviewPicture();
                     this.toolStripStatusLabel1.ForeColor = System.Drawing.Color.Black;
@@ -215,9 +217,9 @@ namespace viewer
     }
 
 
-        private void supprimerToolStripMenuItem_Click_1(object sender, EventArgs e)
+        private void supprimerToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            foreach (Picture photo in vignetteAlbumSelected.linkedAlb.Pictures)
+            foreach (Picture photo in vignetteAlbumSelected.albumLinked.Pictures)
             {
 
                 foreach (string name in Name_photo_suppr)
@@ -232,18 +234,16 @@ namespace viewer
 
             foreach (Picture pic in Photo_a_suppr)
             {
-                vignetteAlbumSelected.linkedAlb.Pictures.Remove(pic);
+                vignetteAlbumSelected.albumLinked.Pictures.Remove(pic);
 
             }
             vignetteAlbumSelected.refreshPreviewPicture();
             AllPhotosGrid.Controls.Clear();
 
-            foreach (Picture pic in vignetteAlbumSelected.linkedAlb.Pictures)
+            foreach (Picture pic in vignetteAlbumSelected.albumLinked.Pictures)
             {
-                show_vignette(pic);
+                AddControlVignettePhoto(pic);
             }
-
-            
         }
        
     }  

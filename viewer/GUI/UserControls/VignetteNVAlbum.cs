@@ -11,12 +11,12 @@ namespace viewer.GUI.UserControls
     public partial class VignetteNVAlbum : viewer.VignetteNV
     {
         #region Properties
-        public Album linkedAlb;
+        public Album albumLinked;
         #endregion Properties
         public VignetteNVAlbum(Album alb)
         {
             InitializeComponent();
-            linkedAlb = alb;
+            albumLinked = alb;
             this.refreshPreviewPicture();
         }
 
