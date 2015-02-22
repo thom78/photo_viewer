@@ -165,6 +165,33 @@ namespace viewer
 
                 return ret;
             }
+
+        private void toolStripButton2_Click(object sender, EventArgs e)
+        {
+            if (timer1.Enabled == true)
+            {
+               timer1.Enabled = false;
+            }
+            else
+            {
+                timer1.Enabled = true;
+            }
+        }
+
+        private void vitesseDiapoRapideToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            timer1.Interval = 2000;
+        }
+
+        private void vitesseMoyenneToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            timer1.Interval = 4000;
+        }
+
+        private void vitessseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            timer1.Interval = 6000;
+        }
         
         
        
