@@ -1,4 +1,4 @@
-﻿using System;
+﻿﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -23,6 +23,10 @@ namespace viewer
     public partial class ListAlbums : Form
     {
         private VignetteNVAlbum vignetteAlbumSelected;
+        private VignetteNVPhoto vignettePhotoSelected;
+        private List<Picture> Photo_a_suppr = new List<Picture>();
+        private List<string> Name_photo_suppr = new List<string>();
+
 
         /// <summary>
         /// Fonction qui instancie une nouvelle vignette correspondant à une image d'un album afin de l'afficher sur l'interface.
@@ -32,6 +36,8 @@ namespace viewer
         {
             VignetteNV vignetteImage = new VignetteNVPhoto(pic);
             AllPhotosGrid.Controls.Add(vignetteImage);
+
+            vignetteImage.ehClickOnAlbum += new EventHandler(ClickOnVignettePhoto);
         }
 
         /// <summary>
@@ -49,6 +55,9 @@ namespace viewer
             vignetteAlbumSelected = vignetteAlbum as VignetteNVAlbum;
             refreshViewPicturesList();
         }
+
+       
+
 
         public ListAlbums()
         {
@@ -82,6 +91,8 @@ namespace viewer
                 }
             }
         }
+
+        
 
         private void createAlbumToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -120,7 +131,7 @@ namespace viewer
             //La vignette d'albums dont on souhaite afficher le contenu est l'émetteur de l'évènement. (C'est celle sur laquelle l'utilisateur a cliqué)
             vignetteAlbumSelected = sender as VignetteNVAlbum;
             refreshViewPicturesList();
-        }
+            }
 
         /// <summary>
         ///  Fonction appelée pour ajouter des images dans un album photo à partir des chemins de fichiers (et qui les sérialise).
@@ -188,12 +199,53 @@ namespace viewer
         {
             vignetteAlbumSelected.albumLinked.Pictures = vignetteAlbumSelected.albumLinked.Pictures.OrderBy(a => a.Date).ToList();
             refreshViewPicturesList();
-        }
+            }
 
         private void nomToolStripMenuItem_Click(object sender, EventArgs e)
         {
             vignetteAlbumSelected.albumLinked.Pictures = vignetteAlbumSelected.albumLinked.Pictures.OrderBy(a => a.Name).ToList();
             refreshViewPicturesList();
         }
+
+        private void ClickOnVignettePhoto(object sender, EventArgs e)
+        {
+            vignettePhotoSelected = sender as VignetteNVPhoto;
+            Name_photo_suppr.Add(vignettePhotoSelected.pic.Name);
+
+            
+           
     }
+
+
+        private void supprimerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            foreach (Picture photo in vignetteAlbumSelected.albumLinked.Pictures)
+            {
+
+                foreach (string name in Name_photo_suppr)
+                {
+                    if (photo.Name == name)
+                    {
+                        Photo_a_suppr.Add(photo);
+                        //System.Windows.Forms.MessageBox.Show(photo.Name);
+                    }
+                }
+            }
+
+            foreach (Picture pic in Photo_a_suppr)
+            {
+                vignetteAlbumSelected.albumLinked.Pictures.Remove(pic);
+
+            }
+            vignetteAlbumSelected.refreshPreviewPicture();
+            AllPhotosGrid.Controls.Clear();
+
+            foreach (Picture pic in vignetteAlbumSelected.albumLinked.Pictures)
+            {
+                AddControlVignettePhoto(pic);
+            }
+        }
+       
+    }  
+    
 }

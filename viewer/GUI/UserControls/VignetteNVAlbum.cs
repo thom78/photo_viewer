@@ -36,11 +36,11 @@ namespace viewer.GUI.UserControls
                 if (albumLinked.Pictures.Count > 0)
                 {
                     pic = albumLinked.Pictures[0];
-                    this.pbPreviewPicture.Image = pic.Image;
-                    this.pbPreviewPicture.SizeMode = PictureBoxSizeMode.Zoom;
-                    this.pbPreviewPicture.Size = new Size(256, 256);
-                }
+                this.pbPreviewPicture.Image = pic.Image;
+                this.pbPreviewPicture.SizeMode = PictureBoxSizeMode.Zoom;
+                this.pbPreviewPicture.Size = new Size(256, 256);
             }
         }
     }
+}
 }
