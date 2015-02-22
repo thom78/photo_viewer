@@ -47,6 +47,7 @@ namespace viewer
             AlbumGrid.Controls.Add(vignetteAlbum);
 
             vignetteAlbumSelected = vignetteAlbum as VignetteNVAlbum;
+            refreshViewPicturesList();
         }
 
         public ListAlbums()
@@ -118,13 +119,7 @@ namespace viewer
         {
             //La vignette d'albums dont on souhaite afficher le contenu est l'émetteur de l'évènement. (C'est celle sur laquelle l'utilisateur a cliqué)
             vignetteAlbumSelected = sender as VignetteNVAlbum;
-
-            //On rafraichit la liste de photos du contrôle AllPhotosGrid à partir des photos contenu dans l'album de la vignette.
-            AllPhotosGrid.Controls.Clear();
-            foreach (Picture pic in vignetteAlbumSelected.albumLinked.Pictures)
-            {
-                AddControlVignettePhoto(pic);
-            }
+            refreshViewPicturesList();            
         }
 
         /// <summary>
@@ -155,13 +150,13 @@ namespace viewer
         }
 
         //Les fichiers déplacés sont copiés en mémoire lorsque la souris arrive sur le contrôle avec les fichiers déplacés.
-        void AllPhotosGrid_DragEnter(object sender, DragEventArgs e)
+        private void AllPhotosGrid_DragEnter(object sender, DragEventArgs e)
         {
             if (e.Data.GetDataPresent(DataFormats.FileDrop)) e.Effect = DragDropEffects.Copy;
         }
 
         //On récupère le chemin des fichiers déplacés sous forme de String lorsque le bouton de la souris est relâché ("drop").
-        void AllPhotosGrid_DragDrop(object sender, DragEventArgs e)
+        private void AllPhotosGrid_DragDrop(object sender, DragEventArgs e)
         {
             List<String> listAllowedFileExt = new List<String>() { ".jpeg", ".jpg", ".png", ".bmp", ".gif" };
 
@@ -178,6 +173,15 @@ namespace viewer
             }
             //On sauvegarde les données.
             XML_Serialization.save_user_data();
+        }
+        private void refreshViewPicturesList()
+        {
+        //On rafraichit la liste de photos du contrôle AllPhotosGrid à partir des photos contenu dans l'album de la vignette.
+            AllPhotosGrid.Controls.Clear();
+            foreach (Picture pic in vignetteAlbumSelected.albumLinked.Pictures)
+            {
+                AddControlVignettePhoto(pic);
+            }
         }
     }
 }
