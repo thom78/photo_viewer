@@ -89,7 +89,7 @@ namespace viewer
                 }
             }
         }
-        
+
         private void createAlbumToolStripMenuItem_Click(object sender, EventArgs e)
         {
             AddAlbumWindow dialogNewAlbum = new AddAlbumWindow();
@@ -129,6 +129,7 @@ namespace viewer
 
             listPhotosSelected.Clear();
             refreshViewPicturesList();
+
         }
 
         /// <summary>
@@ -236,26 +237,39 @@ namespace viewer
         private void supprimerToolStripMenuItem_Click(object sender, EventArgs e)
         {
             List<Picture> listTempRemPic = new List<Picture>();
-            foreach (VignetteNVPhoto vignettePic in listPhotosSelected)
-            {
-                listTempRemPic.Add(vignettePic.pic);
-            }
 
-            foreach (Picture pic in listTempRemPic)
+            if (listPhotosSelected.Count == 0)
             {
-                //Actuellement le code permet de sélectionner des photos provenant d'albums différents, il faut donc tester si les photos sont bien dans l'album sélectionné avant de les supprimer.
-                //Ce test if n'est plus nécessaire dès qu'on appelle la fonction listPhotosSelected.Clear() à chaque fois qu'on clique sur une vignette d'album.
-                if(vignetteAlbumSelected.albumLinked.Pictures.Exists(a=>a==pic))
+                Program.Albums.Remove(vignetteAlbumSelected.albumLinked);
+                AlbumGrid.Controls.Clear();
+                foreach(Album alb in Program.Albums)
                 {
-                vignetteAlbumSelected.albumLinked.Pictures.Remove(pic);
+                    AddControlVignetteAlbum(alb);
                 }
             }
-            //On vide la liste des vignettes sélectionnées en mémoire.
-            listPhotosSelected.Clear();
+            else if (listPhotosSelected.Count > 0)
+            {
+                foreach (VignetteNVPhoto vignettePic in listPhotosSelected)
+                {
+                    listTempRemPic.Add(vignettePic.pic);
+                }
 
-            vignetteAlbumSelected.refreshPreviewPicture();
-            refreshViewPicturesList();
-            XML_Serialization.save_user_data();
+                foreach (Picture pic in listTempRemPic)
+                {
+                    //Actuellement le code permet de sélectionner des photos provenant d'albums différents, il faut donc tester si les photos sont bien dans l'album sélectionné avant de les supprimer.
+                    //Ce test if n'est plus nécessaire dès qu'on appelle la fonction listPhotosSelected.Clear() à chaque fois qu'on clique sur une vignette d'album.
+                    if (vignetteAlbumSelected.albumLinked.Pictures.Exists(a => a == pic))
+                    {
+                        vignetteAlbumSelected.albumLinked.Pictures.Remove(pic);
+                    }
+                }
+                //On vide la liste des vignettes sélectionnées en mémoire.
+                listPhotosSelected.Clear();
+
+                vignetteAlbumSelected.refreshPreviewPicture();
+                refreshViewPicturesList();
+                XML_Serialization.save_user_data();
+            }
         }
 
     }
