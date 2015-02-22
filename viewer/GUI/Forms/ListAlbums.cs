@@ -131,7 +131,8 @@ namespace viewer
             //La vignette d'albums dont on souhaite afficher le contenu est l'émetteur de l'évènement. (C'est celle sur laquelle l'utilisateur a cliqué)
             vignetteAlbumSelected = sender as VignetteNVAlbum;
             refreshViewPicturesList();
-            }
+         
+        }
 
         /// <summary>
         ///  Fonction appelée pour ajouter des images dans un album photo à partir des chemins de fichiers (et qui les sérialise).
@@ -211,32 +212,44 @@ namespace viewer
         {
             vignettePhotoSelected = sender as VignetteNVPhoto;
             Name_photo_suppr.Add(vignettePhotoSelected.pic.Name);
-
-            
-           
-    }
+          
+        }
 
 
         private void supprimerToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            foreach (Picture photo in vignetteAlbumSelected.albumLinked.Pictures)
+            
+            if (vignettePhotoSelected == null)
             {
-
-                foreach (string name in Name_photo_suppr)
-                {
-                    if (photo.Name == name)
+                vignetteAlbumSelected.albumLinked.Pictures.Clear();
+                    foreach (Album album in Program.Albums)
                     {
-                        Photo_a_suppr.Add(photo);
-                        //System.Windows.Forms.MessageBox.Show(photo.Name);
+                        AddControlVignetteAlbum(album);
                     }
+            }
+            
+            else
+            {           
+                foreach (Picture photo in vignetteAlbumSelected.albumLinked.Pictures)
+                {
+                    
+                    foreach (string name in Name_photo_suppr)
+                    {
+                        if (photo.Name == name)
+                        {
+                            Photo_a_suppr.Add(photo);
+                        }
+                    }
+
                 }
             }
-
+            
+            
             foreach (Picture pic in Photo_a_suppr)
             {
                 vignetteAlbumSelected.albumLinked.Pictures.Remove(pic);
-
             }
+            
             vignetteAlbumSelected.refreshPreviewPicture();
             AllPhotosGrid.Controls.Clear();
 
@@ -244,6 +257,10 @@ namespace viewer
             {
                 AddControlVignettePhoto(pic);
             }
+
+            vignettePhotoSelected = null;
+
+            XML_Serialization.save_user_data();
         }
        
     }  
