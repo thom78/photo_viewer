@@ -8,7 +8,7 @@ using System.Xml.Serialization;
 
 namespace viewer
 {
-    public class Picture : IComparable<Picture>
+    public class Picture
     {
         #region Properties
 
@@ -54,14 +54,5 @@ namespace viewer
         }
 
         #endregion Constructor(s)
-
-        #region Method_Sort
-
-        int IComparable<Picture>.CompareTo(Picture other)
-        {
-            return this.Name.CompareTo(other.Name);
-        }
-
-        #endregion Method_Sort
     }
 }
