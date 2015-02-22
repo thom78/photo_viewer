@@ -218,8 +218,5 @@ namespace viewer
             timer1.Interval = 6000;
         }
         
-        
-       
-   
     }
 }
