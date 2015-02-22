@@ -79,6 +79,7 @@ namespace viewer
             if (boolShowDialog)
             {
                 System.Windows.Forms.MessageBox.Show("Les images suivantes n'ont pas été trouvées et ont été supprimées:\n" + strDialogText, "Images introuvables");
+                save_user_data();
             }
         }
     }
