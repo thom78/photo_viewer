@@ -24,12 +24,12 @@ namespace viewer
     {
         private VignetteNVAlbum vignetteAlbumSelected;
         private VignetteNVPhoto vignettePhotoSelected;
-        private List<Picture> Photo_a_suppr = new List<Picture>();
+        private List<VignetteNVPhoto> listPhotosSelected = new List<VignetteNVPhoto>();
         private List<string> Name_photo_suppr = new List<string>();
 
 
         /// <summary>
-        /// Fonction qui instancie une nouvelle vignette correspondant à une image d'un album afin de l'afficher sur l'interface.
+        /// Fonction qui instancie une nouvelle vignette correspondant à une image (Picture) afin de l'afficher sur l'interface.
         /// </summary>
         /// <param name="pic">Objet Picture correspondant à la vignette.</param>
         private void AddControlVignettePhoto(Picture pic)
@@ -49,15 +49,13 @@ namespace viewer
             VignetteNV vignetteAlbum = new VignetteNVAlbum(alb);
             //ListAlbums s'abonne à l'évènement de la vignette d'album correspondant à un clic de l'utilisateur.
             //Cet évènement sera traité avec la méthode ClickOnVignetteAlbum
-            vignetteAlbum.ehClickOnAlbum += new EventHandler(ClickOnVignetteAlbum);
             AlbumGrid.Controls.Add(vignetteAlbum);
+
+            vignetteAlbum.ehClickOnAlbum += new EventHandler(ClickOnVignetteAlbum);
 
             vignetteAlbumSelected = vignetteAlbum as VignetteNVAlbum;
             refreshViewPicturesList();
         }
-
-       
-
 
         public ListAlbums()
         {
@@ -91,9 +89,7 @@ namespace viewer
                 }
             }
         }
-
         
-
         private void createAlbumToolStripMenuItem_Click(object sender, EventArgs e)
         {
             AddAlbumWindow dialogNewAlbum = new AddAlbumWindow();
@@ -130,8 +126,10 @@ namespace viewer
         {
             //La vignette d'albums dont on souhaite afficher le contenu est l'émetteur de l'évènement. (C'est celle sur laquelle l'utilisateur a cliqué)
             vignetteAlbumSelected = sender as VignetteNVAlbum;
+
+            listPhotosSelected.Clear();
             refreshViewPicturesList();
-            }
+        }
 
         /// <summary>
         ///  Fonction appelée pour ajouter des images dans un album photo à partir des chemins de fichiers (et qui les sérialise).
@@ -195,57 +193,71 @@ namespace viewer
             }
         }
 
+        #region TriePhotos
         private void dateToolStripMenuItem_Click(object sender, EventArgs e)
         {
             vignetteAlbumSelected.albumLinked.Pictures = vignetteAlbumSelected.albumLinked.Pictures.OrderBy(a => a.Date).ToList();
             refreshViewPicturesList();
-            }
+            XML_Serialization.save_user_data();
+        }
 
         private void nomToolStripMenuItem_Click(object sender, EventArgs e)
         {
             vignetteAlbumSelected.albumLinked.Pictures = vignetteAlbumSelected.albumLinked.Pictures.OrderBy(a => a.Name).ToList();
             refreshViewPicturesList();
+            XML_Serialization.save_user_data();
         }
+
+        private void noteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            vignetteAlbumSelected.albumLinked.Pictures = vignetteAlbumSelected.albumLinked.Pictures.OrderBy(a => a.intPicRating).ToList();
+            refreshViewPicturesList();
+            XML_Serialization.save_user_data();
+        }
+        #endregion TriePhotos
 
         private void ClickOnVignettePhoto(object sender, EventArgs e)
         {
             vignettePhotoSelected = sender as VignetteNVPhoto;
-            Name_photo_suppr.Add(vignettePhotoSelected.pic.Name);
-
-            
-           
-    }
+            if (listPhotosSelected.Contains(vignettePhotoSelected))
+            {
+                listPhotosSelected.Remove(vignettePhotoSelected);
+                vignettePhotoSelected.BackColor = System.Drawing.Color.White;
+            }
+            else if (!listPhotosSelected.Contains(vignettePhotoSelected))
+            {
+                listPhotosSelected.Add(vignettePhotoSelected);
+                vignettePhotoSelected.BackColor = System.Drawing.Color.DodgerBlue;
+            }
+            //Name_photo_suppr.Add(vignettePhotoSelected.pic.Name);
+        }
 
 
         private void supprimerToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            foreach (Picture photo in vignetteAlbumSelected.albumLinked.Pictures)
+            List<Picture> listTempRemPic = new List<Picture>();
+            foreach (VignetteNVPhoto vignettePic in listPhotosSelected)
             {
+                listTempRemPic.Add(vignettePic.pic);
+            }
 
-                foreach (string name in Name_photo_suppr)
+            foreach (Picture pic in listTempRemPic)
+            {
+                //Actuellement le code permet de sélectionner des photos provenant d'albums différents, il faut donc tester si les photos sont bien dans l'album sélectionné avant de les supprimer.
+                //Ce test if n'est plus nécessaire dès qu'on appelle la fonction listPhotosSelected.Clear() à chaque fois qu'on clique sur une vignette d'album.
+                if(vignetteAlbumSelected.albumLinked.Pictures.Exists(a=>a==pic))
                 {
-                    if (photo.Name == name)
-                    {
-                        Photo_a_suppr.Add(photo);
-                        //System.Windows.Forms.MessageBox.Show(photo.Name);
-                    }
+                vignetteAlbumSelected.albumLinked.Pictures.Remove(pic);
                 }
             }
+            //On vide la liste des vignettes sélectionnées en mémoire.
+            listPhotosSelected.Clear();
 
-            foreach (Picture pic in Photo_a_suppr)
-            {
-                vignetteAlbumSelected.albumLinked.Pictures.Remove(pic);
-
-            }
             vignetteAlbumSelected.refreshPreviewPicture();
-            AllPhotosGrid.Controls.Clear();
-
-            foreach (Picture pic in vignetteAlbumSelected.albumLinked.Pictures)
-            {
-                AddControlVignettePhoto(pic);
-            }
+            refreshViewPicturesList();
+            XML_Serialization.save_user_data();
         }
-       
-    }  
-    
+
+    }
+
 }

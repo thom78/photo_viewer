@@ -30,6 +30,9 @@ namespace viewer
         [XmlIgnore]
         public Image Image;
 
+        [XmlIgnore]
+        public Album albumLinked;
+
         #endregion Properties
 
         #region Constructor(s)
