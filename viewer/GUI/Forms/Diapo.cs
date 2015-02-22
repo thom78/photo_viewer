@@ -158,6 +158,31 @@ namespace viewer
                             }
                         }
                         break;
+                    case Keys.Escape:
+                        {
+                            this.Close();
+                            
+                        }
+                        break;
+                    case Keys.Add:
+                        {
+                            timer1.Interval = timer1.Interval + 20;
+
+                        }
+                        break;
+                    case Keys.Subtract:
+                        {
+                            if (timer1.Interval > 20)
+                            {
+                                timer1.Interval = timer1.Interval - 20;
+                            }
+                            else
+                            {
+                                timer1.Interval = 20;
+                            }
+
+                        }
+                        break;
                     case Keys.Up: break;
                     case Keys.Down: break;
                     default: ret = base.ProcessCmdKey(ref msg, keyData); break;
