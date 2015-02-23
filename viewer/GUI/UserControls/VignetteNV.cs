@@ -14,6 +14,8 @@ namespace viewer
     {
         public Picture pic;
         public event EventHandler ehClickOnAlbum;
+        public event MouseEventHandler ehMouseDown;
+        public event DragEventHandler ehDragOver;
         public VignetteNV()
         {
             InitializeComponent();
@@ -28,14 +30,25 @@ namespace viewer
                 eh(this, e);
             }
         }
-        //evenenement lorsqu'on double clique sur le texte
-        protected virtual void labelName_DoubleClick(object sender, EventArgs e)
-        {
-        }
-        //evenenement lorsqu'on double clique sur le texte
-        protected virtual void pbPreviewPicture_DoubleClick(object sender, EventArgs e)
-        {
 
+        private void VignetteNV_MouseDown(object sender, MouseEventArgs e)
+        {
+            //L'évènement est créé et envoyé aux objets abonnés
+            MouseEventHandler eh = ehMouseDown;
+            if (eh != null)
+            {
+                eh(this, e);
+            }
+        }
+
+        private void VignetteNV_DragOver(object sender, DragEventArgs e)
+        {
+            //L'évènement est créé et envoyé aux objets abonnés
+            DragEventHandler eh = ehDragOver;
+            if (eh != null)
+            {
+                eh(this, e);
+            }
         }
     }
 }
