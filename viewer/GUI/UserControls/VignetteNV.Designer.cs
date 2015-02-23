@@ -79,6 +79,8 @@
             this.Name = "VignetteNV";
             this.Padding = new System.Windows.Forms.Padding(5);
             this.Size = new System.Drawing.Size(259, 259);
+            this.DragOver += new System.Windows.Forms.DragEventHandler(this.VignetteNV_DragOver);
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.VignetteNV_MouseDown);
             ((System.ComponentModel.ISupportInitialize)(this.pbPreviewPicture)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

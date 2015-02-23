@@ -246,20 +246,47 @@ namespace viewer
         //Les fichiers déplacés sont copiés en mémoire lorsque la souris arrive sur le contrôle avec les fichiers déplacés.
         private void AllPhotosGrid_DragEnter(object sender, DragEventArgs e)
         {
-            if (e.Data.GetDataPresent(DataFormats.FileDrop)) e.Effect = DragDropEffects.Copy;
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                e.Effect = DragDropEffects.Copy;
+            }
+            if (e.Data.GetDataPresent("VignetteNVPhoto")) 
+            {
+                e.Effect = DragDropEffects.Move;
+            }
         }
 
         //On récupère le chemin des fichiers déplacés sous forme de String lorsque le bouton de la souris est relâché ("drop").
         private void AllPhotosGrid_DragDrop(object sender, DragEventArgs e)
         {
-            string[] files = e.Data.GetData(DataFormats.FileDrop) as string[];
+            if(e.Data.GetFormats().Contains(DataFormats.FileDrop))
+            {
+                string[] files = e.Data.GetData(DataFormats.FileDrop) as string[];
 
-            //On les ajoute à l'album sélectionné si il existe.
-            importPictures(files);
+                //On les ajoute à l'album sélectionné si il existe.
+                importPictures(files);
+            }
+            else if(e.Data.GetFormats().Contains("VignetteNVPhoto"))
+            {
+                AllPhotosGrid.Controls.Add(e.Data.GetData("VignetteNVPhoto") as VignetteNVPhoto);
+            }
+            
         }
         #endregion DragAndDropPhotos
 
         #region Evènements
+        private void MouseDownVignettePhoto(object sender, MouseEventArgs e)
+        {
+            DataObject data = new DataObject();
+            VignetteNVPhoto vignette = sender as VignetteNVPhoto;
+            data.SetData("VignetteNVPhoto",vignette);
+            vignette.DoDragDrop(data, DragDropEffects.Move);
+        }
+
+        private void DragDropVignettePhoto(object sender, DragEventArgs e)
+        {
+            e.Effect = DragDropEffects.Copy;
+        }
         private void ClickOnVignettePhoto(object sender, EventArgs e)
         {
             vignettePhotoSelected = sender as VignetteNVPhoto;
@@ -293,9 +320,9 @@ namespace viewer
                 {
                     listAlbumsSelected.Remove(vignetteAlbumSelected);
                     vignetteAlbumSelected.BackColor = System.Drawing.SystemColors.Control;
-                                        
+
                     vignetteAlbumSelected = listAlbumsSelected.LastOrDefault();
-                }                
+                }
             }
             else if (!listAlbumsSelected.Contains(vignetteAlbumSelected))
             {
@@ -314,15 +341,15 @@ namespace viewer
             dialogNewAlbum.ShowDialog();
             if (dialogNewAlbum.DialogResult == DialogResult.OK)
             {
-                vignetteAlbumSelected=AddControlVignetteAlbum(dialogNewAlbum.created_album);
+                vignetteAlbumSelected = AddControlVignetteAlbum(dialogNewAlbum.created_album);
                 listAlbumsSelected.Add(vignetteAlbumSelected);
                 vignetteAlbumSelected.BackColor = System.Drawing.SystemColors.Highlight;
                 refreshViewPicturesList();
 
                 this.toolStripStatusLabel1.ForeColor = System.Drawing.Color.Black;
-                this.toolStripStatusLabel1.Text = dialogNewAlbum.created_album.Title + " a été créé avec succès.";                
+                this.toolStripStatusLabel1.Text = dialogNewAlbum.created_album.Title + " a été créé avec succès.";
                 XML_Serialization.save_user_data();
-            }            
+            }
         }
 
         private void importPhotosToolStripMenuItem_Click(object sender, EventArgs e)
@@ -366,6 +393,8 @@ namespace viewer
             AllPhotosGrid.Controls.Add(vignetteImage);
 
             vignetteImage.ehClickOnAlbum += new EventHandler(ClickOnVignettePhoto);
+            vignetteImage.ehMouseDown += new MouseEventHandler(MouseDownVignettePhoto);
+            vignetteImage.ehDragOver += new DragEventHandler(DragDropVignettePhoto);
         }
 
         /// <summary>
