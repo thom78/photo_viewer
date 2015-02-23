@@ -20,18 +20,9 @@ namespace viewer
             but_ok.Enabled = false;
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void KO_but_Click(object sender, EventArgs e)
         {
+            this.DialogResult = DialogResult.Cancel;
             this.Close();
         }
 
@@ -51,12 +42,7 @@ namespace viewer
         {
             //creer album avec constructeur different en fonction de ce qui a été rempli
             created_album = new Album(textBox1.Text.ToString(), textBox2.Text.ToString(), DateTime.Now.ToShortDateString());
-
-            // Par defaut ajouter la premiere photo de la pellicule comme premiere photo de lalbum !!!!!!!!!A CHANGER!!!!!!!!
-            if (Program.Pellicule.Pictures.Count > 0) 
-            {
-                created_album.Pictures.Add(Program.Pellicule.Pictures[0]);
-            }
+            this.DialogResult = DialogResult.OK;
             this.Close();
         }
     }

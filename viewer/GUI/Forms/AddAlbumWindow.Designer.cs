@@ -71,7 +71,7 @@
             this.but_ko.UseVisualStyleBackColor = true;
             this.but_ko.Click += new System.EventHandler(this.KO_but_Click);
             // 
-            // label1
+            // labelTitrePhoto
             // 
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(12, 18);
@@ -79,9 +79,8 @@
             this.label1.Size = new System.Drawing.Size(28, 13);
             this.label1.TabIndex = 5;
             this.label1.Text = "Titre";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
-            // label2
+            // labelDate
             // 
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(12, 45);
@@ -89,7 +88,6 @@
             this.label2.Size = new System.Drawing.Size(55, 13);
             this.label2.TabIndex = 6;
             this.label2.Text = "Sous-Titre";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // AddAlbumWindow
             // 

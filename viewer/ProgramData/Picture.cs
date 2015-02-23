@@ -8,7 +8,7 @@ using System.Xml.Serialization;
 
 namespace viewer
 {
-    public class Picture : IComparable<Picture>
+    public class Picture
     {
         #region Properties
 
@@ -19,7 +19,7 @@ namespace viewer
         public String Name { get; set; }
 
         [XmlElement(ElementName = "Rating")]
-        public Int32 Rate { get; set; }
+        public Int32 intPicRating { get; set; }
 
         [XmlElement(ElementName = "Commentaire")]
         public String Comment { get; set; }
@@ -30,6 +30,9 @@ namespace viewer
         [XmlIgnore]
         public Image Image;
 
+        [XmlIgnore]
+        public Album albumLinked;
+
         #endregion Properties
 
         #region Constructor(s)
@@ -39,7 +42,7 @@ namespace viewer
             this.picturePath = path;
             this.Image = im;
             this.Name = Name;
-            this.Rate = rate;
+            this.intPicRating = rate;
             this.Comment = comment;
             this.Date = date;
 
@@ -54,20 +57,5 @@ namespace viewer
         }
 
         #endregion Constructor(s)
-
-        #region Method_Sort
-
-        int IComparable<Picture>.CompareTo(Picture other)
-        {
-            return this.Name.CompareTo(other.Name);
-        }
-
-        #endregion Method_Sort
-
-        //Inutile
-        public void AddPicture()
-        {
-            Program.Pellicule.Pictures.Add(this);
-        }
     }
 }

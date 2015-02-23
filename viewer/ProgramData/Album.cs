@@ -23,7 +23,7 @@ namespace viewer
         //liste des photos contenues dans l'album
         //[XmlIgnore]
         public List<Picture> Pictures = new List<Picture>();
-
+        
         #endregion Properties
 
         #region Constructor(s)
