@@ -36,11 +36,27 @@ namespace viewer.GUI.UserControls
                 if (albumLinked.Pictures.Count > 0)
                 {
                     pic = albumLinked.Pictures[0];
-                this.pbPreviewPicture.Image = pic.Image;
-                this.pbPreviewPicture.SizeMode = PictureBoxSizeMode.Zoom;
-                this.pbPreviewPicture.Size = new Size(256, 256);
-            }
+                    this.pbPreviewPicture.Image = pic.Image;
+                    this.pbPreviewPicture.SizeMode = PictureBoxSizeMode.Zoom;
+                    this.pbPreviewPicture.Size = new Size(256, 256);
+                }
+             }
+         }
+        #region AttributsModification
+        //modification des attributs de lalbum lorsqu'on double clique sur le texte
+        protected override void labelName_DoubleClick(object sender, EventArgs e)
+        {
+            AddAlbumWindow rename = new AddAlbumWindow(albumLinked);
+            rename.ShowDialog();
+            refreshPreviewPicture();
         }
+        //modification des attributs de lalbum lorsqu'on double clique sur limage
+        protected override void pbPreviewPicture_DoubleClick(object sender, EventArgs e)
+        {
+            AddAlbumWindow rename = new AddAlbumWindow(albumLinked);
+            rename.ShowDialog();
+            refreshPreviewPicture();
+        }
+        #endregion AttributsModification
     }
-}
 }

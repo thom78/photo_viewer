@@ -43,6 +43,7 @@
             this.labelName.Size = new System.Drawing.Size(28, 13);
             this.labelName.TabIndex = 0;
             this.labelName.Text = "Titre";
+            this.labelName.DoubleClick += new System.EventHandler(this.labelName_DoubleClick);
             // 
             // labelDate
             // 
@@ -59,13 +60,13 @@
             // pbPreviewPicture
             // 
             this.pbPreviewPicture.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pbPreviewPicture.Image = global::viewer.Properties.Resources.empty;
             this.pbPreviewPicture.Location = new System.Drawing.Point(5, 5);
             this.pbPreviewPicture.Name = "pbPreviewPicture";
             this.pbPreviewPicture.Size = new System.Drawing.Size(249, 249);
             this.pbPreviewPicture.TabIndex = 2;
             this.pbPreviewPicture.TabStop = false;
             this.pbPreviewPicture.Click += new System.EventHandler(this.pbPreviewPicture_Click);
+            this.pbPreviewPicture.DoubleClick += new System.EventHandler(this.pbPreviewPicture_DoubleClick);
             // 
             // VignetteNV
             // 

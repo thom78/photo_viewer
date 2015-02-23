@@ -28,5 +28,14 @@ namespace viewer
                 eh(this, e);
             }
         }
+        //evenenement lorsqu'on double clique sur le texte
+        protected virtual void labelName_DoubleClick(object sender, EventArgs e)
+        {
+        }
+        //evenenement lorsqu'on double clique sur le texte
+        protected virtual void pbPreviewPicture_DoubleClick(object sender, EventArgs e)
+        {
+
+        }
     }
 }

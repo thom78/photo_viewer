@@ -81,12 +81,6 @@
             // 
             // menuStrip1
             // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.créerAlbumToolStripMenuItem,
-            this.importerPhotosToolStripMenuItem,
-            this.diaporamaToolStripMenuItem,
-            this.supprimerToolStripMenuItem,
-            this.trierToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(824, 24);
@@ -134,21 +128,21 @@
             // nomToolStripMenuItem
             // 
             this.nomToolStripMenuItem.Name = "nomToolStripMenuItem";
-            this.nomToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.nomToolStripMenuItem.Size = new System.Drawing.Size(101, 22);
             this.nomToolStripMenuItem.Text = "Nom";
             this.nomToolStripMenuItem.Click += new System.EventHandler(this.nomToolStripMenuItem_Click);
             // 
             // dateToolStripMenuItem
             // 
             this.dateToolStripMenuItem.Name = "dateToolStripMenuItem";
-            this.dateToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.dateToolStripMenuItem.Size = new System.Drawing.Size(101, 22);
             this.dateToolStripMenuItem.Text = "Date";
             this.dateToolStripMenuItem.Click += new System.EventHandler(this.dateToolStripMenuItem_Click);
             // 
             // noteToolStripMenuItem
             // 
             this.noteToolStripMenuItem.Name = "noteToolStripMenuItem";
-            this.noteToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.noteToolStripMenuItem.Size = new System.Drawing.Size(101, 22);
             this.noteToolStripMenuItem.Text = "Note";
             this.noteToolStripMenuItem.Click += new System.EventHandler(this.noteToolStripMenuItem_Click);
             // 
@@ -174,8 +168,6 @@
             // 
             // statusStrip1
             // 
-            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel1});
             this.statusStrip1.Location = new System.Drawing.Point(0, 596);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(824, 22);
@@ -198,7 +190,7 @@
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "ListAlbums";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "PhotoViewer";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();

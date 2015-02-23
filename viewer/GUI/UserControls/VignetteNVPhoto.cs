@@ -11,10 +11,10 @@ namespace viewer.GUI.UserControls
     public partial class VignetteNVPhoto : viewer.VignetteNV
     {
         protected int intRating = 0;
+
         public VignetteNVPhoto(Picture picParam)
         {
             InitializeComponent();
-
             this.pic = picParam;
             this.pbPreviewPicture.Image = pic.Image;
             this.pbPreviewPicture.SizeMode = PictureBoxSizeMode.Zoom;
@@ -51,6 +51,30 @@ namespace viewer.GUI.UserControls
                     break;
             }
         }
+
+        public void refreshtext()
+        {
+            this.labelDate.Text = pic.Date;
+            this.labelName.Text = pic.Name;
+            this.toolTipPicComment.SetToolTip(this.pbPreviewPicture, pic.Comment);
+        }
+
+        #region AttributsModification
+        //modification des attributs de lalbum lorsqu'on double clique sur le texte
+        protected override void labelName_DoubleClick(object sender, EventArgs e)
+        {
+            RenamePictureWindow rename = new RenamePictureWindow(pic);
+            rename.ShowDialog();
+            refreshtext();
+        }
+        //modification des attributs de lalbum lorsqu'on double clique sur limage
+        protected override void pbPreviewPicture_DoubleClick(object sender, EventArgs e)
+        {
+            RenamePictureWindow rename = new RenamePictureWindow(pic);
+            rename.ShowDialog();
+            refreshtext();
+        }
+        #endregion AttributsModification
 
         #region radioButtonsChecked
         private void rbNote1_CheckedChanged(object sender, EventArgs e)
