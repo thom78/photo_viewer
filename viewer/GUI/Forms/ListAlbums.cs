@@ -268,7 +268,15 @@ namespace viewer
             }
             else if(e.Data.GetFormats().Contains("VignetteNVPhoto"))
             {
-                AllPhotosGrid.Controls.Add(e.Data.GetData("VignetteNVPhoto") as VignetteNVPhoto);
+                VignetteNVPhoto data = e.Data.GetData("VignetteNVPhoto") as VignetteNVPhoto;
+
+                FlowLayoutPanel _destination = (FlowLayoutPanel)sender as FlowLayoutPanel;
+
+                Point p = _destination.PointToClient(new Point(e.X, e.Y));
+                var item = _destination.GetChildAtPoint(p);
+                int index = _destination.Controls.GetChildIndex(item, false);
+                _destination.Controls.SetChildIndex(data, index);
+                _destination.Invalidate();
             }
             
         }

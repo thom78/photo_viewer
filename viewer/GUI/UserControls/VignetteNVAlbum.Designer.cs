@@ -31,14 +31,14 @@
             this.labelSubtitle = new System.Windows.Forms.Label();
             this.labelNumPhotos = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pbPreviewPicture)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxHandle)).BeginInit();
             this.SuspendLayout();
             // 
             // labelSubtitle
             // 
-            this.labelSubtitle.AutoSize = true;
-            this.labelSubtitle.Location = new System.Drawing.Point(7, 21);
+            this.labelSubtitle.Location = new System.Drawing.Point(5, 18);
             this.labelSubtitle.Name = "labelSubtitle";
-            this.labelSubtitle.Size = new System.Drawing.Size(55, 13);
+            this.labelSubtitle.Size = new System.Drawing.Size(256, 13);
             this.labelSubtitle.TabIndex = 2;
             this.labelSubtitle.Text = "Sous-Titre";
             // 
@@ -46,7 +46,7 @@
             // 
             this.labelNumPhotos.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.labelNumPhotos.AutoSize = true;
-            this.labelNumPhotos.Location = new System.Drawing.Point(7, 243);
+            this.labelNumPhotos.Location = new System.Drawing.Point(109, 264);
             this.labelNumPhotos.Name = "labelNumPhotos";
             this.labelNumPhotos.Size = new System.Drawing.Size(50, 13);
             this.labelNumPhotos.TabIndex = 3;
@@ -63,7 +63,9 @@
             this.Controls.SetChildIndex(this.labelDate, 0);
             this.Controls.SetChildIndex(this.labelSubtitle, 0);
             this.Controls.SetChildIndex(this.labelNumPhotos, 0);
+            this.Controls.SetChildIndex(this.pictureBoxHandle, 0);
             ((System.ComponentModel.ISupportInitialize)(this.pbPreviewPicture)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxHandle)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
