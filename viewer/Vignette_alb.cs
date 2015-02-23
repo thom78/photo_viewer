@@ -19,14 +19,33 @@ namespace viewer
         public Vignette_alb(Album alb)
         {
             Alb = alb;
-            //la vignette de lalbum correspond a la premiere photo de cet album (peut etre modifié)
+                //la vignette de lalbum correspond a la premiere photo de cet album (peut etre modifié)
+                if ((Alb != null) && (Alb.Pictures.Count > 0))
+                {
+                    Pic = Alb.Pictures[0];
+                    PhotoVignette.Image = Pic.Image;
+                    PhotoVignette.SizeMode = PictureBoxSizeMode.Zoom;
+                    PhotoVignette.Size = new Size(250, 250);
+                    InfoBox.Visible = false;
+                }
+            else
+            {
+               ///////JARRIVE PAS A METRE UNE PHOTO RESSOURCE
+                PhotoVignette.SizeMode = PictureBoxSizeMode.Zoom;
+                PhotoVignette.Size = new Size(250, 250);
+                InfoBox.Visible = false;
+            }
+        }
+
+        //set limage de la vignette
+        public void Set_Image()
+        {
             if ((Alb != null) && (Alb.Pictures.Count > 0))
             {
                 Pic = Alb.Pictures[0];
                 PhotoVignette.Image = Pic.Image;
                 PhotoVignette.SizeMode = PictureBoxSizeMode.Zoom;
                 PhotoVignette.Size = new Size(250, 250);
-                InfoBox.Visible = false;
             }
         }
 

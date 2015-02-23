@@ -10,11 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 ///**********************************************************************************************************************************************************
-/// NB: Le premier album en haut a gauche sera toujours l'album "Pellicule" dans lequel on trouve l'integralité des photos 
-/// --->>> a chaque fois quon importe des photos, ne pas oublier de les ajouter à lalbum "pellicule"!
-/// a faire: creation album, ajout de photos a album
-/// CREER UNE FONCTION : AJOUT DE PHOTO DANS UNE GRID AU LIEU DE COPIER COLLER LE TEXTE TOUT LE TOUT LE TEMPS
-/// supprimer albums, photos
+
 /// *********************************************************************************************************************************************************
 
 namespace viewer
@@ -87,8 +83,8 @@ namespace viewer
 
                     if((albumSelected.Alb!=null)&&(!(albumSelected.Alb.Pictures.Exists(a=>a.picturePath==fileName))))
                     {
-                    Picture pic = new Picture(System.Drawing.Image.FromFile(fileName), fileName, name, 0, "", date, albumSelected.Alb);
-                    show_vignette(pic);
+                        Picture pic = new Picture(System.Drawing.Image.FromFile(fileName), fileName, name, 0, "", date, albumSelected.Alb);
+                        show_vignette(pic);
                     }
                 }
                 //Emplacement temporaire pour l'appel à la méthode de sérialisation. //A changer.//
