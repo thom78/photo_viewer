@@ -42,9 +42,9 @@ namespace viewer.GUI.UserControls
                 }
              }
          }
-        #region AttributsModification
+         #region AttributsModification
         //modification des attributs de lalbum lorsqu'on double clique sur le texte
-        protected override void labelName_DoubleClick(object sender, EventArgs e)
+       protected override void labelName_DoubleClick(object sender, EventArgs e)
         {
             AddAlbumWindow rename = new AddAlbumWindow(albumLinked);
             rename.ShowDialog();
@@ -56,7 +56,7 @@ namespace viewer.GUI.UserControls
             AddAlbumWindow rename = new AddAlbumWindow(albumLinked);
             rename.ShowDialog();
             refreshPreviewPicture();
-        }
+     }
         #endregion AttributsModification
-    }
+       }
 }

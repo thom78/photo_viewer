@@ -59,9 +59,9 @@ namespace viewer.GUI.UserControls
             this.toolTipPicComment.SetToolTip(this.pbPreviewPicture, pic.Comment);
         }
 
-        #region AttributsModification
+          #region AttributsModification
         //modification des attributs de lalbum lorsqu'on double clique sur le texte
-        protected override void labelName_DoubleClick(object sender, EventArgs e)
+      protected override void labelName_DoubleClick(object sender, EventArgs e)
         {
             RenamePictureWindow rename = new RenamePictureWindow(pic);
             rename.ShowDialog();
@@ -74,8 +74,8 @@ namespace viewer.GUI.UserControls
             rename.ShowDialog();
             refreshtext();
         }
-        #endregion AttributsModification
-
+       #endregion AttributsModification
+ 
         #region radioButtonsChecked
         private void rbNote1_CheckedChanged(object sender, EventArgs e)
         {

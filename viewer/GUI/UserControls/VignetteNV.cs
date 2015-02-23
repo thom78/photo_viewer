@@ -50,5 +50,15 @@ namespace viewer
                 eh(this, e);
             }
         }
+
+        protected virtual void pbPreviewPicture_DoubleClick(object sender, EventArgs e)
+        {
+
+        }
+
+        protected virtual void labelName_DoubleClick(object sender, EventArgs e)
+        {
+
+        }
     }
 }

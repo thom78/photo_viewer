@@ -63,7 +63,6 @@
             // 
             this.pictureBoxHandle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBoxHandle.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBoxHandle.Image = global::viewer.Properties.Resources.Handle1;
             this.pictureBoxHandle.Location = new System.Drawing.Point(234, 256);
             this.pictureBoxHandle.Name = "pictureBoxHandle";
             this.pictureBoxHandle.Size = new System.Drawing.Size(32, 32);
