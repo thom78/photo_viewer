@@ -243,7 +243,7 @@ namespace viewer
         #endregion TriePhotos
 
         #region DragAndDropPhotos
-        //Les fichiers déplacés sont copiés en mémoire lorsque la souris arrive sur le contrôle avec les fichiers déplacés.
+        //Les fichiers/photo déplacé(e)s sont copié(e)s en mémoire lorsque la souris arrive sur le contrôle avec les fichiers déplacés.
         private void AllPhotosGrid_DragEnter(object sender, DragEventArgs e)
         {
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
@@ -268,15 +268,21 @@ namespace viewer
             }
             else if(e.Data.GetFormats().Contains("VignetteNVPhoto"))
             {
-                VignetteNVPhoto data = e.Data.GetData("VignetteNVPhoto") as VignetteNVPhoto;
 
-                FlowLayoutPanel _destination = (FlowLayoutPanel)sender as FlowLayoutPanel;
+                VignetteNVPhoto vignetteSource = e.Data.GetData("VignetteNVPhoto") as VignetteNVPhoto;
 
-                Point p = _destination.PointToClient(new Point(e.X, e.Y));
-                var item = _destination.GetChildAtPoint(p);
-                int index = _destination.Controls.GetChildIndex(item, false);
-                _destination.Controls.SetChildIndex(data, index);
-                _destination.Invalidate();
+                FlowLayoutPanel localvarAllPhotosGrid = (FlowLayoutPanel)sender as FlowLayoutPanel;
+
+                //On obtient les coordonnées où l'évènement "Drop" a eu lieu dans le FlowLayoutPanel
+                Point p = localvarAllPhotosGrid.PointToClient(new Point(e.X, e.Y));
+                //On obtient la vignette à ces coordonnées.
+                Control vignette = localvarAllPhotosGrid.GetChildAtPoint(p);
+                //On obtient son index.
+                int indexVignette = localvarAllPhotosGrid.Controls.GetChildIndex(vignette, false);
+                //La vignette source est déplacée à cet index.
+                localvarAllPhotosGrid.Controls.SetChildIndex(vignetteSource, indexVignette);
+                //Cette dernière ligne permet de redessiner la vignette "déplacée":
+                localvarAllPhotosGrid.Invalidate();
             }
             
         }
@@ -288,6 +294,8 @@ namespace viewer
             DataObject data = new DataObject();
             VignetteNVPhoto vignette = sender as VignetteNVPhoto;
             data.SetData("VignetteNVPhoto",vignette);
+            //Le DataObject est peu utile, on pourrait écrire directement:
+            //vignette.DoDragDrop(vignette, DragDropEffects.Move);
             vignette.DoDragDrop(data, DragDropEffects.Move);
         }
 

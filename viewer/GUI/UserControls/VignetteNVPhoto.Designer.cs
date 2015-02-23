@@ -35,6 +35,8 @@
             this.rbNote2 = new System.Windows.Forms.RadioButton();
             this.rbNote1 = new System.Windows.Forms.RadioButton();
             this.toolTipPicComment = new System.Windows.Forms.ToolTip(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.pbPreviewPicture)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxHandle)).BeginInit();
             this.SuspendLayout();
             // 
             // rbNote5
@@ -103,11 +105,17 @@
             this.Controls.Add(this.rbNote2);
             this.Controls.Add(this.rbNote1);
             this.Name = "VignetteNVPhoto";
+            this.Controls.SetChildIndex(this.pbPreviewPicture, 0);
+            this.Controls.SetChildIndex(this.labelName, 0);
+            this.Controls.SetChildIndex(this.labelDate, 0);
+            this.Controls.SetChildIndex(this.pictureBoxHandle, 0);
             this.Controls.SetChildIndex(this.rbNote1, 0);
             this.Controls.SetChildIndex(this.rbNote2, 0);
             this.Controls.SetChildIndex(this.rbNote3, 0);
             this.Controls.SetChildIndex(this.rbNote4, 0);
             this.Controls.SetChildIndex(this.rbNote5, 0);
+            ((System.ComponentModel.ISupportInitialize)(this.pbPreviewPicture)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxHandle)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

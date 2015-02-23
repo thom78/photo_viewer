@@ -59,7 +59,7 @@
             this.AllPhotosGrid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.AllPhotosGrid.Location = new System.Drawing.Point(0, 0);
             this.AllPhotosGrid.Name = "AllPhotosGrid";
-            this.AllPhotosGrid.Size = new System.Drawing.Size(554, 572);
+            this.AllPhotosGrid.Size = new System.Drawing.Size(566, 572);
             this.AllPhotosGrid.TabIndex = 0;
             this.AllPhotosGrid.DragDrop += new System.Windows.Forms.DragEventHandler(this.AllPhotosGrid_DragDrop);
             this.AllPhotosGrid.DragEnter += new System.Windows.Forms.DragEventHandler(this.AllPhotosGrid_DragEnter);
@@ -76,7 +76,7 @@
             this.AlbumGrid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.AlbumGrid.Location = new System.Drawing.Point(0, 0);
             this.AlbumGrid.Name = "AlbumGrid";
-            this.AlbumGrid.Size = new System.Drawing.Size(266, 572);
+            this.AlbumGrid.Size = new System.Drawing.Size(276, 572);
             this.AlbumGrid.TabIndex = 5;
             // 
             // menuStrip1
@@ -89,7 +89,7 @@
             this.trierToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(824, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(846, 24);
             this.menuStrip1.TabIndex = 7;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -134,41 +134,42 @@
             // nomToolStripMenuItem
             // 
             this.nomToolStripMenuItem.Name = "nomToolStripMenuItem";
-            this.nomToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.nomToolStripMenuItem.Size = new System.Drawing.Size(101, 22);
             this.nomToolStripMenuItem.Text = "Nom";
             this.nomToolStripMenuItem.Click += new System.EventHandler(this.nomToolStripMenuItem_Click);
             // 
             // dateToolStripMenuItem
             // 
             this.dateToolStripMenuItem.Name = "dateToolStripMenuItem";
-            this.dateToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.dateToolStripMenuItem.Size = new System.Drawing.Size(101, 22);
             this.dateToolStripMenuItem.Text = "Date";
             this.dateToolStripMenuItem.Click += new System.EventHandler(this.dateToolStripMenuItem_Click);
             // 
             // noteToolStripMenuItem
             // 
             this.noteToolStripMenuItem.Name = "noteToolStripMenuItem";
-            this.noteToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.noteToolStripMenuItem.Size = new System.Drawing.Size(101, 22);
             this.noteToolStripMenuItem.Text = "Note";
             this.noteToolStripMenuItem.Click += new System.EventHandler(this.noteToolStripMenuItem_Click);
             // 
             // splitContainer1
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer1.IsSplitterFixed = true;
             this.splitContainer1.Location = new System.Drawing.Point(0, 24);
             this.splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
             // 
             this.splitContainer1.Panel1.Controls.Add(this.AlbumGrid);
-            this.splitContainer1.Panel1MinSize = 266;
+            this.splitContainer1.Panel1MinSize = 276;
             // 
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.AllPhotosGrid);
-            this.splitContainer1.Panel2MinSize = 266;
-            this.splitContainer1.Size = new System.Drawing.Size(824, 572);
-            this.splitContainer1.SplitterDistance = 266;
+            this.splitContainer1.Panel2MinSize = 276;
+            this.splitContainer1.Size = new System.Drawing.Size(846, 572);
+            this.splitContainer1.SplitterDistance = 276;
             this.splitContainer1.SplitterIncrement = 16;
             this.splitContainer1.TabIndex = 9;
             // 
@@ -178,7 +179,7 @@
             this.toolStripStatusLabel1});
             this.statusStrip1.Location = new System.Drawing.Point(0, 596);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(824, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(846, 22);
             this.statusStrip1.TabIndex = 10;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -192,7 +193,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(824, 618);
+            this.ClientSize = new System.Drawing.Size(846, 618);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
