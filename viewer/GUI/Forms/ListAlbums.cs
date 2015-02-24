@@ -274,6 +274,34 @@ namespace viewer
         #endregion TriePhotos
 
         #region DragAndDropPhotos
+
+        private void AlbumGrid_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent("VignetteNV"))
+            {
+                e.Effect = DragDropEffects.Move;
+            }
+        }
+
+        private void AlbumGrid_DragDrop(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetFormats().Contains("VignetteNV"))
+            {
+                VignetteNV vignetteSource = e.Data.GetData("VignetteNV") as VignetteNV;
+
+                FlowLayoutPanel flowlayoutpanelTemp = (FlowLayoutPanel)sender as FlowLayoutPanel;
+
+                if (vignetteSource.Parent == flowlayoutpanelTemp)
+                {
+                    Point p = flowlayoutpanelTemp.PointToClient(new Point(e.X, e.Y));
+                    Control vignetteDestination = flowlayoutpanelTemp.GetChildAtPoint(p);
+                    int index = flowlayoutpanelTemp.Controls.GetChildIndex(vignetteDestination, false);
+                    flowlayoutpanelTemp.Controls.SetChildIndex(vignetteSource, index);
+                    flowlayoutpanelTemp.Invalidate();
+                }
+            }
+        }
+
         //Les fichiers déplacés sont copiés en mémoire lorsque la souris arrive sur le contrôle avec les fichiers déplacés.
         private void AllPhotosGrid_DragEnter(object sender, DragEventArgs e)
         {
@@ -281,7 +309,7 @@ namespace viewer
             {
                 e.Effect = DragDropEffects.Copy;
             }
-            if (e.Data.GetDataPresent("VignetteNVPhoto")) 
+            if (e.Data.GetDataPresent("VignetteNV"))
             {
                 e.Effect = DragDropEffects.Move;
             }
@@ -290,39 +318,42 @@ namespace viewer
         //On récupère le chemin des fichiers déplacés sous forme de String lorsque le bouton de la souris est relâché ("drop").
         private void AllPhotosGrid_DragDrop(object sender, DragEventArgs e)
         {
-            if(e.Data.GetFormats().Contains(DataFormats.FileDrop))
+            if (e.Data.GetFormats().Contains(DataFormats.FileDrop))
             {
                 string[] files = e.Data.GetData(DataFormats.FileDrop) as string[];
 
                 //On les ajoute à l'album sélectionné si il existe.
                 importPictures(files);
             }
-            else if(e.Data.GetFormats().Contains("VignetteNVPhoto"))
+            else if (e.Data.GetFormats().Contains("VignetteNV"))
             {
-                VignetteNVPhoto data = e.Data.GetData("VignetteNVPhoto") as VignetteNVPhoto;
+                VignetteNV vignetteSource = e.Data.GetData("VignetteNV") as VignetteNV;
 
-                FlowLayoutPanel _destination = (FlowLayoutPanel)sender as FlowLayoutPanel;
+                FlowLayoutPanel flowlayoutpanelTemp = (FlowLayoutPanel)sender as FlowLayoutPanel;
 
-                Point p = _destination.PointToClient(new Point(e.X, e.Y));
-                var item = _destination.GetChildAtPoint(p);
-                int index = _destination.Controls.GetChildIndex(item, false);
-                _destination.Controls.SetChildIndex(data, index);
-                _destination.Invalidate();
+                if (vignetteSource.Parent == flowlayoutpanelTemp)
+                {
+                    Point p = flowlayoutpanelTemp.PointToClient(new Point(e.X, e.Y));
+                    Control vignetteDestination = flowlayoutpanelTemp.GetChildAtPoint(p);
+                    int index = flowlayoutpanelTemp.Controls.GetChildIndex(vignetteDestination, false);
+                    flowlayoutpanelTemp.Controls.SetChildIndex(vignetteSource, index);
+                    flowlayoutpanelTemp.Invalidate();
+                }
             }
-            
         }
+
         #endregion DragAndDropPhotos
 
         #region Evènements
-        private void MouseDownVignettePhoto(object sender, MouseEventArgs e)
+        private void MouseDownVignette(object sender, MouseEventArgs e)
         {
             DataObject data = new DataObject();
-            VignetteNVPhoto vignette = sender as VignetteNVPhoto;
-            data.SetData("VignetteNVPhoto",vignette);
+            VignetteNV vignette = sender as VignetteNV;
+            data.SetData("VignetteNV", vignette);
             vignette.DoDragDrop(data, DragDropEffects.Move);
         }
 
-        private void DragDropVignettePhoto(object sender, DragEventArgs e)
+        private void DragDropVignette(object sender, DragEventArgs e)
         {
             e.Effect = DragDropEffects.Copy;
         }
@@ -432,8 +463,8 @@ namespace viewer
             AllPhotosGrid.Controls.Add(vignetteImage);
 
             vignetteImage.ehClickOnAlbum += new EventHandler(ClickOnVignettePhoto);
-            vignetteImage.ehMouseDown += new MouseEventHandler(MouseDownVignettePhoto);
-            vignetteImage.ehDragOver += new DragEventHandler(DragDropVignettePhoto);
+            vignetteImage.ehMouseDown += new MouseEventHandler(MouseDownVignette);
+            vignetteImage.ehDragOver += new DragEventHandler(DragDropVignette);
         }
 
         /// <summary>
@@ -448,6 +479,8 @@ namespace viewer
             AlbumGrid.Controls.Add(vignetteAlbum);
 
             vignetteAlbum.ehClickOnAlbum += new EventHandler(ClickOnVignetteAlbum);
+            vignetteAlbum.ehMouseDown += new MouseEventHandler(MouseDownVignette);
+            vignetteAlbum.ehDragOver += new DragEventHandler(DragDropVignette);
 
             return vignetteAlbum;
         }
