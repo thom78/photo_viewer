@@ -465,7 +465,7 @@ namespace viewer
                 this.toolStripStatusLabel1.Text = "Aucun album sélectionné!";
             }
         }
-
+        //suppression delements
         private void supprimerToolStripMenuItem_Click(object sender, EventArgs e)
         {
             DeleteWindow dlwin = new DeleteWindow(0);
