@@ -440,7 +440,12 @@ namespace viewer
 
         private void supprimerToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            deletePhotosOrAlbums();
+            DeleteWindow dlwin = new DeleteWindow(0);
+            dlwin.ShowDialog();
+            if (dlwin.valide)
+            {
+                deletePhotosOrAlbums();
+            }
         }
         #endregion Boutons
 
