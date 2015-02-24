@@ -63,6 +63,7 @@
             // 
             this.pictureBoxHandle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBoxHandle.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBoxHandle.Image = global::viewer.Properties.Resources.Handle1;
             this.pictureBoxHandle.Location = new System.Drawing.Point(234, 256);
             this.pictureBoxHandle.Name = "pictureBoxHandle";
             this.pictureBoxHandle.Size = new System.Drawing.Size(32, 32);
@@ -75,6 +76,7 @@
             // pbPreviewPicture
             // 
             this.pbPreviewPicture.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pbPreviewPicture.Image = global::viewer.Properties.Resources.empty;
             this.pbPreviewPicture.Location = new System.Drawing.Point(5, 5);
             this.pbPreviewPicture.Name = "pbPreviewPicture";
             this.pbPreviewPicture.Size = new System.Drawing.Size(256, 278);
