@@ -211,17 +211,8 @@ namespace viewer
         #region Interface
 
         #region TriePhotos
-        private void dateToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (vignetteAlbumSelected != null)
-            {
-                vignetteAlbumSelected.albumLinked.Pictures = vignetteAlbumSelected.albumLinked.Pictures.OrderBy(a => a.Date).ToList();
-                refreshViewPicturesList();
-                XML_Serialization.save_user_data();
-            }
-        }
 
-        private void nomToolStripMenuItem_Click(object sender, EventArgs e)
+        private void croissantToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (vignetteAlbumSelected != null)
             {
@@ -231,11 +222,51 @@ namespace viewer
             }
         }
 
-        private void noteToolStripMenuItem_Click(object sender, EventArgs e)
+        private void decroissantToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (vignetteAlbumSelected != null)
+            {
+                vignetteAlbumSelected.albumLinked.Pictures = vignetteAlbumSelected.albumLinked.Pictures.OrderByDescending(a => a.Name).ToList();
+                refreshViewPicturesList();
+                XML_Serialization.save_user_data();
+            }
+        }
+
+        private void croissantToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            if (vignetteAlbumSelected != null)
+            {
+                vignetteAlbumSelected.albumLinked.Pictures = vignetteAlbumSelected.albumLinked.Pictures.OrderBy(a => a.Date).ToList();
+                refreshViewPicturesList();
+                XML_Serialization.save_user_data();
+            }
+        }
+
+        private void decroissantToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            if (vignetteAlbumSelected != null)
+            {
+                vignetteAlbumSelected.albumLinked.Pictures = vignetteAlbumSelected.albumLinked.Pictures.OrderByDescending(a => a.Date).ToList();
+                refreshViewPicturesList();
+                XML_Serialization.save_user_data();
+            }
+        }
+
+        private void croissantToolStripMenuItem2_Click(object sender, EventArgs e)
         {
             if (vignetteAlbumSelected != null)
             {
                 vignetteAlbumSelected.albumLinked.Pictures = vignetteAlbumSelected.albumLinked.Pictures.OrderBy(a => a.intPicRating).ToList();
+                refreshViewPicturesList();
+                XML_Serialization.save_user_data();
+            }
+        }
+
+        private void decroissantToolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            if (vignetteAlbumSelected != null)
+            {
+                vignetteAlbumSelected.albumLinked.Pictures = vignetteAlbumSelected.albumLinked.Pictures.OrderByDescending(a => a.intPicRating).ToList();
                 refreshViewPicturesList();
                 XML_Serialization.save_user_data();
             }

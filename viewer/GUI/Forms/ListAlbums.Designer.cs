@@ -43,6 +43,12 @@
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.croissantToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.décroissantToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.croissantToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.décroissantToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.croissantToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.décroissantToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -133,24 +139,30 @@
             // 
             // nomToolStripMenuItem
             // 
+            this.nomToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.croissantToolStripMenuItem,
+            this.décroissantToolStripMenuItem});
             this.nomToolStripMenuItem.Name = "nomToolStripMenuItem";
-            this.nomToolStripMenuItem.Size = new System.Drawing.Size(101, 22);
+            this.nomToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.nomToolStripMenuItem.Text = "Nom";
-            this.nomToolStripMenuItem.Click += new System.EventHandler(this.nomToolStripMenuItem_Click);
             // 
             // dateToolStripMenuItem
             // 
+            this.dateToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.croissantToolStripMenuItem1,
+            this.décroissantToolStripMenuItem1});
             this.dateToolStripMenuItem.Name = "dateToolStripMenuItem";
-            this.dateToolStripMenuItem.Size = new System.Drawing.Size(101, 22);
+            this.dateToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.dateToolStripMenuItem.Text = "Date";
-            this.dateToolStripMenuItem.Click += new System.EventHandler(this.dateToolStripMenuItem_Click);
             // 
             // noteToolStripMenuItem
             // 
+            this.noteToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.croissantToolStripMenuItem2,
+            this.décroissantToolStripMenuItem2});
             this.noteToolStripMenuItem.Name = "noteToolStripMenuItem";
-            this.noteToolStripMenuItem.Size = new System.Drawing.Size(101, 22);
+            this.noteToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.noteToolStripMenuItem.Text = "Note";
-            this.noteToolStripMenuItem.Click += new System.EventHandler(this.noteToolStripMenuItem_Click);
             // 
             // splitContainer1
             // 
@@ -187,6 +199,48 @@
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
             this.toolStripStatusLabel1.Size = new System.Drawing.Size(60, 17);
             this.toolStripStatusLabel1.Text = "En attente";
+            // 
+            // croissantToolStripMenuItem
+            // 
+            this.croissantToolStripMenuItem.Name = "croissantToolStripMenuItem";
+            this.croissantToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.croissantToolStripMenuItem.Text = "Croissant";
+            this.croissantToolStripMenuItem.Click += new System.EventHandler(this.croissantToolStripMenuItem_Click);
+            // 
+            // décroissantToolStripMenuItem
+            // 
+            this.décroissantToolStripMenuItem.Name = "décroissantToolStripMenuItem";
+            this.décroissantToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.décroissantToolStripMenuItem.Text = "Décroissant";
+            this.décroissantToolStripMenuItem.Click += new System.EventHandler(this.decroissantToolStripMenuItem_Click);
+            // 
+            // croissantToolStripMenuItem1
+            // 
+            this.croissantToolStripMenuItem1.Name = "croissantToolStripMenuItem1";
+            this.croissantToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.croissantToolStripMenuItem1.Text = "Croissant";
+            this.croissantToolStripMenuItem1.Click += new System.EventHandler(this.croissantToolStripMenuItem1_Click);
+            // 
+            // décroissantToolStripMenuItem1
+            // 
+            this.décroissantToolStripMenuItem1.Name = "décroissantToolStripMenuItem1";
+            this.décroissantToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.décroissantToolStripMenuItem1.Text = "Décroissant";
+            this.décroissantToolStripMenuItem1.Click += new System.EventHandler(this.decroissantToolStripMenuItem1_Click);
+            // 
+            // croissantToolStripMenuItem2
+            // 
+            this.croissantToolStripMenuItem2.Name = "croissantToolStripMenuItem2";
+            this.croissantToolStripMenuItem2.Size = new System.Drawing.Size(152, 22);
+            this.croissantToolStripMenuItem2.Text = "Croissant";
+            this.croissantToolStripMenuItem2.Click += new System.EventHandler(this.croissantToolStripMenuItem2_Click);
+            // 
+            // décroissantToolStripMenuItem2
+            // 
+            this.décroissantToolStripMenuItem2.Name = "décroissantToolStripMenuItem2";
+            this.décroissantToolStripMenuItem2.Size = new System.Drawing.Size(152, 22);
+            this.décroissantToolStripMenuItem2.Text = "Décroissant";
+            this.décroissantToolStripMenuItem2.Click += new System.EventHandler(this.decroissantToolStripMenuItem2_Click);
             // 
             // ListAlbums
             // 
@@ -230,5 +284,11 @@
         private System.Windows.Forms.ToolStripMenuItem dateToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem noteToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem supprimerToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem croissantToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem décroissantToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem croissantToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem décroissantToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem croissantToolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem décroissantToolStripMenuItem2;
     }
 }
