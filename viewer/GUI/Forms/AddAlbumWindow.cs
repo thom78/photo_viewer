@@ -73,13 +73,16 @@ namespace viewer
 
         private void SousTitreBox_TextChanged(object sender, EventArgs e)
         {
-            if (album_to_rename != null && SousTitreBox.Text.Trim().Length > 0) 
+            if (album_to_rename != null)
             {
-                but_ok.Enabled = true;
-            }
-            else
-            {
-                but_ok.Enabled = false;
+                if (SousTitreBox.Text.Trim().Length > 0)
+                {
+                    but_ok.Enabled = true;
+                }
+                else
+                {
+                    but_ok.Enabled = false;
+                }
             }
         }
     }
