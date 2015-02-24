@@ -10,14 +10,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using viewer.GUI.UserControls;
 
-///**********************************************************************************************************************************************************
-/// NB: Le premier album en haut a gauche sera toujours l'album "Pellicule" dans lequel on trouve l'integralité des photos 
-/// --->>> a chaque fois quon importe des photos, ne pas oublier de les ajouter à lalbum "pellicule"!
-/// a faire: creation album, ajout de photos a album
-/// CREER UNE FONCTION : AJOUT DE PHOTO DANS UNE GRID AU LIEU DE COPIER COLLER LE TEXTE TOUT LE TOUT LE TEMPS
-/// supprimer albums, photos
-/// *********************************************************************************************************************************************************
-
 namespace viewer
 {
     public partial class ListAlbums : Form
@@ -273,7 +265,7 @@ namespace viewer
         }
         #endregion TriePhotos
 
-        #region DragAndDropPhotos
+        #region DragAndDrop
 
         private void AlbumGrid_DragEnter(object sender, DragEventArgs e)
         {
@@ -287,22 +279,11 @@ namespace viewer
         {
             if (e.Data.GetFormats().Contains("VignetteNV"))
             {
-                VignetteNV vignetteSource = e.Data.GetData("VignetteNV") as VignetteNV;
-
-                FlowLayoutPanel flowlayoutpanelTemp = (FlowLayoutPanel)sender as FlowLayoutPanel;
-
-                if (vignetteSource.Parent == flowlayoutpanelTemp)
-                {
-                    Point p = flowlayoutpanelTemp.PointToClient(new Point(e.X, e.Y));
-                    Control vignetteDestination = flowlayoutpanelTemp.GetChildAtPoint(p);
-                    int index = flowlayoutpanelTemp.Controls.GetChildIndex(vignetteDestination, false);
-                    flowlayoutpanelTemp.Controls.SetChildIndex(vignetteSource, index);
-                    flowlayoutpanelTemp.Invalidate();
-                }
+                MoveVignette(sender, e);
             }
         }
 
-        //Les fichiers déplacés sont copiés en mémoire lorsque la souris arrive sur le contrôle avec les fichiers déplacés.
+        //L'effet du drag and drop et défini lorsque la souris arrive sur le flowLayoutPanel, si il correspond à l'effet autorisé, alors l'utilisateur voit son curseur changer.
         private void AllPhotosGrid_DragEnter(object sender, DragEventArgs e)
         {
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
@@ -327,22 +308,33 @@ namespace viewer
             }
             else if (e.Data.GetFormats().Contains("VignetteNV"))
             {
-                VignetteNV vignetteSource = e.Data.GetData("VignetteNV") as VignetteNV;
-
-                FlowLayoutPanel flowlayoutpanelTemp = (FlowLayoutPanel)sender as FlowLayoutPanel;
-
-                if (vignetteSource.Parent == flowlayoutpanelTemp)
-                {
-                    Point p = flowlayoutpanelTemp.PointToClient(new Point(e.X, e.Y));
-                    Control vignetteDestination = flowlayoutpanelTemp.GetChildAtPoint(p);
-                    int index = flowlayoutpanelTemp.Controls.GetChildIndex(vignetteDestination, false);
-                    flowlayoutpanelTemp.Controls.SetChildIndex(vignetteSource, index);
-                    flowlayoutpanelTemp.Invalidate();
-                }
+                MoveVignette(sender, e);
             }
         }
 
-        #endregion DragAndDropPhotos
+        private void MoveVignette(object sender, DragEventArgs e)
+        {
+            VignetteNV vignetteSource = e.Data.GetData("VignetteNV") as VignetteNV;
+
+            FlowLayoutPanel flowlayoutpanelTemp = (FlowLayoutPanel)sender as FlowLayoutPanel;
+
+            //Si le flowlayoutpanel correspond bien à celui du UserControl que l'on déplace (On ne doit pouvoir déplacer que les Vignettes d'album dans les Albums et les vignettes de Photos dans les photos).
+            if (vignetteSource.Parent == flowlayoutpanelTemp)
+            {
+                //On obtient le contrôle à la position où l'évènement "drop" a été enregistré.
+                Point p = flowlayoutpanelTemp.PointToClient(new Point(e.X, e.Y));
+                Control vignetteDestination = flowlayoutpanelTemp.GetChildAtPoint(p);
+                //On obtient l'index (la position) de ce conbtrôle
+                int index = flowlayoutpanelTemp.Controls.GetChildIndex(vignetteDestination, false);
+                //On déplace la vignette source à cette position
+                flowlayoutpanelTemp.Controls.SetChildIndex(vignetteSource, index);
+                //On "invalide" le flowlayoutpanelTemp afin de le redessiner.
+                flowlayoutpanelTemp.Refresh();
+                //flowlayoutpanelTemp.Invalidate();
+            }
+        }
+
+        #endregion DragAndDrop
 
         #region Evènements
         private void MouseDownVignette(object sender, MouseEventArgs e)
