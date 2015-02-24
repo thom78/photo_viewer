@@ -12,11 +12,14 @@ namespace viewer
 {
     public partial class Diapo : Form
     {
+        #region Attributs
         private Album albDisplayedAlbum;
         private int cpt = 0;
         private int album_length = 0;
         private int interrupteur = 1;
-        
+        #endregion Attributs
+
+        #region ConstructeursEtInit
         public Diapo(Album alb)
         {
             InitializeComponent();
@@ -36,9 +39,11 @@ namespace viewer
                 interrupteur = 0;
                 
             }
-        } 
-           // timer
-           private void timer1_Tick(object sender, EventArgs e)
+        }
+        #endregion ConstructeursEtInit
+        
+        #region Timer
+        private void timer1_Tick(object sender, EventArgs e)
             {
                 if (interrupteur == 1)
                 {
@@ -55,7 +60,23 @@ namespace viewer
                     }
                 }
             }
-            
+        private void vitesseDiapoRapideToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            timer1.Interval = 2000;
+        }
+
+        private void vitesseMoyenneToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            timer1.Interval = 4000;
+        }
+
+        private void vitessseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            timer1.Interval = 6000;
+        }
+        #endregion Timer
+
+        #region Interface
         // affichage de la première image
         private void Diapo_Load(object sender, EventArgs e)
         {
@@ -64,7 +85,7 @@ namespace viewer
                 pictureBox1.Image = albDisplayedAlbum.Pictures[0].Image;
             }
         }
-
+        #region BoutonsSuivant/Precedent
         //gestion du bouton suivante
         private void toolStripButton3_Click(object sender, EventArgs e)
         {
@@ -115,6 +136,9 @@ namespace viewer
                 timer1.Enabled = true;
             }
         }
+        #endregion BoutonsSuivant/Precedent
+
+        #region TouchesSuivant/Precedent
         // Gestion des flèches droite et gauche
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
@@ -190,6 +214,7 @@ namespace viewer
 
                 return ret;
             }
+        #endregion TouchesSuivant/Precedent
 
         private void toolStripButton2_Click(object sender, EventArgs e)
         {
@@ -202,21 +227,6 @@ namespace viewer
                 timer1.Enabled = true;
             }
         }
-
-        private void vitesseDiapoRapideToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            timer1.Interval = 2000;
-        }
-
-        private void vitesseMoyenneToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            timer1.Interval = 4000;
-        }
-
-        private void vitessseToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            timer1.Interval = 6000;
-        }
-        
+        #endregion Interface
     }
 }

@@ -10,8 +10,11 @@ namespace viewer.GUI.UserControls
 {
     public partial class VignetteNVPhoto : viewer.VignetteNV
     {
-        protected int intRating = 0;
+        #region Attributs
+        protected int intRating = 0; 
+        #endregion
 
+        #region ConstructeursEtinit
         public VignetteNVPhoto(Picture picParam)
         {
             InitializeComponent();
@@ -50,16 +53,19 @@ namespace viewer.GUI.UserControls
                     this.rbNote5.Checked = true;
                     break;
             }
-        }
+        } 
+        #endregion
 
+        #region RefraichissementAffichage
         public void refreshtext()
         {
             this.labelDate.Text = pic.Date;
             this.labelName.Text = pic.Name;
             this.toolTipPicComment.SetToolTip(this.pbPreviewPicture, pic.Comment);
-        }
+        } 
+        #endregion
 
-          #region AttributsModification
+       #region AttributsModification
         //modification des attributs de lalbum lorsqu'on double clique sur le texte
       protected override void labelName_DoubleClick(object sender, EventArgs e)
         {

@@ -13,12 +13,14 @@ namespace viewer.GUI.UserControls
         #region Properties
         public Album albumLinked;
         #endregion Properties
+        #region Constructeurs
         public VignetteNVAlbum(Album alb)
         {
             InitializeComponent();
             albumLinked = alb;
             this.refreshPreviewPicture();
-        }
+        } 
+        #endregion
 
         /// <summary>
         /// Met à jour les composants de la vignette avec les données de l'album lié.

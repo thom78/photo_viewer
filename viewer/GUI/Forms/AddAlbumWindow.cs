@@ -12,9 +12,12 @@ namespace viewer
 {
     public partial class AddAlbumWindow : Form
     {
+        #region Attributs
         public Album created_album;
         public Album album_to_rename = null;
+        #endregion Attributs
 
+        #region ConstructeurEtInit
         public AddAlbumWindow()
         {
             InitializeComponent();
@@ -29,16 +32,13 @@ namespace viewer
             this.Text = "Renommer l'album";
             album_to_rename = alb_to_rename;
         }
+        #endregion ConstructeurEtInit
 
-        private void KO_but_Click(object sender, EventArgs e)
-        {
-            this.DialogResult = DialogResult.Cancel;
-            this.Close();
-        }
-
+        #region interface
+        #region autoriser appui sur bouton ok
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            if (TitreBox.Text.Trim().Length > 0) 
+            if (TitreBox.Text.Trim().Length > 0)
             {
                 but_ok.Enabled = true;
             }
@@ -46,6 +46,29 @@ namespace viewer
             {
                 but_ok.Enabled = false;
             }
+        }
+
+        private void SousTitreBox_TextChanged(object sender, EventArgs e)
+        {
+            if (album_to_rename != null)
+            {
+                if (SousTitreBox.Text.Trim().Length > 0)
+                {
+                    but_ok.Enabled = true;
+                }
+                else
+                {
+                    but_ok.Enabled = false;
+                }
+            }
+        }
+        #endregion autoriser appui sur bouton ok
+
+        #region valider/annuler
+        private void KO_but_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.Cancel;
+            this.Close();
         }
 
         private void but_ok_Click(object sender, EventArgs e)
@@ -70,20 +93,7 @@ namespace viewer
             this.DialogResult = DialogResult.OK;
             this.Close();
         }
-
-        private void SousTitreBox_TextChanged(object sender, EventArgs e)
-        {
-            if (album_to_rename != null)
-            {
-                if (SousTitreBox.Text.Trim().Length > 0)
-                {
-                    but_ok.Enabled = true;
-                }
-                else
-                {
-                    but_ok.Enabled = false;
-                }
-            }
-        }
+        #endregion valider/annuler
+        #endregion interface
     }
 }

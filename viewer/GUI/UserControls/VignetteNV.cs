@@ -12,15 +12,21 @@ namespace viewer
 {
     public partial class VignetteNV : UserControl
     {
+        #region Attributs
         public Picture pic;
         public event EventHandler ehClickOnAlbum;
         public event MouseEventHandler ehMouseDown;
         public event DragEventHandler ehDragOver;
+        #endregion Attributs
+
+        #region Constructeurs
         public VignetteNV()
         {
             InitializeComponent();
         }
+        #endregion Constructeurs
 
+        #region Evenements
         private void pbPreviewPicture_Click(object sender, EventArgs e)
         {
             //L'évènement est créé et envoyé aux objets abonnés
@@ -51,6 +57,7 @@ namespace viewer
             }
         }
 
+        #region EventDoubleclique
         protected virtual void pbPreviewPicture_DoubleClick(object sender, EventArgs e)
         {
 
@@ -60,5 +67,7 @@ namespace viewer
         {
 
         }
+        #endregion 
+        #endregion
     }
 }
