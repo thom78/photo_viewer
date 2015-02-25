@@ -337,6 +337,12 @@ namespace viewer
         #endregion DragAndDrop
 
         #region Evènements
+
+        /// <summary>
+        /// Fonction qui traite le début d'un évènement DragAndDrop de Vignette.
+        /// </summary>
+        /// <param name="sender">Emetteur: vignette</param>
+        /// <param name="e">Paramètre de l'évènement</param>
         private void MouseDownVignette(object sender, MouseEventArgs e)
         {
             DataObject data = new DataObject();
@@ -345,32 +351,44 @@ namespace viewer
             vignette.DoDragDrop(data, DragDropEffects.Move);
         }
 
-        private void DragDropVignette(object sender, DragEventArgs e)
-        {
-            e.Effect = DragDropEffects.Copy;
-        }
+        /// <summary>
+        /// Fonction évènementielle qui traite la selection des Vignettes de photos.
+        /// </summary>
+        /// <param name="sender">Emetteur: vignette de photo</param>
+        /// <param name="e">Paramètre de l'évènement</param>
         private void ClickOnVignettePhoto(object sender, EventArgs e)
         {
             vignettePhotoSelected = sender as VignetteNVPhoto;
+            //Si la liste de photos (vignettes) sélectionnée contient déjà la vignette
             if (listPhotosSelected.Contains(vignettePhotoSelected))
             {
+                //Alors on la déselectionne: on l'enlève de la liste de photos sélectionnées et on met à jour son apparence.
                 listPhotosSelected.Remove(vignettePhotoSelected);
                 vignettePhotoSelected.BackColor = System.Drawing.SystemColors.Control;
+                //La variable représentant la dernière photo sélectionnée prend comme valeur:
                 if (listPhotosSelected.Count > 0)
                 {
+                    //La dernière vignette de la liste de photos sélectionnées.
                     vignettePhotoSelected = listPhotosSelected.LastOrDefault();
                 }
                 else if (listPhotosSelected.Count == 0)
                 {
+                    //Ou null si cette liste est vide.
                     vignettePhotoSelected = null;
                 }
             }
+            //Sinon on l'ajoute à la liste de photos sélectionnées et on modifie son apparence en conséquence.
             else if (!listPhotosSelected.Contains(vignettePhotoSelected))
             {
                 listPhotosSelected.Add(vignettePhotoSelected);
                 vignettePhotoSelected.BackColor = System.Drawing.SystemColors.Highlight;
             }
         }
+        /// <summary>
+        /// Fonction évènementielle qui traite la selection des Vignettes d'albums.
+        /// </summary>
+        /// <param name="sender">Emetteur: vignette d'album</param>
+        /// <param name="e">Paramètre de l'évènement</param>
         private void ClickOnVignetteAlbum(object sender, EventArgs e)
         {
             vignetteAlbumSelected = sender as VignetteNVAlbum;
@@ -461,7 +479,6 @@ namespace viewer
 
             vignetteImage.ehClickOnAlbum += new EventHandler(ClickOnVignettePhoto);
             vignetteImage.ehMouseDown += new MouseEventHandler(MouseDownVignette);
-            vignetteImage.ehDragOver += new DragEventHandler(DragDropVignette);
         }
 
         /// <summary>
@@ -477,7 +494,6 @@ namespace viewer
 
             vignetteAlbum.ehClickOnAlbum += new EventHandler(ClickOnVignetteAlbum);
             vignetteAlbum.ehMouseDown += new MouseEventHandler(MouseDownVignette);
-            vignetteAlbum.ehDragOver += new DragEventHandler(DragDropVignette);
 
             return vignetteAlbum;
         }

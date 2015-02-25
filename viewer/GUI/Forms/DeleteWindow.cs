@@ -22,7 +22,7 @@ namespace viewer
             InitializeComponent();
             if (type == 0 )
             {
-                textlabel.Text = "Etes vous sur de vouloir supprimer ces elements?";
+                textlabel.Text = "Êtes-vous sûr de vouloir supprimer ces éléments?";
             }
             if ( type == 1)
             {
