@@ -318,7 +318,8 @@ namespace viewer
 
             FlowLayoutPanel flowlayoutpanelTemp = (FlowLayoutPanel)sender as FlowLayoutPanel;
 
-            //Si le flowlayoutpanel correspond bien à celui du UserControl que l'on déplace (On ne doit pouvoir déplacer que les Vignettes d'album dans les Albums et les vignettes de Photos dans les photos).
+            //Si le flowlayoutpanel correspond bien à celui du UserControl que l'on déplace 
+            //(On ne doit pouvoir déplacer que les Vignettes d'album dans les Albums et les vignettes de Photos dans les photos).
             if (vignetteSource.Parent == flowlayoutpanelTemp)
             {
                 //On obtient le contrôle à la position où l'évènement "drop" a été enregistré.
@@ -331,6 +332,33 @@ namespace viewer
                 //On "invalide" le flowlayoutpanelTemp afin de le redessiner.
                 flowlayoutpanelTemp.Refresh();
                 //flowlayoutpanelTemp.Invalidate();
+                //on sauvegarde les modifications 
+                XML_Serialization.save_user_data();
+            }
+
+            //sinon, si le usercontrol est une PictureVignette et quelle est deplacée dans le flowlayoutpannel des albums
+            else
+            {
+                if ((vignetteSource.Parent == AllPhotosGrid) && (flowlayoutpanelTemp == AlbumGrid))
+                {
+                    VignetteNVAlbum album;
+                    VignetteNVPhoto photo;
+                    //On obtient le contrôle à la position où l'évènement "drop" a été enregistré.
+                    Point p = flowlayoutpanelTemp.PointToClient(new Point(e.X, e.Y));
+                    Control vignetteDestination = flowlayoutpanelTemp.GetChildAtPoint(p);
+                    //On obtient l'index (la position) de ce conbtrôle
+                    int index = flowlayoutpanelTemp.Controls.GetChildIndex(vignetteDestination, false);
+                    //On ajoute la vignettePicture dans lalbum situé à cette position
+                    album = (VignetteNVAlbum)flowlayoutpanelTemp.Controls[index];
+                    photo = (VignetteNVPhoto)vignetteSource;
+                    album.albumLinked.Pictures.Add(photo.pic);
+                    album.refreshPreviewPicture();
+                    //On "invalide" le flowlayoutpanelTemp afin de le redessiner.
+                    flowlayoutpanelTemp.Refresh();
+                    //flowlayoutpanelTemp.Invalidate();
+                    //on sauvegarde les modifications 
+                    XML_Serialization.save_user_data();
+                }
             }
         }
 
@@ -455,7 +483,7 @@ namespace viewer
                 this.toolStripStatusLabel1.Text = "Aucun album sélectionné!";
             }
         }
-
+        //suppression delements
         private void supprimerToolStripMenuItem_Click(object sender, EventArgs e)
         {
             DeleteWindow dlwin = new DeleteWindow(0);

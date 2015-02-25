@@ -58,7 +58,7 @@ namespace viewer.GUI.UserControls
             AddAlbumWindow rename = new AddAlbumWindow(albumLinked);
             rename.ShowDialog();
             refreshPreviewPicture();
-     }
+        }
         #endregion AttributsModification
-       }
+    }
 }
